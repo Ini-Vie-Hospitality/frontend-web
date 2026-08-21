@@ -1,4 +1,79 @@
 "use client";
-import Image from "next/image";import Link from "next/link";import{ArrowLeft,ArrowRight,ArrowUpRight}from"lucide-react";import{useState}from"react";
-const properties=[{name:"Leedon Villa Seminyak",category:"Luxury Villa",description:"Elegant villa living with warm tropical design, curated privacy, and a memorable Bali stay.",image:"https://images.unsplash.com/photo-1582610116397-edb318620f90?auto=format&fit=crop&w=1200&q=85",href:"#leedon-villa"},{name:"Ajowa Resort",category:"Resort Experience",description:"A refined resort experience blending tropical atmosphere, contemporary comfort, and destination-led hospitality.",image:"https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=85",href:"#ajowa-resort"},{name:"La Mewali Resort",category:"Resort Experience",description:"A considered retreat shaped by lush surroundings, warm service, and the easy rhythm of Bali.",image:"https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=85",href:"#la-mewali-resort"}];
-export function FeaturedProperties(){const[active,setActive]=useState(0);const visible=[0,1].map(o=>properties[(active+o)%properties.length]);const move=(d:number)=>setActive(c=>(c+d+properties.length)%properties.length);return <section id="stays" className="relative min-h-[940px] overflow-hidden bg-[#f5f0e7] px-[clamp(28px,5vw,92px)] pt-[clamp(105px,9vw,160px)] pb-33 text-[#171815] max-md:min-h-0 max-md:px-5 max-md:pt-19 max-md:pb-29" aria-labelledby="featured-properties-title"><div className="mb-28 flex items-center gap-7 text-[19px] max-md:mb-16 max-md:gap-4 max-md:text-[15px]"><strong>{String(active+1).padStart(2,"0")}</strong><span className="relative h-0.5 w-[min(280px,16vw)] bg-[#d0c8bb] max-md:w-30"><i className="absolute inset-y-0 left-0 bg-orange transition-all" style={{width:`${((active+1)/properties.length)*100}%`}}/></span><span className="text-[#9d9386]">{String((active+1)%3+1).padStart(2,"0")}</span><span className="text-[#9d9386]">{String((active+2)%3+1).padStart(2,"0")}</span></div><div className="grid grid-cols-[minmax(400px,.92fr)_minmax(600px,1.35fr)] items-center gap-[clamp(48px,7vw,130px)] max-lg:grid-cols-1 max-lg:gap-12 max-md:block"><div className="max-w-[590px]"><p className="mb-7 text-xs font-medium uppercase tracking-[.24em] text-[#a86422]">Curated Collection</p><h2 id="featured-properties-title" className="m-0 font-serif text-[clamp(3.35rem,4.2vw,5rem)] leading-[1.1] tracking-[-.04em] max-md:text-[clamp(2.75rem,11vw,3.5rem)]">Discover Curated Stays<br/>Designed For You</h2><p className="my-8.5 max-w-[500px] text-[17px] leading-[1.7] text-[#4c4b47] max-md:my-7 max-md:text-[15px]">We present a carefully selected collection of Ini Vie properties — from intimate villas to immersive resorts — designed to match your style of stay and the spirit of Bali.</p><Link className="inline-flex min-h-16 items-center gap-7 rounded-[9px] bg-[#20211f] px-7.5 text-sm text-soft-white shadow-[0_12px_20px_rgba(30,29,24,.12)] hover:-translate-y-0.5 hover:bg-[#343632]" href="#all-properties">Explore All Properties <ArrowRight className="size-5 text-orange"/></Link></div><div className="grid min-w-0 grid-cols-2 gap-6 max-md:mt-13 max-md:grid-cols-[repeat(2,86vw)] max-md:gap-3.5 max-md:overflow-x-auto max-md:snap-x max-md:[scrollbar-width:none]">{visible.map(p=><Link className="group min-w-0 max-md:snap-start" href={p.href} key={p.name}><div className="relative h-[696px] overflow-hidden rounded-[25px] bg-[#242820] max-lg:h-[560px] max-md:h-auto max-md:aspect-[3/4.35] max-md:rounded-[20px]"><Image className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" src={p.image} alt={p.name} fill sizes="(max-width:767px) 86vw,28vw"/><div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_35%,rgba(7,9,7,.2)_54%,rgba(7,9,7,.96)_100%)]"/><div className="absolute inset-x-7.5 bottom-7.5 text-soft-white max-md:inset-x-5.5 max-md:bottom-6"><span className="mb-3.5 block text-[11px] uppercase tracking-[.06em]">{p.category}</span><h3 className="m-0 font-serif text-[clamp(2rem,2.1vw,2.7rem)] leading-[1.08] tracking-[-.03em]">{p.name}</h3><p className="my-4.5 text-[15px] leading-[1.55] max-md:text-sm">{p.description}</p><span className="flex w-max items-center gap-7 border-b border-soft-white/45 pb-2.5 text-[15px]">Discover Stay <ArrowRight className="size-5 text-orange"/></span></div><span className="absolute top-5.5 right-5.5 grid size-10.5 place-items-center rounded-full border border-soft-white/55 text-soft-white opacity-0 group-hover:opacity-100 max-md:opacity-100"><ArrowUpRight className="size-4.5"/></span></div></Link>)}</div></div><div className="absolute right-[clamp(28px,5vw,92px)] bottom-11 flex gap-4.5 max-md:right-5 max-md:bottom-8">{[-1,1].map((d,i)=><button className={`grid size-14.5 place-items-center rounded-full border bg-transparent ${i?"border-orange text-orange":"border-[#d4cabc] text-[#34322e]"} hover:bg-orange hover:text-white`} key={d} onClick={()=>move(d)}>{i?<ArrowRight/>:<ArrowLeft/>}</button>)}</div></section>}
+
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { useState } from "react";
+
+const properties = [
+  {
+    name: "Leedon Villa Seminyak",
+    category: "Luxury Villa",
+    description: "Elegant villa living with warm tropical design, curated privacy, and a memorable Bali stay.",
+    image: "https://images.unsplash.com/photo-1582610116397-edb318620f90?auto=format&fit=crop&w=1200&q=85",
+    href: "#leedon-villa",
+  },
+  {
+    name: "Ajowa Resort",
+    category: "Resort Experience",
+    description: "A refined resort experience blending tropical atmosphere, contemporary comfort, and destination-led hospitality.",
+    image: "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1200&q=85",
+    href: "#ajowa-resort",
+  },
+  {
+    name: "La Mewali Resort",
+    category: "Resort Experience",
+    description: "A considered retreat shaped by lush surroundings, warm service, and the easy rhythm of Bali.",
+    image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=85",
+    href: "#la-mewali-resort",
+  },
+];
+
+export function FeaturedProperties() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const visibleProperties = [0, 1].map((offset) => properties[(activeIndex + offset) % properties.length]);
+
+  function moveSlide(direction: number) {
+    setActiveIndex((current) => (current + direction + properties.length) % properties.length);
+  }
+
+  return (
+    <section id="stays" className="featured-properties" aria-labelledby="featured-properties-title">
+      <div className="featured-progress" aria-label={`Slide ${activeIndex + 1} of ${properties.length}`}>
+        <strong>{String(activeIndex + 1).padStart(2, "0")}</strong>
+        <span><i style={{ width: `${((activeIndex + 1) / properties.length) * 100}%` }} /></span>
+        <span>{String((activeIndex + 1) % properties.length + 1).padStart(2, "0")}</span>
+        <span>{String((activeIndex + 2) % properties.length + 1).padStart(2, "0")}</span>
+      </div>
+      <div className="featured-layout">
+        <div className="featured-copy">
+          <p className="section-kicker">Curated Collection</p>
+          <h2 id="featured-properties-title">Discover Curated Stays<br />Designed For You</h2>
+          <p className="featured-intro">We present a carefully selected collection of Ini Vie properties — from intimate villas to immersive resorts — designed to match your style of stay and the spirit of Bali.</p>
+          <Link className="featured-link" href="#all-properties">Explore All Properties <ArrowRight aria-hidden="true" /></Link>
+        </div>
+        <div className="property-grid">
+          {visibleProperties.map((property) => (
+            <Link className="property-card" href={property.href} key={property.name}>
+              <div className="property-image">
+                <Image src={property.image} alt={property.name} fill sizes="(max-width: 767px) 88vw, 28vw" />
+                <div className="property-overlay" />
+                <div className="property-card-content">
+                  <span className="property-category">{property.category}</span>
+                  <h3>{property.name}</h3>
+                  <p>{property.description}</p>
+                  <span className="property-cta">{activeIndex === 0 ? "Discover Stay" : "Explore Property"}<ArrowRight aria-hidden="true" /></span>
+                </div>
+                <span className="property-arrow"><ArrowUpRight aria-hidden="true" /></span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className="featured-controls">
+        <button type="button" aria-label="Previous properties" onClick={() => moveSlide(-1)}><ArrowLeft aria-hidden="true" /></button>
+        <button type="button" aria-label="Next properties" onClick={() => moveSlide(1)}><ArrowRight aria-hidden="true" /></button>
+      </div>
+    </section>
+  );
+}

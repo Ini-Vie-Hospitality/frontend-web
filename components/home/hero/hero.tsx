@@ -21,7 +21,7 @@ export function Hero() {
     document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
   }
 
-  return <section id="hero" className="relative isolate min-h-[max(100svh,780px)] overflow-hidden bg-ink max-md:min-h-svh" aria-labelledby="hero-title">
+  return <section id="hero" className="hero" aria-labelledby="hero-title">
     <HeroMedia />
     <HeroContent onBookingRequest={requestBooking} />
     <BookingBar onRequest={requestBooking} />

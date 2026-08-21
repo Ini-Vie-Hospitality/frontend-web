@@ -1,4 +1,70 @@
-import Image from "next/image";import Link from "next/link";import{ArrowUpRight,Mail,MapPin,Phone}from"lucide-react";
-type Contact={title:string;phone?:string;email?:string;links?:string[]};const contacts:Contact[]=[{title:"Marketing",phone:"+62 812-3868-7387",email:"marcom@inivie.com",links:["Collaborate with us","Submit your proposal"]},{title:"Media Inquiry",phone:"+62 813 3753-0285",email:"pr@inivie.com"},{title:"Human Resource",phone:"+62 812-3729-0110",email:"hire@inivie.com",links:["View open jobs"]},{title:"Reservation",phone:"+62 811-3986-889",email:"reservation@inivie.com",links:["Submit your inquiry"]},{title:"Travel Agent Inquiry",phone:"+62 811-3986-889",email:"salescoordinator@inivie.com",links:["Submit your inquiry"]},{title:"Owners",links:["About Us"]}];
-function ContactBlock({c}:{c:Contact}){return <section className="min-w-0"><h3 className="mb-3 pb-3 font-serif text-xl text-[#e5dac9] after:mt-2 after:block after:h-px after:w-6 after:bg-orange">{c.title}</h3>{c.phone&&<a className="flex gap-3 break-all" href={`tel:${c.phone.replaceAll(" ","")}`}><Phone className="mt-1 size-4.5 shrink-0 stroke-[1.4]"/>{c.phone}</a>}{c.email&&<a className="flex gap-3 break-all" href={`mailto:${c.email}`}><Mail className="mt-1 size-4.5 shrink-0 stroke-[1.4]"/>{c.email}</a>}{c.links?.map(l=><Link className="flex w-max max-w-full gap-3 text-orange" href="#contact" key={l}>{l}<ArrowUpRight className="mt-1 size-4 shrink-0"/></Link>)}</section>}
-export function Footer(){return <footer className="relative overflow-hidden bg-[linear-gradient(rgba(12,14,12,.34),rgba(12,14,12,.72)),url('/bg-footer.png')] bg-cover bg-center px-[clamp(32px,4vw,72px)] pt-22.5 pb-13 text-sm leading-[1.7] text-[#d8d0c3] max-md:px-5.5 max-md:pt-17 max-md:pb-8"><div className="grid grid-cols-[1fr_1.35fr_1fr] border-b border-[#d9cdb8]/28 px-[5.5%] pb-16.5 max-md:block max-md:px-0 max-md:pb-11"><div className="mb-0 text-center max-md:mb-11"><Image className="mx-auto size-44 object-contain max-md:size-36" src="/inivie-white.png" alt="Ini Vie Hospitality" width={236} height={235}/><p className="mx-auto mt-4 max-w-72">Curating meaningful stays, destinations, wellness, and lifestyle experiences across Bali.</p></div><div className="min-h-56 border-l border-[#d9cdb8]/28 pl-[clamp(34px,5vw,78px)] max-md:min-h-0 max-md:border-t max-md:border-l-0 max-md:pt-8 max-md:pl-0"><h2 className="font-serif text-[28px] text-[#e5dac9] max-md:text-[25px]">Head office</h2><address className="mt-5 grid gap-4 not-italic"><span className="flex gap-4"><MapPin className="mt-1 size-4.5 shrink-0"/>Jl. Persada II No.888, Kerobokan, Kec. Kuta Utara, Kabupaten Badung, Bali 80361</span><a className="flex gap-4" href="tel:+623619346082"><Phone className="size-4.5"/>+62 361 9346082</a><a className="flex gap-4" href="mailto:info@inivie.com"><Mail className="size-4.5"/>info@inivie.com</a><Link className="flex gap-4" href="#map"><ArrowUpRight className="size-4.5 text-orange"/>View on map</Link></address></div><div className="min-h-56 border-l border-[#d9cdb8]/28 pl-[clamp(34px,5vw,78px)] max-md:min-h-0 max-md:border-t max-md:border-l-0 max-md:pt-8 max-md:pl-0"><h2 className="font-serif text-[28px] text-[#e5dac9] max-md:text-[25px]">Subscribe</h2><p className="my-5 max-w-55">Receive latest offers and promos without spam</p><Link className="flex h-15 w-50 items-center justify-center gap-5 border border-orange/75 text-orange max-md:w-full max-md:max-w-60" href="#subscribe">Subscribe <ArrowUpRight className="size-4.5"/></Link></div></div><div className="grid grid-cols-[3fr_1fr] gap-16 border-b border-[#d9cdb8]/28 px-[5.5%] py-11.5 max-md:block max-md:px-0"><div className="grid grid-cols-3 gap-x-16 gap-y-6 max-md:grid-cols-1 max-md:gap-y-8">{contacts.map(c=><ContactBlock c={c} key={c.title}/>)}</div><section className="border-l border-[#d9cdb8]/20 pl-16 max-md:mt-11 max-md:border-t max-md:border-l-0 max-md:px-0 max-md:pt-8"><h3 className="mb-3 pb-3 font-serif text-xl text-[#e5dac9] after:mt-2 after:block after:h-px after:w-6 after:bg-orange">Follow Our Social Media</h3>{["Facebook","Instagram","LinkedIn","YouTube","Tiktok"].map(s=><Link className="mt-4 block" href="#social" key={s}>{s}</Link>)}</section></div><div className="flex items-center justify-between pt-8 text-[13px] tracking-[.1em] max-md:block max-md:text-[11px]"><Link className="flex items-center gap-3" href="#policy">General Policy <ArrowUpRight className="size-4 text-orange"/></Link><span className="max-md:mt-6 max-md:block">2026 Ini Vie Hospitality. All Rights Reserved</span></div></footer>}
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+
+type Contact = {
+  title: string;
+  phone?: string;
+  email?: string;
+  links?: string[];
+};
+
+const contacts: Contact[] = [
+  { title: "Marketing", phone: "+62 812-3868-7387", email: "marcom@inivie.com", links: ["Collaborate with us", "Submit your proposal"] },
+  { title: "Media Inquiry", phone: "+62 813 3753-0285", email: "pr@inivie.com" },
+  { title: "Human Resource", phone: "+62 812-3729-0110", email: "hire@inivie.com", links: ["View open jobs"] },
+  { title: "Reservation", phone: "+62 811-3986-889", email: "reservation@inivie.com", links: ["Submit your inquiry"] },
+  { title: "Travel Agent Inquiry", phone: "+62 811-3986-889", email: "salescoordinator@inivie.com", links: ["Submit your inquiry"] },
+  { title: "Owners", links: ["About Us"] },
+];
+
+const socials = ["Facebook", "Instagram", "LinkedIn", "YouTube", "Tiktok"];
+
+function ContactBlock({ contact }: { contact: Contact }) {
+  return (
+    <section className="footer-contact">
+      <h3>{contact.title}</h3>
+      {contact.phone && <a href={`tel:${contact.phone.replaceAll(" ", "")}`}><Phone aria-hidden="true" />{contact.phone}</a>}
+      {contact.email && <a href={`mailto:${contact.email}`}><Mail aria-hidden="true" />{contact.email}</a>}
+      {contact.links?.map((link) => <Link href="#contact" key={link}>{link}<ArrowUpRight aria-hidden="true" /></Link>)}
+    </section>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-hero">
+        <div className="footer-brand">
+          <Image src="/inivie-white.png" alt="Ini Vie Hospitality" width={236} height={235} />
+          <p>Curating meaningful stays, destinations, wellness, and lifestyle experiences across Bali.</p>
+        </div>
+        <div className="footer-office">
+          <h2>Head office</h2>
+          <address>
+            <span><MapPin aria-hidden="true" />Jl. Persada II No.888, Kerobokan, Kec. Kuta Utara, Kabupaten Badung, Bali 80361</span>
+            <a href="tel:+623619346082"><Phone aria-hidden="true" />+62 361 9346082</a>
+            <a href="mailto:info@inivie.com"><Mail aria-hidden="true" />info@inivie.com</a>
+            <Link href="#map"><ArrowUpRight aria-hidden="true" />View on map</Link>
+          </address>
+        </div>
+        <div className="footer-subscribe">
+          <h2>Subscribe</h2>
+          <p>Receive latest offers and promos without spam</p>
+          <Link href="#subscribe">Subscribe <ArrowUpRight aria-hidden="true" /></Link>
+        </div>
+      </div>
+      <div className="footer-details">
+        <div className="footer-contact-grid">{contacts.map((contact) => <ContactBlock contact={contact} key={contact.title} />)}</div>
+        <section className="footer-socials">
+          <h3>Follow Our Social Media</h3>
+          {socials.map((social) => <Link href="#social" key={social}>{social}</Link>)}
+        </section>
+      </div>
+      <div className="footer-legal">
+        <Link href="#policy">General Policy <ArrowUpRight aria-hidden="true" /></Link>
+        <span>2026 Ini Vie Hospitality. All Rights Reserved</span>
+      </div>
+    </footer>
+  );
+}
