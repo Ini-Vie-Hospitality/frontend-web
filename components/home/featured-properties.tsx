@@ -1,44 +1,165 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useState } from "react";
-import { PropertyCard } from "./featured-properties/property-card";
+import { ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { properties } from "./featured-properties/properties";
 
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
 export function FeaturedProperties() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const visibleProperties = [0, 1].map((offset) => properties[(activeIndex + offset) % properties.length]);
-  const moveSlide = (direction: number) => setActiveIndex((current) => (current + direction + properties.length) % properties.length);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const activeProperty = properties[activeIndex];
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = () => setReducedMotion(mediaQuery.matches);
+    updateMotionPreference();
+    mediaQuery.addEventListener("change", updateMotionPreference);
+    return () => mediaQuery.removeEventListener("change", updateMotionPreference);
+  }, []);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    const stage = stageRef.current;
+    if (!track || !stage) return;
+
+    let frame = 0;
+    const updateFromScroll = () => {
+      frame = 0;
+      const scrollDistance = track.offsetHeight - stage.offsetHeight;
+      const progress = scrollDistance > 0
+        ? clamp(-track.getBoundingClientRect().top / scrollDistance, 0, 1)
+        : 0;
+      const nextIndex = Math.min(
+        Math.floor(progress * properties.length),
+        properties.length - 1,
+      );
+
+      stage.style.setProperty("--slideshow-progress", progress.toFixed(4));
+      setActiveIndex((current) => current === nextIndex ? current : nextIndex);
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateFromScroll);
+    };
+
+    updateFromScroll();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const progressWidth = `${Math.max((activeIndex + 1) / properties.length * 100, 8)}%`;
 
   return (
-    <section id="stays" className="relative min-h-[940px] overflow-hidden bg-[#f5f0e7] px-[clamp(28px,5vw,92px)] pt-[clamp(105px,9vw,160px)] pb-[132px] text-[#171815] max-md:min-h-0 max-md:px-5 max-md:pt-[76px] max-md:pb-[118px]" aria-labelledby="featured-properties-title">
-      <div className="mb-28 flex items-center gap-7 text-[19px] max-[1100px]:mb-[72px] max-md:mb-[65px] max-md:gap-[15px] max-md:text-[15px]" aria-label={`Slide ${activeIndex + 1} of ${properties.length}`}>
-        <strong className="font-semibold">{String(activeIndex + 1).padStart(2, "0")}</strong>
-        <span className="relative h-0.5 w-[min(280px,16vw)] bg-[#d0c8bb] max-md:w-[120px]"><i className="absolute inset-y-0 left-0 bg-orange transition-[width] duration-350" style={{ width: `${((activeIndex + 1) / properties.length) * 100}%` }} /></span>
-        <span className="text-[#9d9386]">{String((activeIndex + 1) % properties.length + 1).padStart(2, "0")}</span>
-        <span className="text-[#9d9386]">{String((activeIndex + 2) % properties.length + 1).padStart(2, "0")}</span>
-      </div>
-      <div className="grid grid-cols-[minmax(400px,.92fr)_minmax(600px,1.35fr)] items-center gap-[clamp(48px,7vw,130px)] max-[1100px]:grid-cols-1 max-[1100px]:gap-12 max-md:block">
-        <div className="max-w-[590px]">
-          <p className="mb-7 text-xs font-medium uppercase tracking-[.24em] text-[#a86422]">Curated Collection</p>
-          <h2 id="featured-properties-title" className="m-0 font-serif text-[clamp(3.35rem,4.2vw,5rem)] leading-[1.1] tracking-[-.04em] max-md:text-[clamp(2.75rem,11vw,3.5rem)]">Discover Curated Stays<br />Designed For You</h2>
-          <p className="my-[34px] max-w-[500px] text-[17px] leading-[1.7] text-[#4c4b47] max-md:my-7 max-md:text-[15px]">We present a carefully selected collection of Ini Vie properties — from intimate villas to immersive resorts — designed to match your style of stay and the spirit of Bali.</p>
-          <Link className="inline-flex min-h-16 items-center gap-7 rounded-[9px] bg-[#20211f] px-[30px] text-sm text-white shadow-[0_12px_20px_rgba(30,29,24,.12)] transition hover:-translate-y-0.5 hover:bg-[#343632] max-md:min-h-[58px] max-md:px-6 max-md:text-[13px]" href="#all-properties">Explore All Properties <ArrowRight className="size-[21px] text-orange" /></Link>
+    <section
+      id="stays"
+      className="relative bg-[#f5f0e7] px-5 py-[clamp(110px,12vw,180px)] text-[#171815] sm:px-8 lg:px-[clamp(48px,5vw,92px)]"
+      aria-labelledby="featured-properties-title"
+    >
+      <header className="mx-auto max-w-[820px] text-center">
+        <p className="mb-6 text-[11px] font-medium uppercase tracking-[.28em] text-[#a86422] sm:text-xs">
+          Curated Collection
+        </p>
+        <h2
+          id="featured-properties-title"
+          className="m-0 font-serif text-[clamp(3rem,7vw,6.5rem)] leading-[.98] tracking-[-.055em]"
+        >
+          Discover Curated Stays
+          <br />
+          Designed For You
+        </h2>
+        <p className="mx-auto mt-8 max-w-[560px] text-[15px] leading-[1.75] text-[#5a574f] sm:text-[17px]">
+          A carefully selected collection of distinctive stays, created for different ways of experiencing Bali.
+        </p>
+      </header>
+
+      <div
+        ref={trackRef}
+        className="relative mx-auto mt-[clamp(70px,9vw,130px)] max-w-[1400px]"
+        style={{ minHeight: `${properties.length * 92}svh` }}
+      >
+        <div
+          ref={stageRef}
+          className="sticky top-[5svh] flex min-h-[78svh] items-center"
+        >
+          <div className="relative h-[clamp(500px,68svh,760px)] w-full overflow-hidden rounded-[22px] bg-[#292c26] shadow-[0_28px_70px_rgba(44,39,29,.14)] sm:rounded-[26px] max-md:h-[72svh] max-md:min-h-[500px] max-md:rounded-[20px]">
+            {properties.map((property, index) => (
+              <Image
+                key={property.id}
+                src={property.image}
+                alt={property.name}
+                fill
+                priority={index === 0}
+                loading={index === 0 ? undefined : "lazy"}
+                sizes="(max-width: 767px) 92vw, 90vw"
+                className="object-cover"
+                style={{
+                  objectPosition: property.objectPosition,
+                  opacity: index === activeIndex ? 1 : 0,
+                  transform: index === activeIndex ? "scale(1)" : "scale(1.03)",
+                  transition: reducedMotion
+                    ? "opacity 120ms linear"
+                    : "opacity 600ms cubic-bezier(.22,1,.36,1), transform 700ms cubic-bezier(.22,1,.36,1)",
+                  zIndex: index === activeIndex ? 1 : 0,
+                }}
+                aria-hidden={index !== activeIndex}
+              />
+            ))}
+
+            <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(180deg,rgba(7,9,7,.04)_18%,rgba(7,9,7,.10)_42%,rgba(7,9,7,.76)_100%)]" />
+
+            <div className="absolute inset-x-[clamp(24px,4vw,64px)] bottom-[clamp(28px,4vw,56px)] z-[3] flex items-end justify-between gap-8 text-white max-md:inset-x-6 max-md:bottom-7 max-md:block">
+              <div
+                key={activeProperty.id}
+                className="max-w-[560px]"
+                aria-live="polite"
+                style={{
+                  animation: reducedMotion ? "none" : "curated-content-in 500ms cubic-bezier(.22,1,.36,1) both",
+                }}
+              >
+                <p className="mb-3 text-[11px] font-medium uppercase tracking-[.22em] text-white/75 sm:text-xs">
+                  {activeProperty.category}
+                </p>
+                <h3 className="m-0 font-serif text-[clamp(2.3rem,5vw,5rem)] leading-[.98] tracking-[-.045em] max-md:text-[clamp(2.35rem,11vw,4rem)]">
+                  {activeProperty.name}
+                </h3>
+                <p className="mt-5 max-w-[500px] text-[14px] leading-[1.65] text-white/82 sm:text-[16px]">
+                  {activeProperty.description}
+                </p>
+                <Link
+                  href={activeProperty.href}
+                  className="group mt-7 inline-flex items-center gap-5 border-b border-white/65 pb-2 text-sm text-white transition-colors hover:border-white max-md:mt-6"
+                >
+                  Explore Property
+                  <ArrowRight className="size-[19px] text-[#e08a3c] transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </div>
+
+              <div className="mb-1 w-[190px] shrink-0 text-right max-md:mt-8 max-md:w-full max-md:text-left">
+                <div className="mb-3 flex items-center justify-between text-[11px] font-medium uppercase tracking-[.18em] text-white/70">
+                  <span>Scroll to explore</span>
+                  <span className="text-white">{String(activeIndex + 1).padStart(2, "0")} / {String(properties.length).padStart(2, "0")}</span>
+                </div>
+                <div className="h-px w-full bg-white/30">
+                  <span
+                    className="block h-px bg-white transition-[width] duration-500 ease-out"
+                    style={{ width: progressWidth }}
+                  />
+                </div>
+                <span className="sr-only">Property {activeIndex + 1} of {properties.length}</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="grid min-w-0 grid-cols-2 gap-6 max-md:mt-[54px] max-md:grid-cols-[repeat(2,86vw)] max-md:gap-[14px] max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
-          {visibleProperties.map((property) => (
-            <PropertyCard
-              key={property.name}
-              property={property}
-              isCurrent={activeIndex === 0}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="absolute right-[clamp(28px,5vw,92px)] bottom-[45px] flex gap-[18px] max-md:right-5 max-md:bottom-8">
-        <button className="grid size-[58px] cursor-pointer place-items-center rounded-full border border-[#d4cabc] bg-transparent text-[#34322e] transition hover:border-orange hover:bg-orange hover:text-white max-md:size-[52px]" type="button" aria-label="Previous properties" onClick={() => moveSlide(-1)}><ArrowLeft className="size-[22px] stroke-[1.3]" /></button>
-        <button className="grid size-[58px] cursor-pointer place-items-center rounded-full border border-[#c97b29] bg-transparent text-orange transition hover:bg-orange hover:text-white max-md:size-[52px]" type="button" aria-label="Next properties" onClick={() => moveSlide(1)}><ArrowRight className="size-[22px] stroke-[1.3]" /></button>
       </div>
     </section>
   );
