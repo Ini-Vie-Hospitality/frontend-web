@@ -1,46 +1,129 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { DiningCard } from "./culinary-journey/dining-card";
 import { diningDestinations } from "./culinary-journey/dining-destinations";
+import {
+  getDesktopDestinationIndexes,
+  getSceneIndex,
+} from "./culinary-journey/scene-progression";
+
+const desktopSceneCount = 4;
+const mobileSceneCount = diningDestinations.length;
 
 export function CulinaryJourney() {
-  return (
-    <section id="dining" className="relative overflow-hidden bg-[#100e0b] px-[clamp(24px,2.4vw,40px)] pt-[clamp(48px,5vw,84px)] pb-[clamp(32px,3vw,48px)] text-[#f1e9dc]" aria-labelledby="culinary-journey-title">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_20%,rgba(141,74,20,.12),transparent_35%),linear-gradient(110deg,rgba(0,0,0,.3),transparent_58%,rgba(125,75,26,.07))]" />
-      <div className="relative grid min-h-[800px] grid-cols-[minmax(420px,.92fr)_minmax(700px,1.55fr)] gap-[clamp(44px,3.7vw,74px)] max-[1150px]:grid-cols-[minmax(330px,.8fr)_1.45fr] max-[1150px]:gap-10 max-md:block">
-        <div className="relative min-h-[800px] overflow-hidden rounded-[6px] max-[1150px]:min-h-[650px] max-md:min-h-0 max-md:aspect-[.8] max-md:rounded-[5px]">
-          <Image className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.025]" src="https://images.unsplash.com/photo-1516211697506-8360dbcfe9a4?auto=format&fit=crop&w=1400&q=85" alt="Chef preparing a dish over an open flame" fill sizes="(max-width: 767px) 100vw, 36vw" priority />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,4,3,.06),rgba(5,4,3,.14)_48%,rgba(5,4,3,.62))]" />
-        </div>
+  const trackRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [desktopScene, setDesktopScene] = useState(0);
+  const [mobileScene, setMobileScene] = useState(0);
 
-        <div className="flex min-w-0 flex-col pt-[18px] max-md:pt-14">
-          <div className="flex items-start justify-between gap-8 max-md:block">
-            <div>
-              <p className="m-0 text-[13px] font-medium uppercase tracking-[.25em] text-[#e46d0b] max-md:text-[11px]">Curated Culinary</p>
-              <span className="my-[29px] block h-px w-[47px] bg-[#e46d0b] max-md:my-6 max-md:w-[31px]" aria-hidden="true" />
-              <h2 id="culinary-journey-title" className="m-0 font-serif text-[clamp(3.8rem,5.25vw,5.9rem)] font-normal leading-[.98] tracking-[-.045em] max-[1150px]:text-[clamp(3.3rem,5.5vw,5rem)] max-md:text-[clamp(3.2rem,14vw,4.8rem)]">The Culinary Journey</h2>
-              <p className="mt-[46px] mb-0 text-[17px] leading-[1.5] text-[#a69b8c] max-md:mt-7 max-md:text-[15px]">Opening a new chapter in refined dining experience</p>
-            </div>
-            <Link className="mt-[172px] flex shrink-0 items-center gap-4 text-[16px] text-[#c9beb0] transition-colors hover:text-[#e46d0b] max-[1150px]:mt-[145px] max-md:mt-8 max-md:text-[14px]" href="#all-dining">View All Dining <ArrowRight className="size-[27px] text-[#e46d0b] max-md:size-6" /></Link>
+  useEffect(() => {
+    const track = trackRef.current;
+    const stage = stageRef.current;
+    if (!track || !stage) return;
+
+    let frame = 0;
+    const updateFromScroll = () => {
+      frame = 0;
+      const scrollDistance = track.offsetHeight - stage.offsetHeight;
+      const progress = scrollDistance > 0
+        ? -track.getBoundingClientRect().top / scrollDistance
+        : 0;
+      const nextDesktopScene = getSceneIndex(progress, desktopSceneCount);
+      const nextMobileScene = getSceneIndex(progress, mobileSceneCount);
+
+      setDesktopScene((current) => current === nextDesktopScene ? current : nextDesktopScene);
+      setMobileScene((current) => current === nextMobileScene ? current : nextMobileScene);
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateFromScroll);
+    };
+
+    updateFromScroll();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const desktopDestinations = getDesktopDestinationIndexes(desktopScene)
+    .map((index) => diningDestinations[index]);
+  const mobileDestination = diningDestinations[mobileScene];
+
+  return (
+    <section
+      id="dining"
+      className="relative overflow-hidden bg-[#f5f0e7] text-[#201f1c]"
+      aria-labelledby="culinary-journey-title"
+    >
+      <header className="mx-auto max-w-[720px] px-5 py-[clamp(72px,8vw,126px)] text-center">
+        <h2
+          id="culinary-journey-title"
+          className="font-serif text-[clamp(3.2rem,15vw,4.8rem)] font-normal leading-[.92] tracking-[-.045em] md:text-[clamp(4.4rem,5vw,5.3rem)] md:leading-[.9]"
+        >
+          A Journey
+          <br />
+          Through Taste.
+        </h2>
+        <p className="mx-auto mt-6 max-w-[360px] text-[14px] leading-[1.45] text-[#666157] md:mt-7 md:max-w-[460px] md:text-[16px]">
+          Discover six distinctive dining experiences shaped by craft,
+          atmosphere, and the spirit of Bali.
+        </p>
+      </header>
+
+      <div
+        ref={trackRef}
+        className="relative min-h-[700svh] bg-[#090806] md:min-h-[500svh]"
+      >
+        <div ref={stageRef} className="sticky top-0 h-svh overflow-hidden">
+          <div
+            className="absolute top-5 right-5 z-30 flex items-center gap-3 text-[10px] uppercase tracking-[.2em] text-white/70 md:top-7 md:right-8 md:text-[11px]"
+            aria-live="polite"
+          >
+            <span className="md:hidden">
+              {String(mobileScene + 1).padStart(2, "0")} / {String(mobileSceneCount).padStart(2, "0")}
+            </span>
+            <span className="hidden md:inline">
+              {String(desktopScene + 1).padStart(2, "0")} / {String(desktopSceneCount).padStart(2, "0")}
+            </span>
+            <span className="h-px w-12 bg-white/40 md:hidden" aria-hidden="true">
+              <span
+                className="block h-px bg-[#bd8435] transition-[width] duration-500"
+                style={{
+                  width: `${((mobileScene + 1) / mobileSceneCount) * 100}%`,
+                }}
+              />
+            </span>
+            <span className="hidden h-px w-20 bg-white/40 md:block" aria-hidden="true">
+              <span
+                className="block h-px bg-[#bd8435] transition-[width] duration-500"
+                style={{
+                  width: `${((desktopScene + 1) / desktopSceneCount) * 100}%`,
+                }}
+              />
+            </span>
           </div>
 
-          <div className="mt-[39px] grid grid-cols-3 gap-[17px] max-[1150px]:gap-3 max-md:mt-10 max-md:grid-cols-[repeat(3,78vw)] max-md:overflow-x-auto max-md:pb-2 max-md:snap-x max-md:snap-mandatory max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
-            {diningDestinations.map((destination) => (
+          <div className="hidden h-full grid-cols-3 md:grid md:[&>*:last-child]:border-r-0">
+            {desktopDestinations.map((destination, index) => (
               <DiningCard
-                key={destination.name}
+                key={`${index}-${destination.name}`}
                 destination={destination}
+                animationDelay={index * 70}
               />
             ))}
           </div>
-        </div>
-      </div>
 
-      <div className="relative mt-[28px] flex items-center gap-8 text-[11px] uppercase tracking-[.25em] text-[#8d6747] max-md:mt-9 max-md:gap-5 max-md:text-[9px]">
-        <span>Ini Vie Hospitality</span>
-        <span className="h-7 w-px bg-[#6c5d4a]" aria-hidden="true" />
-        <span>Bali</span>
-        <span className="ml-auto font-serif text-[42px] normal-case leading-none tracking-[-.18em] text-[#a58b73] max-md:text-[34px]" aria-label="Ini Vie">I<span className="relative -left-1">V</span></span>
+          <div className="grid h-full place-items-center px-5 py-12 md:hidden">
+            <DiningCard
+              key={mobileDestination.name}
+              destination={mobileDestination}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

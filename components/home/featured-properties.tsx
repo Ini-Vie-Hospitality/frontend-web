@@ -62,10 +62,10 @@ export function FeaturedProperties() {
   return (
     <section
       id="stays"
-      className="relative bg-[#f5f0e7] px-5 py-[clamp(110px,12vw,180px)] text-[#171815] sm:px-8 lg:px-[clamp(48px,5vw,92px)]"
+      className="relative bg-[#f5f0e7] pt-[clamp(110px,12vw,180px)] text-[#171815]"
       aria-labelledby="featured-properties-title"
     >
-      <header className="mx-auto max-w-[820px] text-center">
+      <header className="mx-auto max-w-[820px] px-5 text-center sm:px-8">
         <p className="mb-6 text-[11px] font-medium uppercase tracking-[.28em] text-[#a86422] sm:text-xs">
           Curated Collection
         </p>
@@ -84,14 +84,14 @@ export function FeaturedProperties() {
 
       <div
         ref={trackRef}
-        className="relative mx-auto mt-[clamp(70px,9vw,130px)] max-w-[1400px]"
-        style={{ minHeight: `${properties.length * 92}svh` }}
+        className="relative mt-[clamp(70px,9vw,130px)]"
+        style={{ minHeight: `${(properties.length + 1) * 100}svh` }}
       >
         <div
           ref={stageRef}
-          className="sticky top-[5svh] flex min-h-[78svh] items-center"
+          className="sticky top-0 h-svh"
         >
-          <div className="relative h-[clamp(500px,68svh,760px)] w-full overflow-hidden rounded-[22px] bg-[#292c26] shadow-[0_28px_70px_rgba(44,39,29,.14)] sm:rounded-[26px] max-md:h-[72svh] max-md:min-h-[500px] max-md:rounded-[20px]">
+          <div className="relative size-full overflow-hidden bg-[#292c26]">
             {properties.map((property, index) => (
               <Image
                 key={property.id}
@@ -100,7 +100,7 @@ export function FeaturedProperties() {
                 fill
                 priority={index === 0}
                 loading={index === 0 ? undefined : "lazy"}
-                sizes="(max-width: 767px) 92vw, 90vw"
+                sizes="100vw"
                 className="object-cover"
                 style={{
                   objectPosition: property.objectPosition,
