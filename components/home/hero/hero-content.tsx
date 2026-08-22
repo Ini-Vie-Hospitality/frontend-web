@@ -1,10 +1,6 @@
-type HeroContentProps = {
-  onBookingRequest: () => void;
-};
-
 const buttonClass = "inline-flex min-h-15 items-center justify-center rounded-sm border-0 px-8 text-xs font-medium uppercase tracking-[.12em] transition-[background-color,border-color,transform] duration-220 active:translate-y-px";
 
-export function HeroContent({ onBookingRequest }: HeroContentProps) {
+export function HeroContent() {
   return (
     <div className="absolute top-[20.5%] left-[4.7%] z-20 w-[min(580px,42vw)] max-[1100px]:top-[20%] [@media(max-height:820px)_and_(min-width:768px)]:top-[18%] max-[1100px]:w-[54vw] max-md:inset-x-[22px] max-md:top-auto max-md:bottom-28 max-md:w-auto">
       <p className="mb-7 text-[13px] font-medium uppercase tracking-[.32em] max-md:mb-5 max-md:text-[11px] max-md:tracking-[.25em]">Ini Vie Hospitality</p>
