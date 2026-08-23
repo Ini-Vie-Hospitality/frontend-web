@@ -5,6 +5,7 @@ import { FeaturedProperties } from "@/components/home/featured-properties";
 import { FaqSection } from "@/components/home/faq-section";
 import { Hero } from "@/components/home/hero/hero";
 import { Footer } from "@/components/layout/footer";
+import { OurSpecialOffers } from "@/components/home/our-special-offers";
 import { WellnessHarmony } from "@/components/home/wellness-harmony";
 import { WhatsNew } from "@/components/home/whats-new";
 
@@ -18,6 +19,7 @@ export default function Home() {
       <FeaturedProperties />
       <CulinaryJourney />
       <WellnessHarmony />
+      <OurSpecialOffers />
       <WhatsNew />
       <FaqSection />
       <Footer />

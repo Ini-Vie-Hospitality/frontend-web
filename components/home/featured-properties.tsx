@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Reveal } from "../ui/reveal";
 import { properties } from "./featured-properties/properties";
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
@@ -66,20 +67,26 @@ export function FeaturedProperties() {
       aria-labelledby="featured-properties-title"
     >
       <header className="mx-auto max-w-[820px] px-5 text-center sm:px-8">
-        <p className="mb-6 text-[11px] font-medium uppercase tracking-[.28em] text-[#a86422] sm:text-xs">
-          Curated Collection
-        </p>
-        <h2
-          id="featured-properties-title"
-          className="m-0 font-serif text-[clamp(3rem,7vw,6.5rem)] leading-[.98] tracking-[-.055em]"
-        >
-          Discover Curated Stays
-          <br />
-          Designed For You
-        </h2>
-        <p className="mx-auto mt-8 max-w-[560px] text-[15px] leading-[1.75] text-[#5a574f] sm:text-[17px]">
-          A carefully selected collection of distinctive stays, created for different ways of experiencing Bali.
-        </p>
+        <Reveal>
+          <p className="mb-6 text-[11px] font-medium uppercase tracking-[.28em] text-[#a86422] sm:text-xs">
+            Curated Collection
+          </p>
+        </Reveal>
+        <Reveal delay={100}>
+          <h2
+            id="featured-properties-title"
+            className="m-0 font-serif text-[clamp(3rem,7vw,6.5rem)] leading-[.98] tracking-[-.055em]"
+          >
+            Discover Curated Stays
+            <br />
+            Designed For You
+          </h2>
+        </Reveal>
+        <Reveal delay={200}>
+          <p className="mx-auto mt-8 max-w-[560px] text-[15px] leading-[1.75] text-[#5a574f] sm:text-[17px]">
+            A carefully selected collection of distinctive stays, created for different ways of experiencing Bali.
+          </p>
+        </Reveal>
       </header>
 
       <div

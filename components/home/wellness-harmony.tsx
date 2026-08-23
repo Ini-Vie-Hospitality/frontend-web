@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "../ui/reveal";
 import {
   forwardRef,
   type ForwardedRef,
@@ -111,18 +112,24 @@ export function WellnessHarmony() {
       aria-labelledby="wellness-harmony-title"
     >
       <header className="mx-auto max-w-[760px] px-6 py-[clamp(80px,9vw,136px)] text-center">
-        <p className="text-[11px] font-medium uppercase tracking-[.28em] text-[#777167]">
-          iNi ViE Wellness
-        </p>
-        <h2
-          id="wellness-harmony-title"
-          className="mt-5 font-serif text-[clamp(3.2rem,7vw,6rem)] font-normal leading-[.9] tracking-[-.055em]"
-        >
-          Wellness Harmony Escape
-        </h2>
-        <p className="mx-auto mt-6 max-w-[420px] text-[14px] leading-[1.55] text-[#777167] sm:text-[16px]">
-          Find serenity in soulful rituals made to restore.
-        </p>
+        <Reveal>
+          <p className="text-[11px] font-medium uppercase tracking-[.28em] text-[#777167]">
+            iNi ViE Wellness
+          </p>
+        </Reveal>
+        <Reveal delay={100}>
+          <h2
+            id="wellness-harmony-title"
+            className="mt-5 font-serif text-[clamp(3.2rem,7vw,6rem)] font-normal leading-[.9] tracking-[-.055em]"
+          >
+            Wellness Harmony Escape
+          </h2>
+        </Reveal>
+        <Reveal delay={200}>
+          <p className="mx-auto mt-6 max-w-[420px] text-[14px] leading-[1.55] text-[#777167] sm:text-[16px]">
+            Find serenity in soulful rituals made to restore.
+          </p>
+        </Reveal>
       </header>
 
       <div

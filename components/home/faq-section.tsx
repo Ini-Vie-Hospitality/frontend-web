@@ -32,7 +32,7 @@ export function FaqSection() {
           <p className="mt-[29px] max-w-[430px] text-[17px] leading-[1.75] text-[#3e3d39] max-md:text-[15px]">
             Find helpful information about reservations, check-in, experiences, and your stay with Ini Vie Hospitality.
           </p>
-          <ConciergeCard />
+          {/* <ConciergeCard /> */}
         </div>
 
         <div className="-mt-[27px]">

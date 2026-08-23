@@ -1,11 +1,15 @@
 import assert from "node:assert/strict";
 import { journalStories } from "./journal-stories.ts";
 
-assert.equal(journalStories.length, 6);
-assert.equal(new Set(journalStories.map(({ id }) => id)).size, 6);
+assert.equal(journalStories.length, 4);
+assert.equal(new Set(journalStories.map(({ id }) => id)).size, 4);
 assert.deepEqual(
   journalStories.map(({ layout }) => layout),
-  ["feature", "standard", "standard", "tall", "wide", "banner"],
+  ["feature", "standard", "standard", "wide"],
+);
+assert.deepEqual(
+  journalStories.map(({ readingTime }) => readingTime),
+  ["8 min read", "5 min read", "4 min read", "6 min read"],
 );
 
 journalStories.forEach((story) => {

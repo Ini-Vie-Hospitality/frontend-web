@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { DiningCard } from "./culinary-journey/dining-card";
 import { diningDestinations } from "./culinary-journey/dining-destinations";
+import { Reveal } from "../ui/reveal";
 import {
   getHorizontalOffset,
   getScrollProgress,
@@ -139,21 +140,27 @@ export function CulinaryJourney() {
       aria-labelledby="culinary-journey-title"
     >
       <header className="mx-auto max-w-[720px] px-5 py-[clamp(72px,8vw,126px)] text-center">
-        <p className="text-[11px] uppercase tracking-[.16em] text-[#a56f2d]">
-          The Culinary Journey
-        </p>
-        <h2
-          id="culinary-journey-title"
-          className="mt-5 font-serif text-[clamp(3.2rem,15vw,4.8rem)] font-normal leading-[.92] tracking-[-.045em] md:text-[clamp(4.4rem,5vw,5.3rem)] md:leading-[.9]"
-        >
-          A Journey
-          <br />
-          Through Taste.
-        </h2>
-        <p className="mx-auto mt-6 max-w-[360px] text-[14px] leading-[1.45] text-[#666157] md:mt-7 md:max-w-[460px] md:text-[16px]">
-          Discover six distinctive dining experiences shaped by craft,
-          atmosphere, and the spirit of Bali.
-        </p>
+        <Reveal>
+          <p className="text-[11px] uppercase tracking-[.16em] text-[#a56f2d]">
+            The Culinary Journey
+          </p>
+        </Reveal>
+        <Reveal delay={100}>
+          <h2
+            id="culinary-journey-title"
+            className="mt-5 font-serif text-[clamp(3.2rem,15vw,4.8rem)] font-normal leading-[.92] tracking-[-.045em] md:text-[clamp(4.4rem,5vw,5.3rem)] md:leading-[.9]"
+          >
+            A Journey
+            <br />
+            Through Taste.
+          </h2>
+        </Reveal>
+        <Reveal delay={200}>
+          <p className="mx-auto mt-6 max-w-[360px] text-[14px] leading-[1.45] text-[#666157] md:mt-7 md:max-w-[460px] md:text-[16px]">
+            Discover six distinctive dining experiences shaped by craft,
+            atmosphere, and the spirit of Bali.
+          </p>
+        </Reveal>
       </header>
 
       <div ref={scrubRef} className="relative bg-[#090806]">
