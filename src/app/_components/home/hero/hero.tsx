@@ -1,0 +1,38 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { BookingBar } from "./booking-bar";
+import { HeroControls } from "./hero-controls";
+import { HeroMedia } from "./hero-media";
+
+export function Hero() {
+  const [muted, setMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  function toggleMute() {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = !video.muted;
+    setMuted(video.muted);
+
+    if (!video.muted && video.paused) {
+      void video.play().catch(() => {
+        video.muted = true;
+        setMuted(true);
+      });
+    }
+  }
+
+  return (
+    <section
+      id="hero"
+      className="relative isolate min-h-[max(100svh,780px)] overflow-hidden bg-[#0e100e] max-md:min-h-svh"
+      aria-label="Ini Vie Hospitality"
+    >
+      <HeroMedia videoRef={videoRef} />
+      <BookingBar />
+      <HeroControls muted={muted} onToggleMute={toggleMute} />
+    </section>
+  );
+}
