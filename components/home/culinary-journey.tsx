@@ -3,35 +3,36 @@
 import { useEffect, useRef, useState } from "react";
 import { DiningCard } from "./culinary-journey/dining-card";
 import { diningDestinations } from "./culinary-journey/dining-destinations";
-import {
-  getDesktopDestinationIndexes,
-  getSceneIndex,
-} from "./culinary-journey/scene-progression";
+import { getSceneIndex } from "./culinary-journey/scene-progression";
 
-const desktopSceneCount = 4;
+const desktopSceneCount = diningDestinations.length - 2;
 const mobileSceneCount = diningDestinations.length;
 
 export function CulinaryJourney() {
   const trackRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const horizontalTrackRef = useRef<HTMLDivElement>(null);
   const [desktopScene, setDesktopScene] = useState(0);
   const [mobileScene, setMobileScene] = useState(0);
 
   useEffect(() => {
     const track = trackRef.current;
     const stage = stageRef.current;
-    if (!track || !stage) return;
+    const horizontalTrack = horizontalTrackRef.current;
+    if (!track || !stage || !horizontalTrack) return;
 
     let frame = 0;
     const updateFromScroll = () => {
       frame = 0;
       const scrollDistance = track.offsetHeight - stage.offsetHeight;
       const progress = scrollDistance > 0
-        ? -track.getBoundingClientRect().top / scrollDistance
+        ? Math.min(1, Math.max(0, -track.getBoundingClientRect().top / scrollDistance))
         : 0;
+
+      horizontalTrack.style.setProperty("--culinary-progress", progress.toFixed(4));
+
       const nextDesktopScene = getSceneIndex(progress, desktopSceneCount);
       const nextMobileScene = getSceneIndex(progress, mobileSceneCount);
-
       setDesktopScene((current) => current === nextDesktopScene ? current : nextDesktopScene);
       setMobileScene((current) => current === nextMobileScene ? current : nextMobileScene);
     };
@@ -49,9 +50,9 @@ export function CulinaryJourney() {
     };
   }, []);
 
-  const desktopDestinations = getDesktopDestinationIndexes(desktopScene)
-    .map((index) => diningDestinations[index]);
   const mobileDestination = diningDestinations[mobileScene];
+  const desktopProgress = ((desktopScene + 1) / desktopSceneCount) * 100;
+  const mobileProgress = ((mobileScene + 1) / mobileSceneCount) * 100;
 
   return (
     <section
@@ -76,7 +77,7 @@ export function CulinaryJourney() {
 
       <div
         ref={trackRef}
-        className="relative min-h-[700svh] bg-[#090806] md:min-h-[500svh]"
+        className="relative min-h-[700svh] bg-[#090806] md:min-h-[400svh]"
       >
         <div ref={stageRef} className="sticky top-0 h-svh overflow-hidden">
           <div
@@ -92,25 +93,27 @@ export function CulinaryJourney() {
             <span className="h-px w-12 bg-white/40 md:hidden" aria-hidden="true">
               <span
                 className="block h-px bg-[#bd8435] transition-[width] duration-500"
-                style={{
-                  width: `${((mobileScene + 1) / mobileSceneCount) * 100}%`,
-                }}
+                style={{ width: `${mobileProgress}%` }}
               />
             </span>
             <span className="hidden h-px w-20 bg-white/40 md:block" aria-hidden="true">
               <span
                 className="block h-px bg-[#bd8435] transition-[width] duration-500"
-                style={{
-                  width: `${((desktopScene + 1) / desktopSceneCount) * 100}%`,
-                }}
+                style={{ width: `${desktopProgress}%` }}
               />
             </span>
           </div>
 
-          <div className="hidden h-full grid-cols-3 md:grid md:[&>*:last-child]:border-r-0">
-            {desktopDestinations.map((destination, index) => (
+          <div
+            ref={horizontalTrackRef}
+            className="hidden h-full w-[200vw] will-change-transform md:flex"
+            style={{
+              transform: "translate3d(calc(var(--culinary-progress, 0) * -100vw), 0, 0)",
+            }}
+          >
+            {diningDestinations.map((destination, index) => (
               <DiningCard
-                key={`${index}-${destination.name}`}
+                key={destination.name}
                 destination={destination}
                 animationDelay={index * 70}
               />
