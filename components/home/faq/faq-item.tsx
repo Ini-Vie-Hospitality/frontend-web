@@ -20,23 +20,34 @@ export function FaqItem({ faq, index, isOpen, onToggle }: FaqItemProps) {
         aria-controls={panelId}
         onClick={onToggle}
       >
-        <span className={`w-[43px] shrink-0 text-[20px] ${isOpen ? "text-[#e06a0b]" : "text-[#9f9283]"}`}>
+        <span className={`w-[43px] shrink-0 text-[20px] transition-colors duration-500 ${isOpen ? "text-[#e06a0b]" : "text-[#9f9283]"}`}>
           {String(index + 1).padStart(2, "0")}
         </span>
         <span className="font-serif text-[25px] leading-[1.2] tracking-[-.02em] max-md:text-[19px]">
           {faq.question}
         </span>
-        <span className={`ml-auto grid size-[52px] shrink-0 place-items-center rounded-full border max-md:size-11 ${isOpen ? "border-[#e06a0b] text-[#e06a0b]" : "border-[#d5cdc4] text-[#1a1c18]"}`}>
+        <span className={`relative ml-auto grid size-[52px] shrink-0 place-items-center rounded-full border transition-colors duration-500 max-md:size-11 ${isOpen ? "border-[#e06a0b] text-[#e06a0b]" : "border-[#d5cdc4] text-[#1a1c18]"}`}>
           <span className="sr-only">{isOpen ? "Close" : "Open"} answer</span>
-          {isOpen ? <Minus aria-hidden="true" className="size-[19px]" /> : <Plus aria-hidden="true" className="size-[19px]" />}
+          <Plus
+            aria-hidden="true"
+            className={`absolute left-1/2 top-1/2 size-[19px] -translate-x-1/2 -translate-y-1/2 transition-[opacity,transform] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${isOpen ? "rotate-90 scale-75 opacity-0" : "rotate-0 scale-100 opacity-100"}`}
+          />
+          <Minus
+            aria-hidden="true"
+            className={`absolute left-1/2 top-1/2 size-[19px] -translate-x-1/2 -translate-y-1/2 transition-[opacity,transform] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${isOpen ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-75 opacity-0"}`}
+          />
         </span>
       </button>
       <div
         id={panelId}
-        hidden={!isOpen}
-        className="pb-[45px] pl-[75px] pr-[76px] text-[17px] leading-[1.9] text-[#45433f] max-md:pb-8 max-md:pl-[59px] max-md:pr-2 max-md:text-[15px]"
+        aria-hidden={!isOpen}
+        className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
       >
-        {faq.answer}
+        <div className="min-h-0 overflow-hidden">
+          <div className="pb-[45px] pl-[75px] pr-[76px] text-[17px] leading-[1.9] text-[#45433f] max-md:pb-8 max-md:pl-[59px] max-md:pr-2 max-md:text-[15px]">
+            {faq.answer}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ export function Footer() {
       className="relative overflow-hidden bg-[#121411] px-[clamp(34px,3.9vw,66px)] pt-[58px] pb-[45px] text-[#d8cebf] max-md:px-5 max-md:pt-16"
       aria-label="Ini Vie Hospitality footer"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(13,14,12,.96)_0%,rgba(13,14,12,.83)_34%,rgba(13,14,12,.5)_68%,rgba(13,14,12,.8)_100%),linear-gradient(180deg,rgba(13,14,12,.24),rgba(13,14,12,.76)),url('/bg-footer.png')] bg-cover bg-[center_42%]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(13,14,12,.88)_0%,rgba(13,14,12,.74)_34%,rgba(13,14,12,.42)_68%,rgba(13,14,12,.7)_100%),linear-gradient(180deg,rgba(13,14,12,.16),rgba(13,14,12,.66)),url('/bg-footer.png')] bg-cover bg-[center_42%]" />
       <div className="relative mx-auto max-w-[1540px]">
         <div className="grid grid-cols-[1fr_1.08fr_1fr] border-b border-[#d8cebf]/30 pb-[57px] max-md:block max-md:pb-11">
           <div className="flex min-h-[223px] flex-col items-center justify-center px-[5%] text-center max-md:min-h-0 max-md:px-0 max-md:pb-12">

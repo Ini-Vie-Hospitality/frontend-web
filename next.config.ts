@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "inivie.com",
+        pathname: "/inivie_assets/img/logomedia/**",
+      },
     ],
   },
 };

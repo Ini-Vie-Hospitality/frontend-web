@@ -17,7 +17,7 @@ journalStories.forEach((story) => {
   assert.ok(story.title);
   assert.ok(story.description);
   assert.ok(story.readingTime);
-  assert.ok(story.image);
+  assert.match(story.image, /^https:\/\/images\.unsplash\.com\//);
   assert.ok(story.alt);
   assert.ok(story.href.startsWith("#journal-"));
 });
