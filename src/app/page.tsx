@@ -16,8 +16,8 @@ export default function Home() {
   return (
     <main>
       <Navbar heroId="hero" />
-      <Hero />
       <section id="booking" className="booking-anchor" aria-hidden="true" />
+      <Hero />
       <BrandIntroduction />
       <FeaturedProperties />
       <CulinaryJourney />

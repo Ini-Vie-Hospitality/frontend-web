@@ -5,6 +5,7 @@ import { featuredInLogos } from "./featured-in-logos";
 export function FeaturedIn() {
   return (
     <section
+      id="featured-in"
       className="bg-[#f8f5ef] px-5 py-20 text-[#291b17] sm:px-8 sm:py-24"
       aria-labelledby="featured-in-title"
     >

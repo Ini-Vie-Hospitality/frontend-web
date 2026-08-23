@@ -33,27 +33,22 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <X className="size-5 stroke-[1.25]" aria-hidden="true" />
           </button>
         </div>
-        <nav className="my-auto grid gap-[21px]" aria-label="Mobile navigation">
-          {navigationLinks.map((link) => (
+        <nav
+          className="mt-8 grid min-h-0 flex-1 content-start gap-[clamp(10px,1.8vh,18px)] overflow-y-auto pb-4 pr-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-label="Mobile navigation"
+        >
+          {navigationLinks.map(({ href, label }) => (
             <Link
-              className="w-max font-serif text-[clamp(3rem,8vw,5rem)] leading-none tracking-[-.035em] transition-[color,transform] duration-200 hover:translate-x-1.5 hover:text-orange max-md:text-[clamp(2.7rem,13vw,4rem)]"
-              key={link}
-              href={`#${link.toLowerCase()}`}
+              className="w-max font-serif text-[clamp(2rem,6vw,3.5rem)] leading-none tracking-[-.035em] transition-[color,transform] duration-200 hover:translate-x-1.5 hover:text-orange max-md:text-[clamp(2rem,9vw,3rem)]"
+              key={href}
+              href={href}
               tabIndex={tabIndex}
               onClick={onClose}
             >
-              {link}
+              {label}
             </Link>
           ))}
         </nav>
-        <Link
-          className="flex min-h-[59px] items-center justify-center rounded-sm bg-orange text-xs font-medium uppercase tracking-[.14em] hover:bg-orange-hover"
-          href="#booking"
-          tabIndex={tabIndex}
-          onClick={onClose}
-        >
-          Book Your Stay
-        </Link>
       </aside>
     </>
   );

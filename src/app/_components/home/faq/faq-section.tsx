@@ -10,6 +10,7 @@ export function FaqSection() {
 
   return (
     <section
+      id="faq"
       className="relative isolate min-h-[941px] overflow-hidden bg-[#f8f4ee] px-[clamp(28px,7vw,118px)] py-[clamp(76px,7vw,116px)] text-[#1a1c18] max-md:min-h-0"
       aria-labelledby="faq-title"
     >

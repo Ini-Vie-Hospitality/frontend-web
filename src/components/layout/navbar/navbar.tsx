@@ -66,14 +66,6 @@ export function Navbar({ heroId }: { heroId: string }) {
         </Link>
         <DesktopNavigation />
         <div className="ml-auto flex items-center">
-          <button
-            className="flex cursor-pointer items-center border-0 bg-transparent text-[13px] font-medium uppercase tracking-[.16em] max-md:hidden"
-            type="button"
-            aria-label="Select language"
-          >
-            EN
-            <ChevronDown className="ml-1.5 size-[15px]" aria-hidden="true" />
-          </button>
           <span className="mx-[30px] h-[34px] w-px bg-current opacity-20 max-md:hidden" aria-hidden="true" />
           <Link className={`${navItemClass} max-md:text-[11px]`} href="#booking">
             Book Your Stay

@@ -24,10 +24,6 @@ export function Hero() {
     }
   }
 
-  function requestBooking() {
-    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
-  }
-
   return (
     <section
       id="hero"
@@ -35,7 +31,7 @@ export function Hero() {
       aria-label="Ini Vie Hospitality"
     >
       <HeroMedia videoRef={videoRef} />
-      <BookingBar onRequest={requestBooking} />
+      <BookingBar />
       <HeroControls muted={muted} onToggleMute={toggleMute} />
     </section>
   );
