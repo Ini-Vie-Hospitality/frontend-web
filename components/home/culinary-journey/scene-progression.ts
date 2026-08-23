@@ -7,11 +7,3 @@ export function getSceneIndex(progress: number, sceneCount: number) {
     sceneCount - 1,
   );
 }
-
-export function getDesktopDestinationIndexes(scene: number) {
-  return [
-    scene >= 1 ? 3 : 0,
-    scene >= 2 ? 4 : 1,
-    scene >= 3 ? 5 : 2,
-  ];
-}

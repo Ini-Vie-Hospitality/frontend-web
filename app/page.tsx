@@ -6,6 +6,7 @@ import { FaqSection } from "@/components/home/faq-section";
 import { Hero } from "@/components/home/hero/hero";
 import { Footer } from "@/components/layout/footer";
 import { WellnessHarmony } from "@/components/home/wellness-harmony";
+import { WhatsNew } from "@/components/home/whats-new";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <FeaturedProperties />
       <CulinaryJourney />
       <WellnessHarmony />
+      <WhatsNew />
       <FaqSection />
       <Footer />
     </main>

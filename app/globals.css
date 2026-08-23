@@ -29,10 +29,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outlin
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes culinary-card-in {
-  from { opacity: 0; transform: translateY(18px) scale(1.015); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
 @keyframes wellness-image-in {
   from { opacity: 0; transform: scale(1.025); }
   to { opacity: 1; transform: scale(1); }
