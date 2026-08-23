@@ -31,6 +31,7 @@ assert.doesNotMatch(membershipSource, /<iframe/);
 assert.match(membershipSource, /motion-reduce:hidden/);
 assert.match(membershipSource, /https:\/\/booking\.inivie\.com\/en\/register/);
 assert.match(membershipSource, /href="\/membership"/);
+assert.match(membershipSource, /hover:text-black/);
 assert.match(combinedSource, /Priority VIP Welcome/);
 assert.match(combinedSource, /Special Celebration Setup/);
 assert.match(combinedSource, /Exclusive Savings at Restaurants, Spa & Club Outlets/);

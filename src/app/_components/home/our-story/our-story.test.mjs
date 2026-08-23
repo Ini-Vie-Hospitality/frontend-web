@@ -24,6 +24,11 @@ assert.match(combinedSource, /About Us/);
 assert.match(combinedSource, /What Makes Us Different/);
 assert.match(combinedSource, /Our Eight Mantras/);
 assert.match(combinedSource, /Sustainability/);
+assert.equal((storiesSource.match(/cta: "Discover More"/g) ?? []).length, 3);
+assert.equal(
+  (storiesSource.match(/href: "https:\/\/inivie\.com\/about"/g) ?? []).length,
+  4,
+);
 assert.match(combinedSource, /\/our-story\/infinity-pool\.png/);
 assert.match(combinedSource, /\/our-story\/meaningful-journey\.png/);
 assert.match(combinedSource, /\/our-story\/eight-mantras\.jpg/);

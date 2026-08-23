@@ -165,15 +165,6 @@ export function BrandIntroduction() {
           <BrandStory />
         </Reveal>
 
-        <Reveal variant="fade" delay={220} className="mt-10 md:mt-16">
-          <Link
-            href="#stays"
-            className="inline-flex items-center gap-4 border-b border-[#b7945d] pb-2 text-[13px] tracking-[.25em]"
-          >
-            Discover Our Story
-            <span className="text-[18px] tracking-normal" aria-hidden="true">→</span>
-          </Link>
-        </Reveal>
       </div>
     </section>
   );

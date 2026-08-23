@@ -65,7 +65,7 @@ export function MembershipSection() {
                 </Link>
                 <Link
                   href="/membership"
-                  className="inline-flex min-h-11 items-center rounded-[4px] border border-white px-5 text-[13px] font-medium tracking-[.02em] text-white transition-colors hover:bg-white hover:text-[#30241f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  className="inline-flex min-h-11 items-center rounded-[4px] border border-white px-5 text-[13px] font-medium tracking-[.02em] text-white transition-colors hover:bg-white/10 hover:text-oran focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   Discover More ↗
                 </Link>
