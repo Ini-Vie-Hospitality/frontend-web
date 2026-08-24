@@ -38,7 +38,7 @@ test("loadHomepageData fetches direct JSON with server cache options", async () 
   assert.equal(data.brandIntroduction.quote, "From CMS");
   assert.equal(request[0], "https://cms.example.com/api/homepage");
   assert.equal(request[1].headers.Accept, "application/json");
-  assert.deepEqual(request[1].next, { revalidate: 300 });
+  assert.deepEqual(request[1].next, { revalidate: 300, tags: ["homepage"] });
   assert.ok(request[1].signal instanceof AbortSignal);
 });
 

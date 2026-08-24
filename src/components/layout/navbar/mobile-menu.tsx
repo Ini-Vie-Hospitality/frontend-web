@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { X } from "lucide-react";
+import { homepageHref } from "./navigation-data";
 import type { NavigationLink, PublishedHomepageData } from "@/content/homepage/types";
 
 type MobileMenuProps = {
@@ -43,7 +44,7 @@ export function MobileMenu({ isOpen, onClose, links, content }: MobileMenuProps)
             <Link
               className="w-max font-serif text-[clamp(2rem,6vw,3.5rem)] leading-none tracking-[-.035em] transition-[color,transform] duration-200 hover:translate-x-1.5 hover:text-orange max-md:text-[clamp(2rem,9vw,3rem)]"
               key={href}
-              href={href}
+              href={homepageHref(href)}
               tabIndex={tabIndex}
               onClick={onClose}
             >

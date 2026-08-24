@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navItemClass } from "./navigation-data";
+import { homepageHref, navItemClass } from "./navigation-data";
 import type { NavigationLink } from "@/content/homepage/types";
 
 export function DesktopNavigation({ links }: { links: NavigationLink[] }) {
@@ -9,7 +9,7 @@ export function DesktopNavigation({ links }: { links: NavigationLink[] }) {
       aria-label="Primary navigation"
     >
       {links.map(({ href, label }) => (
-          <Link className={navItemClass} key={href} href={href}>
+          <Link className={navItemClass} key={href} href={homepageHref(href)}>
             {label}
           </Link>
         ))}

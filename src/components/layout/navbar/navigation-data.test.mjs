@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { navigationLinks } from "./navigation-data.ts";
+import { homepageHref, navigationLinks } from "./navigation-data.ts";
+
+assert.equal(homepageHref("#stays"), "/#stays");
+assert.equal(homepageHref("https://booking.inivie.com"), "https://booking.inivie.com");
+assert.equal(homepageHref("/"), "/");
 
 const desktopLabels = navigationLinks
   .filter(({ desktop }) => desktop)
