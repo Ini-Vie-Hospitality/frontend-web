@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import {
   getHorizontalOffset,
   getScrollProgress,
@@ -16,5 +17,13 @@ assert.ok(Math.abs(getVerticalTravel(1440, 900) - 1944) < 0.001);
 assert.ok(Math.abs(getVerticalTravel(1950, 390) - 2632.5) < 0.001);
 assert.equal(isScrollScrubEnabled(false), true);
 assert.equal(isScrollScrubEnabled(true), false);
+
+const diningCardSource = await readFile(
+  new URL("./dining-card.tsx", import.meta.url),
+  "utf8",
+);
+
+assert.doesNotMatch(diningCardSource, /border-r\s+border-l-0\s+border-\[#6f5c44\]\/60/);
+assert.match(diningCardSource, /bg-\[#090806\]/);
 
 console.log("culinary scroll scrub: ok");

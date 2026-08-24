@@ -45,3 +45,11 @@ test("final image config permits every remote homepage media origin", () => {
     ));
   }
 });
+
+
+test("CSP allows both local CMS origins", async () => {
+  const headers = await nextConfig.headers();
+  const policy = headers[0].headers.find((header) => header.key === "Content-Security-Policy").value;
+  assert.match(policy, /http:\/\/localhost:8000/);
+  assert.match(policy, /http:\/\/127\.0\.0\.1:8000/);
+});

@@ -32,17 +32,18 @@ export function normalizeHomepageData(input: unknown): HomepageData {
   return data;
 }
 
-type HomepageFetch = (input: string, init: RequestInit & { next: { revalidate: number } }) => Promise<Response>;
-type HomepageLoaderDependencies = { apiUrl?: string; fetch?: HomepageFetch; environment?: string; logger?: (message: string) => void };
+type HomepageFetch = (input: string, init: RequestInit & { next?: { revalidate: number; tags?: string[] } }) => Promise<Response>;
+type HomepageLoaderDependencies = { apiUrl?: string; fetch?: HomepageFetch; environment?: string; logger?: (message: string) => void; mode?: 'published' | 'draft'; previewSecret?: string };
 
-export async function loadHomepageData({ apiUrl = process.env.CMS_API_URL, fetch: fetchHomepage = fetch, environment = process.env.NODE_ENV, logger = console.error }: HomepageLoaderDependencies = {}): Promise<HomepageData> {
+export async function loadHomepageData({ apiUrl = process.env.CMS_API_URL, fetch: fetchHomepage = fetch, environment = process.env.NODE_ENV, logger = console.error, mode = 'published', previewSecret = process.env.HOMEPAGE_PREVIEW_SECRET }: HomepageLoaderDependencies = {}): Promise<HomepageData> {
   const fallback = (reason: string): HomepageData => {
     if (environment === "production") logger(`Homepage CMS fallback: ${reason}`);
     return structuredClone(fallbackHomepageData);
   };
   if (!apiUrl) return fallback("CMS_API_URL is missing");
   try {
-    const response = await fetchHomepage(`${apiUrl.replace(/\/$/, "")}/api/homepage`, { headers: { Accept: "application/json" }, next: { revalidate: 300 }, signal: AbortSignal.timeout(5_000) });
+    const preview = mode === 'draft';
+    const response = await fetchHomepage(`${apiUrl.replace(/\/$/, "")}/api/homepage${preview ? '/preview' : ''}`, { headers: { Accept: "application/json", ...(preview && previewSecret ? { Authorization: `Bearer ${previewSecret}` } : {}) }, ...(preview ? { cache: 'no-store' } : { next: { revalidate: 300, tags: ['homepage'] } }), signal: AbortSignal.timeout(5_000) });
     if (!response.ok) return fallback(`HTTP ${response.status}`);
     const payload: unknown = await response.json();
     if (!isRecord(payload)) return fallback("invalid payload");

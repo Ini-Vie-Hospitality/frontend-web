@@ -38,8 +38,26 @@ test("loadHomepageData fetches direct JSON with server cache options", async () 
   assert.equal(data.brandIntroduction.quote, "From CMS");
   assert.equal(request[0], "https://cms.example.com/api/homepage");
   assert.equal(request[1].headers.Accept, "application/json");
-  assert.deepEqual(request[1].next, { revalidate: 300 });
+  assert.deepEqual(request[1].next, { revalidate: 300, tags: ["homepage"] });
   assert.ok(request[1].signal instanceof AbortSignal);
+});
+
+test("loadHomepageData fetches draft content without cache", async () => {
+  let request;
+  await loadHomepageData({
+    apiUrl: "https://cms.example.com",
+    mode: "draft",
+    previewSecret: "preview-secret",
+    fetch: async (...args) => {
+      request = args;
+      return Response.json(fallbackHomepageData);
+    },
+  });
+
+  assert.equal(request[0], "https://cms.example.com/api/homepage/preview");
+  assert.equal(request[1].headers.Authorization, "Bearer preview-secret");
+  assert.equal(request[1].cache, "no-store");
+  assert.equal(request[1].next, undefined);
 });
 
 test("loadHomepageData accepts a data envelope", async () => {

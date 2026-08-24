@@ -32,7 +32,14 @@ const dynamicCmsPatterns = cmsMediaPattern().filter((pattern) =>
   )
 );
 
+export function cmsFrameAncestors(cmsOrigin = process.env.CMS_APP_ORIGIN ?? 'http://localhost:8000'): string {
+  return [...new Set([cmsOrigin, 'http://localhost:8000', 'http://127.0.0.1:8000'])].join(' ');
+}
+
 const nextConfig: NextConfig = {
+  async headers() {
+    return [{ source: '/:path*', headers: [{ key: 'Content-Security-Policy', value: `frame-ancestors 'self' ${cmsFrameAncestors()}` }] }];
+  },
   images: {
     dangerouslyAllowLocalIP: process.env.NODE_ENV !== "production",
     remotePatterns: [
