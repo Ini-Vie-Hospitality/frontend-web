@@ -11,24 +11,24 @@ import { OurStory } from "./_components/home/our-story/our-story";
 import { OurSpecialOffers } from "./_components/home/special-offers/special-offers";
 import { WellnessHarmony } from "./_components/home/wellness-harmony/wellness-harmony";
 import { WhatsNew } from "./_components/home/whats-new/whats-new";
+import { loadHomepageData } from "@/content/homepage/loader";
 
-export default function Home() {
-  return (
-    <main>
-      <Navbar heroId="hero" />
-      <section id="booking" className="booking-anchor" aria-hidden="true" />
-      <Hero />
-      <BrandIntroduction />
-      <FeaturedProperties />
-      <CulinaryJourney />
-      <WellnessHarmony />
-      <MembershipSection />
-      <OurStory />
-      <OurSpecialOffers />
-      <WhatsNew />
-      <FeaturedIn />
-      <FaqSection />
-      <Footer />
-    </main>
-  );
+export default async function Home() {
+  const data = await loadHomepageData();
+  return <main>
+    {data.navbar && <Navbar heroId="hero" data={data.navbar} />}
+    <section id="booking" className="booking-anchor" aria-hidden="true" />
+    <Hero />
+    {data.brandIntroduction && <BrandIntroduction data={data.brandIntroduction} />}
+    {data.featuredProperties && <FeaturedProperties data={data.featuredProperties} />}
+    {data.culinary && <CulinaryJourney data={data.culinary} />}
+    {data.wellness && <WellnessHarmony data={data.wellness} />}
+    {data.membership && <MembershipSection data={data.membership} />}
+    {data.ourStory && <OurStory data={data.ourStory} />}
+    {data.specialOffers && <OurSpecialOffers data={data.specialOffers} />}
+    {data.whatsNew && <WhatsNew data={data.whatsNew} />}
+    {data.featuredIn && <FeaturedIn data={data.featuredIn} />}
+    {data.faq && <FaqSection data={data.faq} />}
+    {data.footer && <Footer data={data.footer} />}
+  </main>;
 }

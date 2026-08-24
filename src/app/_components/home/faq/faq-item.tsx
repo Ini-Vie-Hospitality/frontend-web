@@ -1,8 +1,8 @@
 import { Minus, Plus } from "lucide-react";
-import type { Faq } from "./faqs";
+import type { PublishedHomepageData } from "@/content/homepage/types";
 
 type FaqItemProps = {
-  faq: Faq;
+  faq: PublishedHomepageData["faq"]["items"][number];
   index: number;
   isOpen: boolean;
   onToggle: () => void;

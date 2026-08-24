@@ -3,10 +3,10 @@ import {
   forwardRef,
   type ForwardedRef,
 } from "react";
-import { wellnessEscapes } from "./wellness-escapes";
+import type { WellnessEscape } from "@/content/homepage/types";
 
 type WellnessCopyProps = {
-  escape: (typeof wellnessEscapes)[number];
+  escape: WellnessEscape;
   isActive: boolean;
 };
 
@@ -37,7 +37,7 @@ export const WellnessCopy = forwardRef(function WellnessCopy(
         href={escape.href}
         tabIndex={isActive ? 0 : -1}
       >
-        Discover Experience
+        {escape.cta}
         <span className="text-[17px] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
       </Link>
     </div>

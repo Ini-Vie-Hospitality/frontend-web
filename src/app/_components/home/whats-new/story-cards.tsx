@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { JournalStory } from "./journal-stories";
+import type { JournalStory } from "@/content/homepage/types";
 
-export function FeatureStory({ story }: { story: JournalStory }) {
+type StoryProps = { story: JournalStory; readLabel: string };
+
+export function FeatureStory({ story, readLabel }: StoryProps) {
   return (
     <article
       id={`journal-${story.id}`}
@@ -36,13 +38,13 @@ export function FeatureStory({ story }: { story: JournalStory }) {
         <p className="mt-4 max-w-[560px] text-[13px] leading-[1.5] text-white/90 sm:text-[17px] sm:leading-[1.45]">
           {story.description}
         </p>
-        <StoryLink story={story} className="mt-5 text-white sm:mt-6" />
+        <StoryLink story={story} label={readLabel} className="mt-5 text-white sm:mt-6" />
       </div>
     </article>
   );
 }
 
-export function CompactStory({ story }: { story: JournalStory }) {
+export function CompactStory({ story, readLabel }: StoryProps) {
   return (
     <article
       id={`journal-${story.id}`}
@@ -71,12 +73,12 @@ export function CompactStory({ story }: { story: JournalStory }) {
       <p className="mt-3 text-[10px] font-medium uppercase tracking-[.22em] text-[#55534f]">
         {story.readingTime}
       </p>
-      <StoryLink story={story} className="mt-3 text-[#4d4e25]" />
+      <StoryLink story={story} label={readLabel} className="mt-3 text-[#4d4e25]" />
     </article>
   );
 }
 
-export function WideStory({ story }: { story: JournalStory }) {
+export function WideStory({ story, readLabel }: StoryProps) {
   return (
     <article
       id={`journal-${story.id}`}
@@ -101,7 +103,7 @@ export function WideStory({ story }: { story: JournalStory }) {
       <p className="mt-3 text-[10px] font-medium uppercase tracking-[.22em] text-[#55534f]">
         {story.readingTime}
       </p>
-      <StoryLink story={story} className="mt-2.5 text-[#4d4e25]" />
+      <StoryLink story={story} label={readLabel} className="mt-2.5 text-[#4d4e25]" />
     </article>
   );
 }
@@ -117,16 +119,18 @@ function StoryMeta({ story }: { story: JournalStory }) {
 function StoryLink({
   story,
   className,
+  label,
 }: {
   story: JournalStory;
   className: string;
+  label: string;
 }) {
   return (
     <Link
       href={story.href}
       className={`group/link inline-flex w-fit items-center gap-4 border-b border-[#b17b25] pb-1.5 text-[14px] transition-colors hover:text-[#9a671b] sm:text-[15px] ${className}`}
     >
-      Read Story
+      {label}
       <span
         className="text-[18px] transition-transform duration-300 group-hover/link:translate-x-1 group-hover/link:-translate-y-1"
         aria-hidden="true"
