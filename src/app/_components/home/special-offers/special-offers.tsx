@@ -66,7 +66,7 @@ export function OurSpecialOffers({ data }: { data: PublishedHomepageData["specia
                 </div>
 
                 <p className="mt-6 text-[12px] font-medium uppercase tracking-[.25em] text-[#a9723d] sm:text-[13px]">
-                  {offer.id} <span className="mx-2">/</span> {offer.category}
+                  {offer.category}
                 </p>
 
                 <h3

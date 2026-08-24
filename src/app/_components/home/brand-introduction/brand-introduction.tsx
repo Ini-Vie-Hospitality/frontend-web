@@ -70,7 +70,7 @@ export function BrandIntroduction({ data }: { data: PublishedHomepageData["brand
         {data.backgroundWords[0]}
       </span>
       <span
-        className="pointer-events-none absolute right-[-2vw] bottom-[-38px] hidden font-serif text-[clamp(9rem,15vw,14rem)] leading-none tracking-[-.07em] text-[#8f8677]/[.05] md:block"
+        className="pointer-events-none absolute left-[-2vw] bottom-[-38px] hidden font-serif text-[clamp(9rem,15vw,14rem)] leading-none tracking-[-.07em] text-[#8f8677]/[.05] md:block"
         aria-hidden="true"
       >
         {data.backgroundWords[1]}
