@@ -3,7 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { Reveal } from "@/components/ui/reveal/reveal";
 import { DiningCard } from "./dining-card";
-import { diningDestinations } from "./dining-destinations";
+import type { PublishedHomepageData } from "@/content/homepage/types";
 import {
   getHorizontalOffset,
   getScrollProgress,
@@ -26,7 +26,13 @@ const resetCardEffects = (cards: HTMLElement[]) => {
   });
 };
 
-export function CulinaryJourney() {
+export function CulinaryJourney({ data }: { data: PublishedHomepageData["culinary"] }) {
+  if (!data.items.length) return null;
+  return <CulinaryJourneyContent data={data} />;
+}
+
+function CulinaryJourneyContent({ data }: { data: PublishedHomepageData["culinary"] }) {
+  const diningDestinations = data.items;
   const scrubRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -142,7 +148,7 @@ export function CulinaryJourney() {
       <header className="mx-auto max-w-[720px] px-5 py-[clamp(72px,8vw,126px)] text-center">
         <Reveal>
           <p className="text-[11px] uppercase tracking-[.16em] text-[#a56f2d]">
-            The Culinary Journey
+            {data.eyebrow}
           </p>
         </Reveal>
         <Reveal delay={100}>
@@ -150,14 +156,12 @@ export function CulinaryJourney() {
             id="culinary-journey-title"
             className="mt-5 font-serif text-[clamp(3.2rem,15vw,4.8rem)] font-normal leading-[.92] tracking-[-.045em] md:text-[clamp(4.4rem,5vw,5.3rem)] md:leading-[.9]"
           >
-            A Journey
-            <br />
-            Through Taste.
+            {data.title.split("\n").map((line) => <span className="block" key={line}>{line}</span>)}
           </h2>
         </Reveal>
         <Reveal delay={200}>
           <p className="mx-auto mt-6 max-w-[360px] text-[14px] leading-[1.45] text-[#666157] md:mt-7 md:max-w-[460px] md:text-[16px]">
-            Opening a new chapter in refined dining experience
+            {data.description}
           </p>
         </Reveal>
       </header>
@@ -171,7 +175,7 @@ export function CulinaryJourney() {
             className="absolute top-6 right-6 z-30 hidden items-center gap-3 text-[11px] uppercase tracking-[.2em] text-white/70 md:flex"
             aria-hidden="true"
           >
-            Scroll to explore
+            {data.scrollLabel}
             <span className="h-px w-20 origin-left bg-white/30">
               <span
                 ref={progressRef}

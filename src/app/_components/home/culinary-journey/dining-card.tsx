@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { DiningDestination } from "./dining-destinations";
+import type { DiningDestination } from "@/content/homepage/types";
 
 type DiningCardProps = {
   destination: DiningDestination;
@@ -19,7 +19,7 @@ export function DiningCard({ destination, index, priority }: DiningCardProps) {
         data-culinary-image
         className="-z-20 object-cover will-change-transform"
         src={destination.image}
-        alt={`${destination.name} dining experience in ${destination.location}`}
+        alt={destination.alt}
         fill
         priority={priority}
         loading={priority ? undefined : "lazy"}

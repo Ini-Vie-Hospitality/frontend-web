@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal/reveal";
-import type { StoryBlockData } from "./stories";
+import type { StoryBlock } from "@/content/homepage/types";
 
-export function StoryBlock({ story }: { story: StoryBlockData }) {
-  const imageFirst = story.imageSide === "left";
+export function StoryBlock({ story, index }: { story: StoryBlock; index: number }) {
+  const imageFirst = index % 2 === 1;
   const columns = imageFirst
     ? "lg:grid-cols-[58%_42%]"
     : "lg:grid-cols-[42%_58%]";
@@ -16,7 +16,7 @@ export function StoryBlock({ story }: { story: StoryBlockData }) {
       className={`grid items-center ${columns} lg:px-[clamp(24px,3.05vw,44px)]`}
     >
       <Reveal
-        variant={story.copyReveal}
+        variant={imageFirst ? "slide-right" : "fade-up"}
         delay={80}
         className={copyOrder}
       >
@@ -24,7 +24,7 @@ export function StoryBlock({ story }: { story: StoryBlockData }) {
       </Reveal>
 
       <Reveal
-        variant={story.imageReveal}
+        variant={imageFirst ? "rise-scale" : "clip-left"}
         delay={160}
         className={imageOrder}
       >
@@ -42,7 +42,7 @@ export function StoryBlock({ story }: { story: StoryBlockData }) {
   );
 }
 
-function StoryCopy({ story }: { story: StoryBlockData }) {
+function StoryCopy({ story }: { story: StoryBlock }) {
   return (
     <div className="flex flex-col justify-center px-[clamp(24px,5.7vw,83px)] py-[clamp(42px,5vw,68px)]">
       <h3 className="font-serif text-[clamp(2.65rem,3.35vw,3.3rem)] font-normal leading-[.98] tracking-[-.04em]">

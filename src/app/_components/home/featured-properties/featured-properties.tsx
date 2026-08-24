@@ -5,11 +5,17 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/reveal/reveal";
-import { properties } from "./properties";
+import type { PublishedHomepageData } from "@/content/homepage/types";
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
-export function FeaturedProperties() {
+export function FeaturedProperties({ data }: { data: PublishedHomepageData["featuredProperties"] }) {
+  if (!data.items.length) return null;
+  return <FeaturedPropertiesContent data={data} />;
+}
+
+function FeaturedPropertiesContent({ data }: { data: PublishedHomepageData["featuredProperties"] }) {
+  const properties = data.items;
   const trackRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -56,7 +62,7 @@ export function FeaturedProperties() {
       window.removeEventListener("resize", scheduleUpdate);
       if (frame) window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [properties.length]);
 
   const progressWidth = `${Math.max((activeIndex + 1) / properties.length * 100, 8)}%`;
 
@@ -69,7 +75,7 @@ export function FeaturedProperties() {
       <header className="mx-auto max-w-[820px] px-5 text-center sm:px-8">
         <Reveal>
           <p className="mb-6 text-[11px] font-medium uppercase tracking-[.28em] text-[#a86422] sm:text-xs">
-            Curated Collection
+            {data.eyebrow}
           </p>
         </Reveal>
         <Reveal delay={100}>
@@ -77,12 +83,12 @@ export function FeaturedProperties() {
             id="featured-properties-title"
             className="m-0 font-serif text-[clamp(3rem,7vw,6.5rem)] leading-[.98] tracking-[-.055em]"
           >
-            Featured Property For You
+            {data.title}
           </h2>
         </Reveal>
         <Reveal delay={200}>
           <p className="mx-auto mt-8 max-w-[560px] text-[15px] leading-[1.75] text-[#5a574f] sm:text-[17px]">
-            Exclusive stays designed to make your getaway unforgettable. Find the place you’ve been dreaming of — and turn every moment into something real.
+            {data.description}
           </p>
         </Reveal>
       </header>
@@ -101,14 +107,14 @@ export function FeaturedProperties() {
               <Image
                 key={property.id}
                 src={property.image}
-                alt={property.name}
+                alt={property.alt}
                 fill
                 priority={index === 0}
                 loading={index === 0 ? undefined : "lazy"}
                 sizes="100vw"
                 className="object-cover"
                 style={{
-                  objectPosition: property.objectPosition,
+                  objectPosition: "center",
                   opacity: index === activeIndex ? 1 : 0,
                   transform: index === activeIndex ? "scale(1)" : "scale(1.03)",
                   transition: reducedMotion
@@ -144,14 +150,14 @@ export function FeaturedProperties() {
                   href={activeProperty.href}
                   className="group mt-7 inline-flex items-center gap-5 border-b border-white/65 pb-2 text-sm text-white transition-colors hover:border-white max-md:mt-6"
                 >
-                  Explore Property
+                  {activeProperty.cta}
                   <ArrowRight className="size-[19px] text-[#e08a3c] transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
 
               <div className="mb-1 w-[190px] shrink-0 text-right max-md:mt-8 max-md:w-full max-md:text-left">
                 <div className="mb-3 flex items-center justify-between text-[11px] font-medium uppercase tracking-[.18em] text-white/70">
-                  <span>Scroll to explore</span>
+                  <span>{data.scrollLabel}</span>
                   <span className="text-white">{String(activeIndex + 1).padStart(2, "0")} / {String(properties.length).padStart(2, "0")}</span>
                 </div>
                 <div className="h-px w-full bg-white/30">

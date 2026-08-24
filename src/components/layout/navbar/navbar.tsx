@@ -2,13 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DesktopNavigation } from "./desktop-navigation";
 import { MobileMenu } from "./mobile-menu";
 import { navItemClass } from "./navigation-data";
+import type { PublishedHomepageData } from "@/content/homepage/types";
 
-export function Navbar({ heroId }: { heroId: string }) {
+type NavbarData = PublishedHomepageData["navbar"];
+
+export function Navbar({ heroId, data }: { heroId: string; data: NavbarData }) {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -52,28 +55,28 @@ export function Navbar({ heroId }: { heroId: string }) {
       <header className={`fixed inset-x-0 top-0 z-[100] flex items-center px-[clamp(32px,3.35vw,64px)] text-[rgba(248,247,243,.94)] transition-[background-color,color,height,border-color,box-shadow] duration-[450ms] ease-[cubic-bezier(.22,1,.36,1)] max-md:h-20 max-md:px-[22px] ${navbarState}`}>
         <Link
           className={`flex shrink-0 items-center transition-[width,height] duration-[450ms] ease-[cubic-bezier(.22,1,.36,1)] max-md:size-[58px] ${brandSize}`}
-          href="/"
-          aria-label="Ini Vie Hospitality home"
+          href={data.logo.href}
+          aria-label={`${data.logo.alt} home`}
         >
           <Image
             className="size-full object-contain"
-            src="/inivie-white.png"
-            alt="Ini Vie Hospitality"
+            src={data.logo.src}
+            alt={data.logo.alt}
             width={236}
             height={235}
             priority
           />
         </Link>
-        <DesktopNavigation />
+        <DesktopNavigation links={data.desktopLinks} />
         <div className="ml-auto flex items-center">
           <span className="mx-[30px] h-[34px] w-px bg-current opacity-20 max-md:hidden" aria-hidden="true" />
-          <Link className={`${navItemClass} max-md:text-[11px]`} href="#booking">
-            Book Your Stay
+          <Link className={`${navItemClass} max-md:text-[11px]`} href={data.book.href}>
+            {data.book.label}
           </Link>
           <button
             className="ml-[34px] grid cursor-pointer place-items-center border-0 bg-transparent py-2 transition-transform duration-250 hover:translate-x-0.5 max-md:ml-[18px]"
             type="button"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={isMenuOpen ? data.mobile.closeLabel : data.mobile.openLabel}
             aria-expanded={isMenuOpen}
             aria-controls="main-menu"
             onClick={() => setIsMenuOpen((open) => !open)}
@@ -86,7 +89,7 @@ export function Navbar({ heroId }: { heroId: string }) {
           </button>
         </div>
       </header>
-      <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} />
+      <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} links={data.mobile.links} content={data.mobile} />
     </>
   );
 }

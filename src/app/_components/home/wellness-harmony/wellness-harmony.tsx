@@ -13,9 +13,15 @@ import {
   getStoryHeight,
 } from "./scroll-story";
 import { WellnessCopy } from "./wellness-copy";
-import { wellnessEscapes } from "./wellness-escapes";
+import type { PublishedHomepageData } from "@/content/homepage/types";
 
-export function WellnessHarmony() {
+export function WellnessHarmony({ data }: { data: PublishedHomepageData["wellness"] }) {
+  if (!data.items.length) return null;
+  return <WellnessHarmonyContent data={data} />;
+}
+
+function WellnessHarmonyContent({ data }: { data: PublishedHomepageData["wellness"] }) {
+  const wellnessEscapes = data.items;
   const trackRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const copyRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -112,7 +118,7 @@ export function WellnessHarmony() {
       <header className="mx-auto max-w-[760px] px-6 py-[clamp(80px,9vw,136px)] text-center">
         <Reveal>
           <p className="text-[11px] font-medium uppercase tracking-[.28em] text-[#777167]">
-            iNi ViE Wellness
+            {data.eyebrow}
           </p>
         </Reveal>
         <Reveal delay={100}>
@@ -120,12 +126,12 @@ export function WellnessHarmony() {
             id="wellness-harmony-title"
             className="mt-5 font-serif text-[clamp(3.2rem,7vw,6rem)] font-normal leading-[.9] tracking-[-.055em]"
           >
-            Wellness Harmony Escape
+            {data.title}
           </h2>
         </Reveal>
         <Reveal delay={200}>
           <p className="mx-auto mt-6 max-w-[420px] text-[14px] leading-[1.55] text-[#777167] sm:text-[16px]">
-            Find serenity in soulful rituals made to restore.
+            {data.description}
           </p>
         </Reveal>
       </header>
@@ -184,7 +190,7 @@ export function WellnessHarmony() {
                     <Image
                       className="object-cover"
                       src={escape.image}
-                      alt={isActive ? `${escape.name} wellness experience in ${escape.location}` : ""}
+                       alt={isActive ? escape.alt : ""}
                       fill
                       sizes="(max-width: 1023px) 100vw, 60vw"
                       priority={index === 0}

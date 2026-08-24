@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal/reveal";
-import { featuredInLogos } from "./featured-in-logos";
+import type { PublishedHomepageData } from "@/content/homepage/types";
 
-export function FeaturedIn() {
+export function FeaturedIn({ data }: { data: PublishedHomepageData["featuredIn"] }) {
+  if (!data.items.length) return null;
   return (
     <section
       id="featured-in"
@@ -17,14 +18,14 @@ export function FeaturedIn() {
               id="featured-in-title"
               className="shrink-0 text-center text-[24px] font-normal leading-[1.2]"
             >
-              Featured In
+              {data.title}
             </h2>
             <span className="h-px w-[60px] bg-black/10" aria-hidden="true" />
           </div>
         </Reveal>
 
         <div className="mt-10 flex snap-x snap-mandatory gap-10 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:justify-center lg:overflow-visible">
-          {featuredInLogos.map((logo, index) => (
+          {data.items.map((logo, index) => (
             <Reveal
               key={logo.src}
               variant="fade-up"
