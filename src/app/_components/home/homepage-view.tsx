@@ -13,9 +13,21 @@ import { OurSpecialOffers } from './special-offers/special-offers';
 import { WellnessHarmony } from './wellness-harmony/wellness-harmony';
 import { WhatsNew } from './whats-new/whats-new';
 
-export function HomepageView({ data }: { data: HomepageData }) {
+export function HomepageView({
+  data,
+  navigationBaseHref = "/",
+}: {
+  data: HomepageData;
+  navigationBaseHref?: string;
+}) {
   return <main>
-    {data.navbar && <Navbar heroId="hero" data={data.navbar} />}
+    {data.navbar && (
+      <Navbar
+        heroId="hero"
+        data={data.navbar}
+        navigationBaseHref={navigationBaseHref}
+      />
+    )}
     <section id="booking" className="booking-anchor" aria-hidden="true" />
     <Hero />
     {data.brandIntroduction && <BrandIntroduction data={data.brandIntroduction} />}

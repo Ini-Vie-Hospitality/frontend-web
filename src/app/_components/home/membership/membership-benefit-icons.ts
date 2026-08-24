@@ -1,0 +1,38 @@
+import {
+  CalendarHeart,
+  Coffee,
+  Crown,
+  Diamond,
+  Flower2,
+  Gem,
+  Gift,
+  Heart,
+  ShieldCheck,
+  ShoppingBag,
+  Sparkles,
+  Star,
+  Tags,
+  TicketPercent,
+  Utensils,
+  Waves,
+} from "lucide-react";
+import type { BenefitIconKey } from "@/content/homepage/types";
+
+export const membershipBenefitIcons: Record<BenefitIconKey, typeof Diamond> = {
+  diamond: Diamond,
+  gift: Gift,
+  "shopping-bag": ShoppingBag,
+  tags: Tags,
+  crown: Crown,
+  sparkles: Sparkles,
+  heart: Heart,
+  star: Star,
+  "calendar-heart": CalendarHeart,
+  utensils: Utensils,
+  "flower-2": Flower2,
+  "ticket-percent": TicketPercent,
+  "shield-check": ShieldCheck,
+  gem: Gem,
+  coffee: Coffee,
+  waves: Waves,
+};

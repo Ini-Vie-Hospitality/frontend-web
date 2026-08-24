@@ -11,7 +11,15 @@ import type { PublishedHomepageData } from "@/content/homepage/types";
 
 type NavbarData = PublishedHomepageData["navbar"];
 
-export function Navbar({ heroId, data }: { heroId: string; data: NavbarData }) {
+export function Navbar({
+  heroId,
+  data,
+  navigationBaseHref = "/",
+}: {
+  heroId: string;
+  data: NavbarData;
+  navigationBaseHref?: string;
+}) {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -55,7 +63,7 @@ export function Navbar({ heroId, data }: { heroId: string; data: NavbarData }) {
       <header className={`fixed inset-x-0 top-0 z-[100] flex items-center px-[clamp(32px,3.35vw,64px)] text-[rgba(248,247,243,.94)] transition-[background-color,color,height,border-color,box-shadow] duration-[450ms] ease-[cubic-bezier(.22,1,.36,1)] max-md:h-20 max-md:px-[22px] ${navbarState}`}>
         <Link
           className={`flex shrink-0 items-center transition-[width,height] duration-[450ms] ease-[cubic-bezier(.22,1,.36,1)] max-md:size-[58px] ${brandSize}`}
-          href={homepageHref(data.logo.href)}
+          href={homepageHref(data.logo.href, navigationBaseHref)}
           aria-label={`${data.logo.alt} home`}
         >
           <Image
@@ -67,10 +75,13 @@ export function Navbar({ heroId, data }: { heroId: string; data: NavbarData }) {
             priority
           />
         </Link>
-        <DesktopNavigation links={data.desktopLinks} />
+        <DesktopNavigation
+          links={data.desktopLinks}
+          navigationBaseHref={navigationBaseHref}
+        />
         <div className="ml-auto flex items-center">
           <span className="mx-[30px] h-[34px] w-px bg-current opacity-20 max-md:hidden" aria-hidden="true" />
-          <Link className={`${navItemClass} max-md:text-[11px]`} href={homepageHref(data.book.href)}>
+          <Link className={`${navItemClass} max-md:text-[11px]`} href={homepageHref(data.book.href, navigationBaseHref)}>
             {data.book.label}
           </Link>
           <button
@@ -89,7 +100,13 @@ export function Navbar({ heroId, data }: { heroId: string; data: NavbarData }) {
           </button>
         </div>
       </header>
-      <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} links={data.mobile.links} content={data.mobile} />
+      <MobileMenu
+        isOpen={isMenuOpen}
+        onClose={closeMenu}
+        links={data.mobile.links}
+        content={data.mobile}
+        navigationBaseHref={navigationBaseHref}
+      />
     </>
   );
 }

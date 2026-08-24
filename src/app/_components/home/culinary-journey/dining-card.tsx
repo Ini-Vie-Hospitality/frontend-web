@@ -12,7 +12,7 @@ export function DiningCard({ destination, index, priority }: DiningCardProps) {
   return (
     <article
       data-culinary-card
-      className="relative isolate flex h-full min-h-0 w-screen max-w-none shrink-0 flex-col overflow-hidden border-y-0 border-r border-l-0 border-[#6f5c44]/60 px-6 pt-[calc(env(safe-area-inset-top)+clamp(88px,14dvh,112px))] pb-8 text-center text-[#f2e9dc] md:w-[50vw] md:px-[clamp(24px,3vw,58px)] md:pt-[clamp(96px,13vh,128px)] md:pb-[43px] lg:w-[33.333333vw]"
+      className="relative isolate flex h-full min-h-0 w-screen max-w-none shrink-0 flex-col overflow-hidden bg-[#090806] px-6 pt-[calc(env(safe-area-inset-top)+clamp(88px,14dvh,112px))] pb-8 text-center text-[#f2e9dc] md:w-[50vw] md:px-[clamp(24px,3vw,58px)] md:pt-[clamp(96px,13vh,128px)] md:pb-[43px] lg:w-[33.333333vw]"
       aria-labelledby={`culinary-card-${index}`}
     >
       <Image

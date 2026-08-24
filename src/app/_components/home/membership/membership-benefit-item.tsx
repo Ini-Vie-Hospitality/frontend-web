@@ -1,9 +1,8 @@
 import { Reveal } from "@/components/ui/reveal/reveal";
-import { Diamond, Gift, ShoppingBag, Tags } from "lucide-react";
 import type { PublishedHomepageData } from "@/content/homepage/types";
+import { membershipBenefitIcons } from "./membership-benefit-icons";
 
-type Benefit = PublishedHomepageData["membership"]["benefits"][number];
-const icons: Record<Benefit["icon"], typeof Diamond> = { diamond: Diamond, gift: Gift, "shopping-bag": ShoppingBag, tags: Tags };
+const icons = membershipBenefitIcons;
 
 export function MembershipBenefitItem({
   benefit,
