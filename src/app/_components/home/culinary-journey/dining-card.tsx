@@ -33,7 +33,7 @@ export function DiningCard({ destination, index, priority }: DiningCardProps) {
 
       <div data-culinary-copy className="will-change-[opacity,transform]">
         <p className="text-[10px] uppercase tracking-[.08em] text-[#bd8435] md:text-[12px]">
-         {destination.eyebrow}
+          {destination.eyebrow}
         </p>
         <h3
           id={`culinary-card-${index}`}

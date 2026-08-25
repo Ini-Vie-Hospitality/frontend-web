@@ -45,11 +45,23 @@ function clickEvent(element: HTMLElement): AnalyticsEvent {
   const target = `${label || "interaction"} ${href || ""}`.toLowerCase();
 
   if (target.includes("book") || section === "booking") {
-    return { action: "booking_click", category: "booking", label, href, section };
+    return {
+      action: "booking_click",
+      category: "booking",
+      label,
+      href,
+      section,
+    };
   }
 
   if (section === "membership" || target.includes("membership")) {
-    return { action: "membership_click", category: "membership", label, href, section };
+    return {
+      action: "membership_click",
+      category: "membership",
+      label,
+      href,
+      section,
+    };
   }
 
   if (section === "offers" || target.includes("offer")) {
@@ -61,10 +73,22 @@ function clickEvent(element: HTMLElement): AnalyticsEvent {
     /^https?:/i.test(element.href) &&
     new URL(element.href).origin !== window.location.origin
   ) {
-    return { action: "outbound_click", category: "navigation", label, href, section };
+    return {
+      action: "outbound_click",
+      category: "navigation",
+      label,
+      href,
+      section,
+    };
   }
 
-  return { action: "interaction_click", category: "interaction", label, href, section };
+  return {
+    action: "interaction_click",
+    category: "interaction",
+    label,
+    href,
+    section,
+  };
 }
 
 export function AnalyticsEvents() {
@@ -84,7 +108,8 @@ export function AnalyticsEvents() {
       if (!(form instanceof HTMLFormElement)) return;
 
       const label = form.getAttribute("aria-label") || form.id || undefined;
-      const isBooking = label?.toLowerCase().includes("stay") || Boolean(form.closest("#hero"));
+      const isBooking =
+        label?.toLowerCase().includes("stay") || Boolean(form.closest("#hero"));
 
       sendEvent({
         action: isBooking ? "booking_submit" : "form_submit",

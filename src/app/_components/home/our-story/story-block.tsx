@@ -3,7 +3,13 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal/reveal";
 import type { StoryBlock } from "@/content/homepage/types";
 
-export function StoryBlock({ story, index }: { story: StoryBlock; index: number }) {
+export function StoryBlock({
+  story,
+  index,
+}: {
+  story: StoryBlock;
+  index: number;
+}) {
   const imageFirst = index % 2 === 1;
   const columns = imageFirst
     ? "lg:grid-cols-[58%_42%]"
@@ -48,10 +54,7 @@ function StoryCopy({ story }: { story: StoryBlock }) {
       <h3 className="font-serif text-[clamp(2.65rem,3.35vw,3.3rem)] font-normal leading-[.98] tracking-[-.04em]">
         {story.title}
       </h3>
-      <span
-        className="mt-7 h-0.5 w-10 bg-[#bc8642]"
-        aria-hidden="true"
-      />
+      <span className="mt-7 h-0.5 w-10 bg-[#bc8642]" aria-hidden="true" />
       <p className="mt-7 max-w-[500px] text-[14px] leading-[1.62] text-[#514a46] sm:text-[15px]">
         {story.description}
       </p>

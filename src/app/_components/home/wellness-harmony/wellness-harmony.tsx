@@ -2,11 +2,7 @@
 
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal/reveal";
-import {
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import {
   getExperienceFrame,
   getScrollProgress,
@@ -15,12 +11,20 @@ import {
 import { WellnessCopy } from "./wellness-copy";
 import type { PublishedHomepageData } from "@/content/homepage/types";
 
-export function WellnessHarmony({ data }: { data: PublishedHomepageData["wellness"] }) {
+export function WellnessHarmony({
+  data,
+}: {
+  data: PublishedHomepageData["wellness"];
+}) {
   if (!data.items.length) return null;
   return <WellnessHarmonyContent data={data} />;
 }
 
-function WellnessHarmonyContent({ data }: { data: PublishedHomepageData["wellness"] }) {
+function WellnessHarmonyContent({
+  data,
+}: {
+  data: PublishedHomepageData["wellness"];
+}) {
   const wellnessEscapes = data.items;
   const trackRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -72,7 +76,9 @@ function WellnessHarmonyContent({ data }: { data: PublishedHomepageData["wellnes
         progressRef.current.style.transform = `scaleX(${(position + 1) / totalSlides})`;
       }
 
-      setActiveIndex((current) => current === nextIndex ? current : nextIndex);
+      setActiveIndex((current) =>
+        current === nextIndex ? current : nextIndex,
+      );
     };
 
     const scheduleUpdate = () => {
@@ -84,7 +90,9 @@ function WellnessHarmonyContent({ data }: { data: PublishedHomepageData["wellnes
       scheduleUpdate();
     };
 
-    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
     const syncMotionPreference = () => {
       reducedMotion = reducedMotionQuery.matches;
       scheduleUpdate();
@@ -155,7 +163,9 @@ function WellnessHarmonyContent({ data }: { data: PublishedHomepageData["wellnes
                   {wellnessEscapes.map((escape, index) => (
                     <WellnessCopy
                       key={escape.id}
-                      ref={(node) => { copyRefs.current[index] = node; }}
+                      ref={(node) => {
+                        copyRefs.current[index] = node;
+                      }}
                       escape={escape}
                       isActive={index === activeIndex}
                     />
@@ -164,9 +174,13 @@ function WellnessHarmonyContent({ data }: { data: PublishedHomepageData["wellnes
 
                 <div className="absolute right-6 bottom-5 left-6 flex items-center gap-4 sm:right-10 sm:bottom-8 sm:left-10 lg:right-[clamp(32px,4vw,72px)] lg:bottom-[clamp(42px,6vh,76px)] lg:left-[clamp(32px,4vw,72px)]">
                   <span className="shrink-0 text-[11px] font-medium tracking-[.22em]">
-                    {String(activeIndex + 1).padStart(2, "0")} / {String(totalSlides).padStart(2, "0")}
+                    {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                    {String(totalSlides).padStart(2, "0")}
                   </span>
-                  <span className="h-px flex-1 overflow-hidden bg-[#29241f]/20" aria-hidden="true">
+                  <span
+                    className="h-px flex-1 overflow-hidden bg-[#29241f]/20"
+                    aria-hidden="true"
+                  >
                     <span
                       ref={progressRef}
                       className="block h-full origin-left bg-[#29241f] will-change-transform"
@@ -183,14 +197,16 @@ function WellnessHarmonyContent({ data }: { data: PublishedHomepageData["wellnes
                 return (
                   <div
                     key={escape.id}
-                    ref={(node) => { imageRefs.current[index] = node; }}
+                    ref={(node) => {
+                      imageRefs.current[index] = node;
+                    }}
                     className="absolute inset-0 opacity-0 will-change-[opacity,transform] first:opacity-100"
                     aria-hidden={!isActive}
                   >
                     <Image
                       className="object-cover"
                       src={escape.image}
-                       alt={isActive ? escape.alt : ""}
+                      alt={isActive ? escape.alt : ""}
                       fill
                       sizes="(max-width: 1023px) 100vw, 60vw"
                       priority={index === 0}

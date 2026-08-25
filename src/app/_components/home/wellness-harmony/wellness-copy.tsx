@@ -1,8 +1,5 @@
 import Link from "next/link";
-import {
-  forwardRef,
-  type ForwardedRef,
-} from "react";
+import { forwardRef, type ForwardedRef } from "react";
 import type { WellnessEscape } from "@/content/homepage/types";
 
 type WellnessCopyProps = {
@@ -21,7 +18,7 @@ export const WellnessCopy = forwardRef(function WellnessCopy(
       aria-hidden={!isActive}
     >
       <p className="text-[10px] font-medium uppercase tracking-[.24em] text-[#777167] sm:text-[11px]">
-       {escape.categories.join(" / ")}
+        {escape.categories.join(" / ")}
       </p>
       <h3 className="mt-3 max-w-[300px] font-serif text-[clamp(2.45rem,11vw,4rem)] font-normal leading-[.88] tracking-[-.055em] sm:mt-5 lg:mt-7 lg:max-w-[560px] lg:text-[clamp(4rem,5.7vw,6.5rem)]">
         {escape.name}
@@ -38,7 +35,12 @@ export const WellnessCopy = forwardRef(function WellnessCopy(
         tabIndex={isActive ? 0 : -1}
       >
         {escape.cta}
-        <span className="text-[17px] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
+        <span
+          className="text-[17px] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+          aria-hidden="true"
+        >
+          ↗
+        </span>
       </Link>
     </div>
   );

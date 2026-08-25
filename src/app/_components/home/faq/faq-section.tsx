@@ -25,12 +25,19 @@ function FaqContent({ data }: { data: PublishedHomepageData["faq"] }) {
           <p className="text-[13px] font-medium uppercase tracking-[.28em] text-[#9c8975] max-md:text-[10px]">
             {data.eyebrow}
           </p>
-          <span className="mt-[27px] h-0.5 w-[30px] bg-[#e06a0b]" aria-hidden="true" />
+          <span
+            className="mt-[27px] h-0.5 w-[30px] bg-[#e06a0b]"
+            aria-hidden="true"
+          />
           <h2
             id="faq-title"
             className="mt-[43px] max-w-[510px] font-serif text-[clamp(3.4rem,4.8vw,5.35rem)] leading-[.99] tracking-[-.035em] max-md:mt-8 max-md:text-[clamp(2.8rem,12vw,4rem)]"
           >
-            {data.title.split("\n").map((line) => <span className="block" key={line}>{line}</span>)}
+            {data.title.split("\n").map((line) => (
+              <span className="block" key={line}>
+                {line}
+              </span>
+            ))}
           </h2>
           <p className="mt-[29px] max-w-[430px] text-[17px] leading-[1.75] text-[#3e3d39] max-md:text-[15px]">
             {data.description}

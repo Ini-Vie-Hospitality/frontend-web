@@ -26,7 +26,9 @@ export function FeatureStory({ story, readLabel }: StoryProps) {
       <div className="absolute inset-x-[clamp(20px,3vw,42px)] bottom-[clamp(24px,3vw,42px)]">
         <p className="text-[10px] font-semibold uppercase tracking-[.24em] sm:text-[11px]">
           {story.category}
-          <span className="mx-3" aria-hidden="true">·</span>
+          <span className="mx-3" aria-hidden="true">
+            ·
+          </span>
           {story.readingTime}
         </p>
         <h3
@@ -38,7 +40,11 @@ export function FeatureStory({ story, readLabel }: StoryProps) {
         <p className="mt-4 max-w-[560px] text-[13px] leading-[1.5] text-white/90 sm:text-[17px] sm:leading-[1.45]">
           {story.description}
         </p>
-        <StoryLink story={story} label={readLabel} className="mt-5 text-white sm:mt-6" />
+        <StoryLink
+          story={story}
+          label={readLabel}
+          className="mt-5 text-white sm:mt-6"
+        />
       </div>
     </article>
   );
@@ -73,7 +79,11 @@ export function CompactStory({ story, readLabel }: StoryProps) {
       <p className="mt-3 text-[10px] font-medium uppercase tracking-[.22em] text-[#55534f]">
         {story.readingTime}
       </p>
-      <StoryLink story={story} label={readLabel} className="mt-3 text-[#4d4e25]" />
+      <StoryLink
+        story={story}
+        label={readLabel}
+        className="mt-3 text-[#4d4e25]"
+      />
     </article>
   );
 }
@@ -103,7 +113,11 @@ export function WideStory({ story, readLabel }: StoryProps) {
       <p className="mt-3 text-[10px] font-medium uppercase tracking-[.22em] text-[#55534f]">
         {story.readingTime}
       </p>
-      <StoryLink story={story} label={readLabel} className="mt-2.5 text-[#4d4e25]" />
+      <StoryLink
+        story={story}
+        label={readLabel}
+        className="mt-2.5 text-[#4d4e25]"
+      />
     </article>
   );
 }

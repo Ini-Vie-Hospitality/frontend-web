@@ -46,10 +46,7 @@ assert.deepEqual(getBookingDefaults(new Date(2026, 7, 23, 12)), {
   checkout: "2026-08-24",
 });
 assert.equal(formatBookingDate("2026-08-23"), "08-23-2026");
-assert.equal(
-  normalizeCheckout("2026-08-23", "2026-08-23"),
-  "2026-08-24",
-);
+assert.equal(normalizeCheckout("2026-08-23", "2026-08-23"), "2026-08-24");
 
 const bookingUrl = new URL(
   buildBookingUrl({

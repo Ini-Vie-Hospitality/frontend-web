@@ -15,10 +15,14 @@ export function DesktopNavigation({
       aria-label="Primary navigation"
     >
       {links.map(({ href, label }) => (
-          <Link className={navItemClass} key={href} href={homepageHref(href, navigationBaseHref)}>
-            {label}
-          </Link>
-        ))}
+        <Link
+          className={navItemClass}
+          key={href}
+          href={homepageHref(href, navigationBaseHref)}
+        >
+          {label}
+        </Link>
+      ))}
     </nav>
   );
 }

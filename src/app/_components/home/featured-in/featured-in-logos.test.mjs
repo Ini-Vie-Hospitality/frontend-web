@@ -7,6 +7,9 @@ assert.deepEqual(
     (number) => `https://inivie.com/inivie_assets/img/logomedia/${number}.png`,
   ),
 );
-assert.equal(featuredInLogos.every(({ alt }) => alt.length > 0), true);
+assert.equal(
+  featuredInLogos.every(({ alt }) => alt.length > 0),
+  true,
+);
 
 console.log("featured in logos: ok");

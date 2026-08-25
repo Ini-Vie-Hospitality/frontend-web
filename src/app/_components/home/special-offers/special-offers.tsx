@@ -3,7 +3,11 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal/reveal";
 import type { PublishedHomepageData } from "@/content/homepage/types";
 
-export function OurSpecialOffers({ data }: { data: PublishedHomepageData["specialOffers"] }) {
+export function OurSpecialOffers({
+  data,
+}: {
+  data: PublishedHomepageData["specialOffers"];
+}) {
   const offers = data.items;
   return (
     <section
@@ -23,7 +27,11 @@ export function OurSpecialOffers({ data }: { data: PublishedHomepageData["specia
             id="special-offers-title"
             className="mt-5 font-serif text-[clamp(3rem,5vw,4.7rem)] font-normal leading-[.98] tracking-[-.04em]"
           >
-            {data.title.split("\n").map((line) => <span className="block" key={line}>{line}</span>)}
+            {data.title.split("\n").map((line) => (
+              <span className="block" key={line}>
+                {line}
+              </span>
+            ))}
           </h2>
         </Reveal>
 
@@ -47,7 +55,9 @@ export function OurSpecialOffers({ data }: { data: PublishedHomepageData["specia
         {offers.map((offer, index) => (
           <Reveal
             key={offer.id}
-            variant={(["clip-left", "rise-scale", "clip-bottom"] as const)[index]}
+            variant={
+              (["clip-left", "rise-scale", "clip-bottom"] as const)[index]
+            }
             delay={(index + 1) * 80}
           >
             <article aria-labelledby={`offer-title-${offer.id}`}>

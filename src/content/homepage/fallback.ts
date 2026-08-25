@@ -5,57 +5,418 @@ export const fallbackHomepageData: PublishedHomepageData = {
   navbar: {
     logo: { src: "/inivie-white.png", alt: "Ini Vie Hospitality", href: "/" },
     desktopLinks: [
-      { label: "Stays", href: "#stays" }, { label: "Dining", href: "#dining" }, { label: "Wellness", href: "#wellness" }, { label: "Membership", href: "#membership" }, { label: "Our Story", href: "#our-story" }, { label: "Offers", href: "#offers" },
+      { label: "Stays", href: "#stays" },
+      { label: "Dining", href: "#dining" },
+      { label: "Wellness", href: "#wellness" },
+      { label: "Membership", href: "#membership" },
+      { label: "Our Story", href: "#our-story" },
+      { label: "Offers", href: "#offers" },
     ],
     book: { label: "Book Your Stay", href: "#booking" },
-    mobile: { eyebrow: "Explore Ini Vie", openLabel: "Open menu", closeLabel: "Close menu", links: [
-      { label: "About", href: "#about" }, { label: "Stays", href: "#stays" }, { label: "Dining", href: "#dining" }, { label: "Wellness", href: "#wellness" }, { label: "Membership", href: "#membership" }, { label: "Our Story", href: "#our-story" }, { label: "Special Offers", href: "#offers" }, { label: "What's New", href: "#journal" }, { label: "Featured In", href: "#featured-in" }, { label: "FAQ", href: "#faq" },
-    ] },
+    mobile: {
+      eyebrow: "Explore Ini Vie",
+      openLabel: "Open menu",
+      closeLabel: "Close menu",
+      links: [
+        { label: "About", href: "#about" },
+        { label: "Stays", href: "#stays" },
+        { label: "Dining", href: "#dining" },
+        { label: "Wellness", href: "#wellness" },
+        { label: "Membership", href: "#membership" },
+        { label: "Our Story", href: "#our-story" },
+        { label: "Special Offers", href: "#offers" },
+        { label: "What's New", href: "#journal" },
+        { label: "Featured In", href: "#featured-in" },
+        { label: "FAQ", href: "#faq" },
+      ],
+    },
   },
   brandIntroduction: {
-    title: "More than places to stay.\nWe create reasons to remember Bali.", backgroundWords: ["BALI", "INI VIE"],
-    story: ["iNi ViE Hospitality is a collection of thoughtfully designed stays and experiences inspired by the warmth, culture, and beauty of Bali.", "From private villas and distinctive resorts to culinary journeys and restorative wellness, every experience is created around one belief — hospitality should feel personal."],
+    title: "More than places to stay.\nWe create reasons to remember Bali.",
+    backgroundWords: ["BALI", "INI VIE"],
+    story: [
+      "iNi ViE Hospitality is a collection of thoughtfully designed stays and experiences inspired by the warmth, culture, and beauty of Bali.",
+      "From private villas and distinctive resorts to culinary journeys and restorative wellness, every experience is created around one belief — hospitality should feel personal.",
+    ],
     quote: "Rooted in Bali —\nmade for meaningful journeys.",
     images: [
-      { src: "/brand-introduction/villa-desktop.webp", alt: "A tropical Bali villa surrounded by lush gardens" },
-      { src: "/brand-introduction/breakfast-desktop.webp", alt: "A guest enjoying breakfast beside a tropical pool" },
-      { src: "/brand-introduction/offering-desktop.webp", alt: "A traditional Balinese floral offering" },
+      {
+        src: "/brand-introduction/villa-desktop.webp",
+        alt: "A tropical Bali villa surrounded by lush gardens",
+      },
+      {
+        src: "/brand-introduction/breakfast-desktop.webp",
+        alt: "A guest enjoying breakfast beside a tropical pool",
+      },
+      {
+        src: "/brand-introduction/offering-desktop.webp",
+        alt: "A traditional Balinese floral offering",
+      },
     ],
   },
-  featuredProperties: { eyebrow: "Curated Collection", title: "Featured Property For You", description: "Exclusive stays designed to make your getaway unforgettable. Find the place you’ve been dreaming of — and turn every moment into something real.", cta: "Explore Property", scrollLabel: "Scroll to explore", items: [
-    { id: 1, name: "Leedon Villa Seminyak", category: "Luxury Villa", description: "Elegant villa living with warm tropical design, curated privacy, and a memorable Bali stay.", image: "/properties/leedon-villa.webp", alt: "Leedon Villa Seminyak", href: "#leedon-villa", cta: "Explore Property" },
-    { id: 2, name: "Ajowa Resort", category: "Resort Experience", description: "A refined resort experience blending tropical atmosphere, contemporary comfort, and destination-led hospitality.", image: "/properties/ajowa.avif", alt: "Ajowa Resort", href: "#ajowa-resort", cta: "Explore Property" },
-    { id: 3, name: "La Mewali Resort", category: "Resort Experience", description: "A considered retreat shaped by lush surroundings, warm service, and the easy rhythm of Bali.", image: "/properties/la-mewali.webp", alt: "La Mewali Resort", href: "#la-mewali-resort", cta: "Explore Property" },
-  ] },
-  culinary: { eyebrow: "The Culinary Journey", title: "A Journey\nThrough Taste.", description: "Opening a new chapter in refined dining experience", scrollLabel: "Scroll to explore", items: [
-    { name:"Norii Seminyak",location:"Seminyak, Bali",eyebrow:"Japanese Dining",description:"Precision, fire, and craftsmanship meet in an intimate dining experience in Seminyak.",schedule:"New Opening — 2026",ctaLabel:"Discover Norii",image:"https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=900&q=85",alt:"Norii Seminyak dining experience in Seminyak, Bali",href:"#norii-seminyak" },
-    { name:"Riserva Steakhouse",location:"Ubud, Bali",eyebrow:"Open Fire",description:"A bold dining experience shaped by premium cuts, open flame, and modern craftsmanship.",schedule:"Dinner · 17:00 — 23:00",ctaLabel:"Discover Riserva",image:"https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85",alt:"Riserva Steakhouse dining experience in Ubud, Bali",href:"#riserva-steakhouse" },
-    { name:"Terra Verte",location:"Ubud, Bali",eyebrow:"Mediterranean",description:"Mediterranean-inspired flavours, shared plates, and relaxed dining shaped for slow moments.",schedule:"New Opening — 2026",ctaLabel:"Discover Terra Verte",image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85",alt:"Terra Verte dining experience in Ubud, Bali",href:"#terra-verte" },
-    { name:"Habitat Bistro",location:"Ubud, Bali",eyebrow:"Contemporary Bistro",description:"A relaxed all-day dining destination pairing familiar flavours with a fresh tropical perspective.",schedule:"Breakfast · 07:00 — 23:00",ctaLabel:"Discover Habitat",image:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=85",alt:"Habitat Bistro dining experience in Ubud, Bali",href:"#habitat-bistro" },
-    { name:"Shichirin Ubud",location:"Ubud, Bali",eyebrow:"Japanese Teppanyaki",description:"Japanese craft, tableside theatre, and live-fire cooking meet in an intimate Ubud setting.",schedule:"Dinner · 17:00 — 23:00",ctaLabel:"Discover Shichirin",image:"https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=85",alt:"Shichirin Ubud dining experience in Ubud, Bali",href:"#shichirin-ubud" },
-    { name:"Seven Paintings",location:"Ubud, Bali",eyebrow:"Immersive Fine Dining",description:"A multi-sensory dinner where storytelling, projection, and refined courses unfold together.",schedule:"Dinner Show · Reservation Only",ctaLabel:"Discover Seven Paintings",image:"https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85",alt:"Seven Paintings dining experience in Ubud, Bali",href:"#seven-paintings" },
-  ] },
-  wellness: { eyebrow: "iNi ViE Wellness", title: "Wellness Harmony Escape", description: "Find serenity in soulful rituals made to restore.", items: [
-    { id: 1, categories: ["Spa","Resort"], name: "Svaha Spa Ajowa", location: "Seminyak, Bali", description: "A restorative sanctuary where traditional rituals, natural ingredients, and quiet surroundings come together in a deeply calming experience.", image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1600&q=88", alt: "Svaha Spa Ajowa wellness experience in Seminyak, Bali", href: "#svaha-spa-ajowa", cta: "Discover Experience" },
-    { id: 2, categories: ["Spa","Garden Retreat"], name: "Svaha Spa La Mewali", location: "Canggu, Bali", description: "Slow treatments and garden air create a gentle pause from the everyday, shaped around touch, stillness, and natural beauty.", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=88", alt: "Svaha Spa La Mewali wellness experience in Canggu, Bali", href: "#svaha-spa-la-mewali", cta: "Discover Experience" },
-  ] },
-  membership: { title: "Join Weinivie Membership", subtitle: "Turn Bali Into Yours. Make Every Journey More Rewarding.", description: "Become a WEINIVIE member and enjoy exclusive access to unforgettable experiences across Bali. Discover special privileges, personalized offers, and curated moments designed just for you.", video: "/cta.mp4", primary: { label: "Become a Member ↗", href: "https://booking.inivie.com/en/register" }, secondary: { label: "Discover More ↗", href: "/membership" }, benefits: [{label:"Priority VIP Welcome",icon:"diamond"},{label:"Special Celebration Setup",icon:"gift"},{label:"Exclusive Savings at Restaurants, Spa & Club Outlets",icon:"shopping-bag"},{label:"Access to Monthly Member Promotions",icon:"tags"}] },
-  ourStory: { title: "Our Story", description: "iNi ViE Hospitality guided by eight mantras that honour people, culture, and nature. Through deeply personalised stays, distinctive resorts and villas, meaningful dining, wellness, and lifestyle experiences, we create memorable journeys across Bali with sustainability at the heart of every decision.", blocks: [
-    { title:"About Us",description:"iNi ViE Hospitality manages a growing portfolio of luxury resorts, private pool villas, restaurants, spas, beach clubs, family attractions, and curated experiences in Bali.",image:"/our-story/infinity-pool.png",alt:"Luxury iNi ViE villa and infinity pool overlooking the Bali landscape",cta:"Explore Our Story",href:"https://inivie.com/about" },
-    { title:"What Makes Us Different",description:"What makes iNi ViE Hospitality different is our seamless multi-experience journey, combining stays, dining, wellness, culture, leisure, and celebration.",image:"/our-story/meaningful-journey.png",alt:"Couple walking through a tropical iNi ViE Hospitality property",cta:"Discover More",href:"https://inivie.com/about" },
-    { title:"Our Eight Mantras",description:"Eight Mantras are the values behind everything we do, inspiring thoughtful hospitality, responsible operations, stronger communities, and meaningful guest experiences.",image:"/our-story/eight-mantras.jpg",alt:"Balinese community gathered in traditional white ceremonial clothing",cta:"Discover More",href:"https://inivie.com/about" },
-    { title:"Sustainability",description:"Sustainability is woven into the way iNi ViE Hospitality operates across Bali, benefiting guests, people, and place.",image:"/our-story/sustainability.jpg",alt:"Farmers harvesting rice in a lush tropical field",cta:"Discover More",href:"https://inivie.com/about" },
-  ] },
-  specialOffers: { eyebrow:"Our Special Offers",title:"Your Bali escape,\nthoughtfully elevated.",description:"Thoughtfully curated stays, seasonal privileges, and exclusive benefits designed to make every iNi ViE journey through Bali even more memorable.",allOffers:{label:"Explore All Offers",href:"https://inivie.com/offers"},items: [
-    {id:"01",category:"Plan Ahead",title:"Early Getaway",description:"Plan your Bali journey early and enjoy exclusive privileges across selected iNi ViE stays.",image:"/offers/early-getaway.png",alt:"Infinity pool overlooking a tropical Bali landscape",href:"https://inivie.com/offers/early-getaway-deal"},
-    {id:"02",category:"Curated Privileges",title:"Bali Yours",description:"Enjoy more meaningful moments with thoughtfully curated benefits created for a longer Bali escape.",image:"/offers/bali-yours.png",alt:"Couple enjoying a floating breakfast in a tropical pool",href:"https://inivie.com/offers/bali-yours"},
-    {id:"03",category:"Advance Reservations",title:"Advance Saver",description:"Reserve your stay in advance and enjoy exclusive value across selected iNi ViE properties.",image:"/offers/advance-saver.png",alt:"Warm Bali villa bedroom opening onto a private pool",href:"https://inivie.com/offers/advance-saver"},
-  ] },
-  whatsNew: { eyebrow:"What's New",title:"Stories from\nBali & Beyond.",description:"Thoughtful guides, rituals, places, and discoveries from across Bali.",explore:{label:"Explore The Story",href:"#journal-nusa-penida"},readLabel:"Read Story",items:[
-    {id:"nusa-penida",category:"Destination",title:["Nusa Penida,","Beyond the Postcard"],description:"Discover dramatic coastlines, hidden beaches, and a slower side of one of Bali’s most iconic islands.",readingTime:"8 min read",image:"https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=85",alt:"Aerial view of the dramatic coastline of Nusa Penida, Bali",href:"#journal-nusa-penida"},
-    {id:"quiet-art",category:"Wellness · Ubud",title:["The Quiet Art","of Slowing Down"],description:"A restorative journey through Bali’s rituals of rest, balance, and mindful living.",readingTime:"5 min read",image:"https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=85",alt:"A woman meditating above a misty tropical forest in Ubud",href:"#journal-quiet-art"},
-  ] },
-  featuredIn: { title:"Featured In",items:[{src:"/featured-in/tripadvisor.png",alt:"Tripadvisor"},{src:"/featured-in/world-luxury-hotel-awards.png",alt:"World Luxury Hotel Awards"}] },
-  faq: { eyebrow:"Frequently Asked Questions",title:"Everything You\nNeed to Know.",description:"Find helpful information about reservations, check-in, experiences, and your stay with Ini Vie Hospitality.",items:[{question:"What Is Ini Vie Hospitality?",answer:"Ini Vie Hospitality is a Bali-based hospitality management company specializing in boutique resorts, private pool villas, romantic getaways, dining, spa experiences, and lifestyle destinations."},{question:"How Can I Get The Best Rate When Booking?",answer:"For the best available rates and exclusive benefits, book directly through the official Ini Vie Hospitality website."}] },
-  footer: { ariaLabel:"Ini Vie Hospitality footer",backgroundImage:"/bg-footer.png",logo:{src:"/inivie-white.png",alt:"Ini Vie Hospitality"},summary:"Curating meaningful stays, destinations, wellness, and lifestyle experiences across Bali.",office:{title:"Head office",address:"Jl. Persada II No.888, Kerobokan, Kec. Kuta Utara, Kabupaten Badung, Bali 80361",phone:{label:"+62 361 9346082",href:"tel:+623619346082"},email:{label:"info@inivie.com",href:"mailto:info@inivie.com"},map:{label:"View on map",href:"#map"}},subscribe:{title:"Subscribe",description:"Receive latest offers and promos without spam",action:{label:"Subscribe",href:"#subscribe"}},contacts:[{title:"Marketing",phone:{label:"+62 812-3868-7387",href:"tel:+6281238687387"},email:{label:"marcom@inivie.com",href:"mailto:marcom@inivie.com"},actions:[{label:"Collaborate with us",href:"#contact"}]}],socialsTitle:"Follow Our Social Media",socials:[{label:"Facebook",href:"#social-facebook",icon:"facebook"},{label:"Instagram",href:"#social-instagram",icon:"instagram"}],policy:{label:"General Policy",href:"#policy"},copyright:"2026 iNi ViE Hospitality. All Rights Reserved" },
+  featuredProperties: {
+    eyebrow: "Curated Collection",
+    title: "Featured Property For You",
+    description:
+      "Exclusive stays designed to make your getaway unforgettable. Find the place you’ve been dreaming of — and turn every moment into something real.",
+    cta: "Explore Property",
+    scrollLabel: "Scroll to explore",
+    items: [
+      {
+        id: 1,
+        name: "Leedon Villa Seminyak",
+        category: "Luxury Villa",
+        description:
+          "Elegant villa living with warm tropical design, curated privacy, and a memorable Bali stay.",
+        image: "/properties/leedon-villa.webp",
+        alt: "Leedon Villa Seminyak",
+        href: "#leedon-villa",
+        cta: "Explore Property",
+      },
+      {
+        id: 2,
+        name: "Ajowa Resort",
+        category: "Resort Experience",
+        description:
+          "A refined resort experience blending tropical atmosphere, contemporary comfort, and destination-led hospitality.",
+        image: "/properties/ajowa.avif",
+        alt: "Ajowa Resort",
+        href: "#ajowa-resort",
+        cta: "Explore Property",
+      },
+      {
+        id: 3,
+        name: "La Mewali Resort",
+        category: "Resort Experience",
+        description:
+          "A considered retreat shaped by lush surroundings, warm service, and the easy rhythm of Bali.",
+        image: "/properties/la-mewali.webp",
+        alt: "La Mewali Resort",
+        href: "#la-mewali-resort",
+        cta: "Explore Property",
+      },
+    ],
+  },
+  culinary: {
+    eyebrow: "The Culinary Journey",
+    title: "A Journey\nThrough Taste.",
+    description: "Opening a new chapter in refined dining experience",
+    scrollLabel: "Scroll to explore",
+    items: [
+      {
+        name: "Norii Seminyak",
+        location: "Seminyak, Bali",
+        eyebrow: "Japanese Dining",
+        description:
+          "Precision, fire, and craftsmanship meet in an intimate dining experience in Seminyak.",
+        schedule: "New Opening — 2026",
+        ctaLabel: "Discover Norii",
+        image:
+          "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=900&q=85",
+        alt: "Norii Seminyak dining experience in Seminyak, Bali",
+        href: "#norii-seminyak",
+      },
+      {
+        name: "Riserva Steakhouse",
+        location: "Ubud, Bali",
+        eyebrow: "Open Fire",
+        description:
+          "A bold dining experience shaped by premium cuts, open flame, and modern craftsmanship.",
+        schedule: "Dinner · 17:00 — 23:00",
+        ctaLabel: "Discover Riserva",
+        image:
+          "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85",
+        alt: "Riserva Steakhouse dining experience in Ubud, Bali",
+        href: "#riserva-steakhouse",
+      },
+      {
+        name: "Terra Verte",
+        location: "Ubud, Bali",
+        eyebrow: "Mediterranean",
+        description:
+          "Mediterranean-inspired flavours, shared plates, and relaxed dining shaped for slow moments.",
+        schedule: "New Opening — 2026",
+        ctaLabel: "Discover Terra Verte",
+        image:
+          "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85",
+        alt: "Terra Verte dining experience in Ubud, Bali",
+        href: "#terra-verte",
+      },
+      {
+        name: "Habitat Bistro",
+        location: "Ubud, Bali",
+        eyebrow: "Contemporary Bistro",
+        description:
+          "A relaxed all-day dining destination pairing familiar flavours with a fresh tropical perspective.",
+        schedule: "Breakfast · 07:00 — 23:00",
+        ctaLabel: "Discover Habitat",
+        image:
+          "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=85",
+        alt: "Habitat Bistro dining experience in Ubud, Bali",
+        href: "#habitat-bistro",
+      },
+      {
+        name: "Shichirin Ubud",
+        location: "Ubud, Bali",
+        eyebrow: "Japanese Teppanyaki",
+        description:
+          "Japanese craft, tableside theatre, and live-fire cooking meet in an intimate Ubud setting.",
+        schedule: "Dinner · 17:00 — 23:00",
+        ctaLabel: "Discover Shichirin",
+        image:
+          "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=85",
+        alt: "Shichirin Ubud dining experience in Ubud, Bali",
+        href: "#shichirin-ubud",
+      },
+      {
+        name: "Seven Paintings",
+        location: "Ubud, Bali",
+        eyebrow: "Immersive Fine Dining",
+        description:
+          "A multi-sensory dinner where storytelling, projection, and refined courses unfold together.",
+        schedule: "Dinner Show · Reservation Only",
+        ctaLabel: "Discover Seven Paintings",
+        image:
+          "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85",
+        alt: "Seven Paintings dining experience in Ubud, Bali",
+        href: "#seven-paintings",
+      },
+    ],
+  },
+  wellness: {
+    eyebrow: "iNi ViE Wellness",
+    title: "Wellness Harmony Escape",
+    description: "Find serenity in soulful rituals made to restore.",
+    items: [
+      {
+        id: 1,
+        categories: ["Spa", "Resort"],
+        name: "Svaha Spa Ajowa",
+        location: "Seminyak, Bali",
+        description:
+          "A restorative sanctuary where traditional rituals, natural ingredients, and quiet surroundings come together in a deeply calming experience.",
+        image:
+          "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1600&q=88",
+        alt: "Svaha Spa Ajowa wellness experience in Seminyak, Bali",
+        href: "#svaha-spa-ajowa",
+        cta: "Discover Experience",
+      },
+      {
+        id: 2,
+        categories: ["Spa", "Garden Retreat"],
+        name: "Svaha Spa La Mewali",
+        location: "Canggu, Bali",
+        description:
+          "Slow treatments and garden air create a gentle pause from the everyday, shaped around touch, stillness, and natural beauty.",
+        image:
+          "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=88",
+        alt: "Svaha Spa La Mewali wellness experience in Canggu, Bali",
+        href: "#svaha-spa-la-mewali",
+        cta: "Discover Experience",
+      },
+    ],
+  },
+  membership: {
+    title: "Join Weinivie Membership",
+    subtitle: "Turn Bali Into Yours. Make Every Journey More Rewarding.",
+    description:
+      "Become a WEINIVIE member and enjoy exclusive access to unforgettable experiences across Bali. Discover special privileges, personalized offers, and curated moments designed just for you.",
+    video: "/cta.mp4",
+    primary: {
+      label: "Become a Member ↗",
+      href: "https://booking.inivie.com/en/register",
+    },
+    secondary: { label: "Discover More ↗", href: "/membership" },
+    benefits: [
+      { label: "Priority VIP Welcome", icon: "diamond" },
+      { label: "Special Celebration Setup", icon: "gift" },
+      {
+        label: "Exclusive Savings at Restaurants, Spa & Club Outlets",
+        icon: "shopping-bag",
+      },
+      { label: "Access to Monthly Member Promotions", icon: "tags" },
+    ],
+  },
+  ourStory: {
+    title: "Our Story",
+    description:
+      "iNi ViE Hospitality guided by eight mantras that honour people, culture, and nature. Through deeply personalised stays, distinctive resorts and villas, meaningful dining, wellness, and lifestyle experiences, we create memorable journeys across Bali with sustainability at the heart of every decision.",
+    blocks: [
+      {
+        title: "About Us",
+        description:
+          "iNi ViE Hospitality manages a growing portfolio of luxury resorts, private pool villas, restaurants, spas, beach clubs, family attractions, and curated experiences in Bali.",
+        image: "/our-story/infinity-pool.png",
+        alt: "Luxury iNi ViE villa and infinity pool overlooking the Bali landscape",
+        cta: "Explore Our Story",
+        href: "https://inivie.com/about",
+      },
+      {
+        title: "What Makes Us Different",
+        description:
+          "What makes iNi ViE Hospitality different is our seamless multi-experience journey, combining stays, dining, wellness, culture, leisure, and celebration.",
+        image: "/our-story/meaningful-journey.png",
+        alt: "Couple walking through a tropical iNi ViE Hospitality property",
+        cta: "Discover More",
+        href: "https://inivie.com/about",
+      },
+      {
+        title: "Our Eight Mantras",
+        description:
+          "Eight Mantras are the values behind everything we do, inspiring thoughtful hospitality, responsible operations, stronger communities, and meaningful guest experiences.",
+        image: "/our-story/eight-mantras.jpg",
+        alt: "Balinese community gathered in traditional white ceremonial clothing",
+        cta: "Discover More",
+        href: "https://inivie.com/about",
+      },
+      {
+        title: "Sustainability",
+        description:
+          "Sustainability is woven into the way iNi ViE Hospitality operates across Bali, benefiting guests, people, and place.",
+        image: "/our-story/sustainability.jpg",
+        alt: "Farmers harvesting rice in a lush tropical field",
+        cta: "Discover More",
+        href: "https://inivie.com/about",
+      },
+    ],
+  },
+  specialOffers: {
+    eyebrow: "Our Special Offers",
+    title: "Your Bali escape,\nthoughtfully elevated.",
+    description:
+      "Thoughtfully curated stays, seasonal privileges, and exclusive benefits designed to make every iNi ViE journey through Bali even more memorable.",
+    allOffers: {
+      label: "Explore All Offers",
+      href: "https://inivie.com/offers",
+    },
+    items: [
+      {
+        id: "01",
+        category: "Plan Ahead",
+        title: "Early Getaway",
+        description:
+          "Plan your Bali journey early and enjoy exclusive privileges across selected iNi ViE stays.",
+        image: "/offers/early-getaway.png",
+        alt: "Infinity pool overlooking a tropical Bali landscape",
+        href: "https://inivie.com/offers/early-getaway-deal",
+      },
+      {
+        id: "02",
+        category: "Curated Privileges",
+        title: "Bali Yours",
+        description:
+          "Enjoy more meaningful moments with thoughtfully curated benefits created for a longer Bali escape.",
+        image: "/offers/bali-yours.png",
+        alt: "Couple enjoying a floating breakfast in a tropical pool",
+        href: "https://inivie.com/offers/bali-yours",
+      },
+      {
+        id: "03",
+        category: "Advance Reservations",
+        title: "Advance Saver",
+        description:
+          "Reserve your stay in advance and enjoy exclusive value across selected iNi ViE properties.",
+        image: "/offers/advance-saver.png",
+        alt: "Warm Bali villa bedroom opening onto a private pool",
+        href: "https://inivie.com/offers/advance-saver",
+      },
+    ],
+  },
+  whatsNew: {
+    eyebrow: "What's New",
+    title: "Stories from\nBali & Beyond.",
+    description:
+      "Thoughtful guides, rituals, places, and discoveries from across Bali.",
+    explore: { label: "Explore The Story", href: "#journal-nusa-penida" },
+    readLabel: "Read Story",
+    items: [
+      {
+        id: "nusa-penida",
+        category: "Destination",
+        title: ["Nusa Penida,", "Beyond the Postcard"],
+        description:
+          "Discover dramatic coastlines, hidden beaches, and a slower side of one of Bali’s most iconic islands.",
+        readingTime: "8 min read",
+        image:
+          "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=85",
+        alt: "Aerial view of the dramatic coastline of Nusa Penida, Bali",
+        href: "#journal-nusa-penida",
+      },
+      {
+        id: "quiet-art",
+        category: "Wellness · Ubud",
+        title: ["The Quiet Art", "of Slowing Down"],
+        description:
+          "A restorative journey through Bali’s rituals of rest, balance, and mindful living.",
+        readingTime: "5 min read",
+        image:
+          "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=85",
+        alt: "A woman meditating above a misty tropical forest in Ubud",
+        href: "#journal-quiet-art",
+      },
+    ],
+  },
+  featuredIn: {
+    title: "Featured In",
+    items: [
+      { src: "/featured-in/tripadvisor.png", alt: "Tripadvisor" },
+      {
+        src: "/featured-in/world-luxury-hotel-awards.png",
+        alt: "World Luxury Hotel Awards",
+      },
+    ],
+  },
+  faq: {
+    eyebrow: "Frequently Asked Questions",
+    title: "Everything You\nNeed to Know.",
+    description:
+      "Find helpful information about reservations, check-in, experiences, and your stay with Ini Vie Hospitality.",
+    items: [
+      {
+        question: "What Is Ini Vie Hospitality?",
+        answer:
+          "Ini Vie Hospitality is a Bali-based hospitality management company specializing in boutique resorts, private pool villas, romantic getaways, dining, spa experiences, and lifestyle destinations.",
+      },
+      {
+        question: "How Can I Get The Best Rate When Booking?",
+        answer:
+          "For the best available rates and exclusive benefits, book directly through the official Ini Vie Hospitality website.",
+      },
+    ],
+  },
+  footer: {
+    ariaLabel: "Ini Vie Hospitality footer",
+    backgroundImage: "/bg-footer.png",
+    logo: { src: "/inivie-white.png", alt: "Ini Vie Hospitality" },
+    summary:
+      "Curating meaningful stays, destinations, wellness, and lifestyle experiences across Bali.",
+    office: {
+      title: "Head office",
+      address:
+        "Jl. Persada II No.888, Kerobokan, Kec. Kuta Utara, Kabupaten Badung, Bali 80361",
+      phone: { label: "+62 361 9346082", href: "tel:+623619346082" },
+      email: { label: "info@inivie.com", href: "mailto:info@inivie.com" },
+      map: { label: "View on map", href: "#map" },
+    },
+    subscribe: {
+      title: "Subscribe",
+      description: "Receive latest offers and promos without spam",
+      action: { label: "Subscribe", href: "#subscribe" },
+    },
+    contacts: [
+      {
+        title: "Marketing",
+        phone: { label: "+62 812-3868-7387", href: "tel:+6281238687387" },
+        email: { label: "marcom@inivie.com", href: "mailto:marcom@inivie.com" },
+        actions: [{ label: "Collaborate with us", href: "#contact" }],
+      },
+    ],
+    socialsTitle: "Follow Our Social Media",
+    socials: [
+      { label: "Facebook", href: "#social-facebook", icon: "facebook" },
+      { label: "Instagram", href: "#social-instagram", icon: "instagram" },
+    ],
+    policy: { label: "General Policy", href: "#policy" },
+    copyright: "2026 iNi ViE Hospitality. All Rights Reserved",
+  },
 };

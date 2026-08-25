@@ -153,7 +153,8 @@ function BookingSelect<Value extends string | number>({
   ) {
     let nextIndex = optionIndex;
 
-    if (event.key === "ArrowDown") nextIndex = (optionIndex + 1) % options.length;
+    if (event.key === "ArrowDown")
+      nextIndex = (optionIndex + 1) % options.length;
     if (event.key === "ArrowUp") {
       nextIndex = (optionIndex - 1 + options.length) % options.length;
     }
@@ -184,11 +185,7 @@ function BookingSelect<Value extends string | number>({
   const alignmentClass = align === "right" ? "right-0" : "left-0";
 
   return (
-    <div
-      ref={rootRef}
-      className={getFieldClass(variant)}
-      onBlur={handleBlur}
-    >
+    <div ref={rootRef} className={getFieldClass(variant)} onBlur={handleBlur}>
       <span className={fieldLabelClass}>{label}</span>
       <button
         ref={activeTriggerRef}
@@ -236,13 +233,15 @@ function BookingSelect<Value extends string | number>({
                   onChange(option.value);
                   closeList(true);
                 }}
-                onKeyDown={(event) =>
-                  handleOptionKeyDown(event, optionIndex)
-                }
+                onKeyDown={(event) => handleOptionKeyDown(event, optionIndex)}
               >
                 <span>{option.label}</span>
                 {isSelected && (
-                  <Check aria-hidden="true" className="size-4" strokeWidth={1.5} />
+                  <Check
+                    aria-hidden="true"
+                    className="size-4"
+                    strokeWidth={1.5}
+                  />
                 )}
               </button>
             );

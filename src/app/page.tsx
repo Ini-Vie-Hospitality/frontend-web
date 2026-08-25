@@ -16,21 +16,27 @@ import { loadHomepageData } from "@/content/homepage/loader";
 
 export default async function Home() {
   const data = await loadHomepageData();
-  return <main>
-    {data.navbar && <Navbar heroId="hero" data={data.navbar} />}
-    <section id="booking" className="booking-anchor" aria-hidden="true" />
-    <Hero />
-    <HomepagePopup data={data.popup ?? undefined} />
-    {data.brandIntroduction && <BrandIntroduction data={data.brandIntroduction} />}
-    {data.featuredProperties && <FeaturedProperties data={data.featuredProperties} />}
-    {data.culinary && <CulinaryJourney data={data.culinary} />}
-    {data.wellness && <WellnessHarmony data={data.wellness} />}
-    {data.membership && <MembershipSection data={data.membership} />}
-    {data.ourStory && <OurStory data={data.ourStory} />}
-    {data.specialOffers && <OurSpecialOffers data={data.specialOffers} />}
-    {data.whatsNew && <WhatsNew data={data.whatsNew} />}
-    {data.featuredIn && <FeaturedIn data={data.featuredIn} />}
-    {data.faq && <FaqSection data={data.faq} />}
-    {data.footer && <Footer data={data.footer} />}
-  </main>;
+  return (
+    <main>
+      {data.navbar && <Navbar heroId="hero" data={data.navbar} />}
+      <section id="booking" className="booking-anchor" aria-hidden="true" />
+      <Hero />
+      <HomepagePopup data={data.popup ?? undefined} />
+      {data.brandIntroduction && (
+        <BrandIntroduction data={data.brandIntroduction} />
+      )}
+      {data.featuredProperties && (
+        <FeaturedProperties data={data.featuredProperties} />
+      )}
+      {data.culinary && <CulinaryJourney data={data.culinary} />}
+      {data.wellness && <WellnessHarmony data={data.wellness} />}
+      {data.membership && <MembershipSection data={data.membership} />}
+      {data.ourStory && <OurStory data={data.ourStory} />}
+      {data.specialOffers && <OurSpecialOffers data={data.specialOffers} />}
+      {data.whatsNew && <WhatsNew data={data.whatsNew} />}
+      {data.featuredIn && <FeaturedIn data={data.featuredIn} />}
+      {data.faq && <FaqSection data={data.faq} />}
+      {data.footer && <Footer data={data.footer} />}
+    </main>
+  );
 }

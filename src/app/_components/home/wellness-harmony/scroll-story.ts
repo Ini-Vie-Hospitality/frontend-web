@@ -13,8 +13,8 @@ export function getExperienceFrame(progress: number, itemCount: number) {
   const lastIndex = Math.max(itemCount - 1, 0);
   if (lastIndex === 0) return { activeIndex: 0, position: 0 };
 
-  const timelineUnits = itemCount * HOLD_VIEWPORTS
-    + lastIndex * TRANSITION_VIEWPORTS;
+  const timelineUnits =
+    itemCount * HOLD_VIEWPORTS + lastIndex * TRANSITION_VIEWPORTS;
   let timelinePosition = clamp(progress, 0, 1) * timelineUnits;
 
   for (let index = 0; index <= lastIndex; index += 1) {
@@ -46,7 +46,7 @@ export function getExperienceFrame(progress: number, itemCount: number) {
 export function getStoryHeight(viewportHeight: number, itemCount: number) {
   if (itemCount <= 1) return viewportHeight;
   const transitions = Math.max(itemCount - 1, 0);
-  const timelineUnits = itemCount * HOLD_VIEWPORTS
-    + transitions * TRANSITION_VIEWPORTS;
+  const timelineUnits =
+    itemCount * HOLD_VIEWPORTS + transitions * TRANSITION_VIEWPORTS;
   return viewportHeight + timelineUnits * viewportHeight;
 }

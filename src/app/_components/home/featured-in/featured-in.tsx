@@ -2,7 +2,11 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal/reveal";
 import type { PublishedHomepageData } from "@/content/homepage/types";
 
-export function FeaturedIn({ data }: { data: PublishedHomepageData["featuredIn"] }) {
+export function FeaturedIn({
+  data,
+}: {
+  data: PublishedHomepageData["featuredIn"];
+}) {
   if (!data.items.length) return null;
   return (
     <section

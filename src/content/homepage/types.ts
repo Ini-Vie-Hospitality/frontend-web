@@ -1,29 +1,170 @@
 export type LinkData = { label: string; href: string };
 export type ImageData = { src: string; alt: string };
-export type SectionHeading = { eyebrow: string; title: string; description: string };
+export type SectionHeading = {
+  eyebrow: string;
+  title: string;
+  description: string;
+};
 export type NavigationLink = LinkData;
-export type Property = { id: number; name: string; category: string; description: string; image: string; alt: string; href: string; cta: string };
-export type DiningDestination = { name: string; location: string; eyebrow: string; description: string; schedule: string; ctaLabel: string; image: string; alt: string; href: string };
-export type WellnessEscape = { id: number; categories: string[]; name: string; location: string; description: string; image: string; alt: string; href: string; cta: string };
-export type BenefitIconKey = "diamond" | "gift" | "shopping-bag" | "tags" | "crown" | "sparkles" | "heart" | "star" | "calendar-heart" | "utensils" | "flower-2" | "ticket-percent" | "shield-check" | "gem" | "coffee" | "waves";
-export type SocialIconKey = "facebook" | "instagram" | "linkedin" | "youtube" | "tiktok";
-export type StoryBlock = { title: string; description: string; image: string; alt: string; cta: string; href: string };
-export type Offer = { id: string; category: string; title: string; description: string; image: string; alt: string; href: string };
-export type JournalStory = { id: string; category: string; title: string[]; description: string; readingTime: string; image: string; alt: string; href: string };
-export type Contact = { title: string; phone?: LinkData; email?: LinkData; actions: LinkData[] };
+export type Property = {
+  id: number;
+  name: string;
+  category: string;
+  description: string;
+  image: string;
+  alt: string;
+  href: string;
+  cta: string;
+};
+export type DiningDestination = {
+  name: string;
+  location: string;
+  eyebrow: string;
+  description: string;
+  schedule: string;
+  ctaLabel: string;
+  image: string;
+  alt: string;
+  href: string;
+};
+export type WellnessEscape = {
+  id: number;
+  categories: string[];
+  name: string;
+  location: string;
+  description: string;
+  image: string;
+  alt: string;
+  href: string;
+  cta: string;
+};
+export type BenefitIconKey =
+  | "diamond"
+  | "gift"
+  | "shopping-bag"
+  | "tags"
+  | "crown"
+  | "sparkles"
+  | "heart"
+  | "star"
+  | "calendar-heart"
+  | "utensils"
+  | "flower-2"
+  | "ticket-percent"
+  | "shield-check"
+  | "gem"
+  | "coffee"
+  | "waves";
+export type SocialIconKey =
+  "facebook" | "instagram" | "linkedin" | "youtube" | "tiktok";
+export type StoryBlock = {
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+  cta: string;
+  href: string;
+};
+export type Offer = {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+  href: string;
+};
+export type JournalStory = {
+  id: string;
+  category: string;
+  title: string[];
+  description: string;
+  readingTime: string;
+  image: string;
+  alt: string;
+  href: string;
+};
+export type Contact = {
+  title: string;
+  phone?: LinkData;
+  email?: LinkData;
+  actions: LinkData[];
+};
 export type PublishedHomepageData = {
   popup: { image: string; alt: string; href: string };
-  navbar: { logo: ImageData & { href: string }; desktopLinks: NavigationLink[]; book: LinkData; mobile: { eyebrow: string; openLabel: string; closeLabel: string; links: NavigationLink[] } };
-  brandIntroduction: { title: string; backgroundWords: [string, string]; story: [string, string]; quote: string; images: [ImageData, ImageData, ImageData] };
-  featuredProperties: SectionHeading & { cta: string; scrollLabel: string; items: Property[] };
-  culinary: SectionHeading & { scrollLabel: string; items: DiningDestination[] };
+  navbar: {
+    logo: ImageData & { href: string };
+    desktopLinks: NavigationLink[];
+    book: LinkData;
+    mobile: {
+      eyebrow: string;
+      openLabel: string;
+      closeLabel: string;
+      links: NavigationLink[];
+    };
+  };
+  brandIntroduction: {
+    title: string;
+    backgroundWords: [string, string];
+    story: [string, string];
+    quote: string;
+    images: [ImageData, ImageData, ImageData];
+  };
+  featuredProperties: SectionHeading & {
+    cta: string;
+    scrollLabel: string;
+    items: Property[];
+  };
+  culinary: SectionHeading & {
+    scrollLabel: string;
+    items: DiningDestination[];
+  };
   wellness: SectionHeading & { items: WellnessEscape[] };
-  membership: { title: string; subtitle: string; description: string; video: string; primary: LinkData; secondary: LinkData; benefits: { label: string; icon: BenefitIconKey }[] };
-  ourStory: { title: string; description: string; blocks: [StoryBlock, StoryBlock, StoryBlock, StoryBlock] };
-  specialOffers: SectionHeading & { allOffers: LinkData; items: [Offer, Offer, Offer] };
-  whatsNew: SectionHeading & { explore: LinkData; readLabel: string; items: JournalStory[] };
+  membership: {
+    title: string;
+    subtitle: string;
+    description: string;
+    video: string;
+    primary: LinkData;
+    secondary: LinkData;
+    benefits: { label: string; icon: BenefitIconKey }[];
+  };
+  ourStory: {
+    title: string;
+    description: string;
+    blocks: [StoryBlock, StoryBlock, StoryBlock, StoryBlock];
+  };
+  specialOffers: SectionHeading & {
+    allOffers: LinkData;
+    items: [Offer, Offer, Offer];
+  };
+  whatsNew: SectionHeading & {
+    explore: LinkData;
+    readLabel: string;
+    items: JournalStory[];
+  };
   featuredIn: { title: string; items: ImageData[] };
   faq: SectionHeading & { items: { question: string; answer: string }[] };
-  footer: { ariaLabel: string; backgroundImage: string; logo: ImageData; summary: string; office: { title: string; address: string; phone: LinkData; email: LinkData; map: LinkData }; subscribe: { title: string; description: string; action: LinkData }; contacts: Contact[]; socialsTitle: string; socials: (LinkData & { icon: SocialIconKey })[]; policy: LinkData; copyright: string };
+  footer: {
+    ariaLabel: string;
+    backgroundImage: string;
+    logo: ImageData;
+    summary: string;
+    office: {
+      title: string;
+      address: string;
+      phone: LinkData;
+      email: LinkData;
+      map: LinkData;
+    };
+    subscribe: { title: string; description: string; action: LinkData };
+    contacts: Contact[];
+    socialsTitle: string;
+    socials: (LinkData & { icon: SocialIconKey })[];
+    policy: LinkData;
+    copyright: string;
+  };
 };
-export type HomepageData = { [K in keyof PublishedHomepageData]: PublishedHomepageData[K] | null };
+export type HomepageData = {
+  [K in keyof PublishedHomepageData]: PublishedHomepageData[K] | null;
+};

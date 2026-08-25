@@ -20,13 +20,17 @@ export function FaqItem({ faq, index, isOpen, onToggle }: FaqItemProps) {
         aria-controls={panelId}
         onClick={onToggle}
       >
-        <span className={`w-[43px] shrink-0 text-[20px] transition-colors duration-500 ${isOpen ? "text-[#e06a0b]" : "text-[#9f9283]"}`}>
+        <span
+          className={`w-[43px] shrink-0 text-[20px] transition-colors duration-500 ${isOpen ? "text-[#e06a0b]" : "text-[#9f9283]"}`}
+        >
           {String(index + 1).padStart(2, "0")}
         </span>
         <span className="font-serif text-[25px] leading-[1.2] tracking-[-.02em] max-md:text-[19px]">
           {faq.question}
         </span>
-        <span className={`relative ml-auto grid size-[52px] shrink-0 place-items-center rounded-full border transition-colors duration-500 max-md:size-11 ${isOpen ? "border-[#e06a0b] text-[#e06a0b]" : "border-[#d5cdc4] text-[#1a1c18]"}`}>
+        <span
+          className={`relative ml-auto grid size-[52px] shrink-0 place-items-center rounded-full border transition-colors duration-500 max-md:size-11 ${isOpen ? "border-[#e06a0b] text-[#e06a0b]" : "border-[#d5cdc4] text-[#1a1c18]"}`}
+        >
           <span className="sr-only">{isOpen ? "Close" : "Open"} answer</span>
           <Plus
             aria-hidden="true"

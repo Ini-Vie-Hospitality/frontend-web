@@ -3,7 +3,10 @@ import { readFile } from "node:fs/promises";
 import { homepageHref, navigationLinks } from "./navigation-data.ts";
 
 assert.equal(homepageHref("#stays"), "/#stays");
-assert.equal(homepageHref("https://booking.inivie.com"), "https://booking.inivie.com");
+assert.equal(
+  homepageHref("https://booking.inivie.com"),
+  "https://booking.inivie.com",
+);
 assert.equal(homepageHref("/"), "/");
 const previewBase = "/preview?expires=1787579300&signature=preview-signature";
 assert.equal(homepageHref("#stays", previewBase), `${previewBase}#stays`);
@@ -28,9 +31,7 @@ const sourceFiles = [
 ];
 const pageSource = (
   await Promise.all(
-    sourceFiles.map((file) =>
-      readFile(new URL(file, import.meta.url), "utf8"),
-    ),
+    sourceFiles.map((file) => readFile(new URL(file, import.meta.url), "utf8")),
   )
 ).join("\n");
 

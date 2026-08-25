@@ -88,11 +88,7 @@ export function Reveal({
   };
 
   return (
-    <div
-      ref={observerRef}
-      className={className}
-      data-reveal-observer
-    >
+    <div ref={observerRef} className={className} data-reveal-observer>
       <div
         ref={motionRef}
         className={`reveal reveal-${variant} size-full`}

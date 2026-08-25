@@ -27,8 +27,5 @@ export function shouldPrepareReveal({
   hasLayout,
   isPastViewport,
 }: RevealPreparation) {
-  return !reducedMotion
-    && observerSupported
-    && hasLayout
-    && !isPastViewport;
+  return !reducedMotion && observerSupported && hasLayout && !isPastViewport;
 }

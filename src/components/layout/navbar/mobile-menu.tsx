@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { X } from "lucide-react";
 import { homepageHref } from "./navigation-data";
-import type { NavigationLink, PublishedHomepageData } from "@/content/homepage/types";
+import type {
+  NavigationLink,
+  PublishedHomepageData,
+} from "@/content/homepage/types";
 
 type MobileMenuProps = {
   isOpen: boolean;

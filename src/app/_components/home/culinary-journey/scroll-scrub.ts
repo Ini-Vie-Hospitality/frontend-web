@@ -13,7 +13,10 @@ export function getHorizontalOffset(progress: number, maxTranslate: number) {
   return -normalizedProgress * distance;
 }
 
-export function getVerticalTravel(maxTranslate: number, viewportHeight: number) {
+export function getVerticalTravel(
+  maxTranslate: number,
+  viewportHeight: number,
+) {
   if (maxTranslate <= 0) return 0;
   return Math.max(maxTranslate * 1.35, viewportHeight * 1.25);
 }

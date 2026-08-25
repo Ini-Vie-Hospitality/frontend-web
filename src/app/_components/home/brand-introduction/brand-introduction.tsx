@@ -43,20 +43,26 @@ function ResponsiveImage({
   );
 }
 
-function BrandStory({ story, className = "" }: { story: [string, string]; className?: string }) {
+function BrandStory({
+  story,
+  className = "",
+}: {
+  story: [string, string];
+  className?: string;
+}) {
   return (
     <div className={`text-[14px] leading-[1.55] text-[#35342f] ${className}`}>
-      <p>
-        {story[0]}
-      </p>
-      <p className="mt-6 max-md:mt-1">
-        {story[1]}
-      </p>
+      <p>{story[0]}</p>
+      <p className="mt-6 max-md:mt-1">{story[1]}</p>
     </div>
   );
 }
 
-export function BrandIntroduction({ data }: { data: PublishedHomepageData["brandIntroduction"] }) {
+export function BrandIntroduction({
+  data,
+}: {
+  data: PublishedHomepageData["brandIntroduction"];
+}) {
   return (
     <section
       id="about"
@@ -82,7 +88,11 @@ export function BrandIntroduction({ data }: { data: PublishedHomepageData["brand
             id="brand-introduction-title"
             className="mt-7 font-serif text-[clamp(2.7rem,11vw,3.3rem)] leading-[1.08] tracking-[-.045em] md:mt-5 md:text-[clamp(3.45rem,4.45vw,4.15rem)] md:leading-[1.16]"
           >
-            {data.title.split("\n").map((line) => <span className="block" key={line}>{line}</span>)}
+            {data.title.split("\n").map((line) => (
+              <span className="block" key={line}>
+                {line}
+              </span>
+            ))}
           </h2>
         </Reveal>
 
@@ -129,10 +139,18 @@ export function BrandIntroduction({ data }: { data: PublishedHomepageData["brand
             </Reveal>
             <Reveal variant="slide-right" delay={280}>
               <p className="mt-5 font-serif text-[clamp(1.35rem,5.5vw,1.65rem)] italic leading-[1.35] text-[#77764e] md:mt-4 md:text-[18px]">
-                {data.quote.split("\n").map((line) => <span className="block" key={line}>{line}</span>)}
+                {data.quote.split("\n").map((line) => (
+                  <span className="block" key={line}>
+                    {line}
+                  </span>
+                ))}
               </p>
             </Reveal>
-            <Reveal variant="fade-up" delay={360} className="mt-12 hidden md:block">
+            <Reveal
+              variant="fade-up"
+              delay={360}
+              className="mt-12 hidden md:block"
+            >
               <BrandStory story={data.story} />
             </Reveal>
           </div>
@@ -141,7 +159,6 @@ export function BrandIntroduction({ data }: { data: PublishedHomepageData["brand
         <Reveal variant="fade-up" delay={160} className="mt-6 md:hidden">
           <BrandStory story={data.story} />
         </Reveal>
-
       </div>
     </section>
   );

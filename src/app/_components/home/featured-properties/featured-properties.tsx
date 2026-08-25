@@ -7,14 +7,23 @@ import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/reveal/reveal";
 import type { PublishedHomepageData } from "@/content/homepage/types";
 
-const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(max, Math.max(min, value));
 
-export function FeaturedProperties({ data }: { data: PublishedHomepageData["featuredProperties"] }) {
+export function FeaturedProperties({
+  data,
+}: {
+  data: PublishedHomepageData["featuredProperties"];
+}) {
   if (!data.items.length) return null;
   return <FeaturedPropertiesContent data={data} />;
 }
 
-function FeaturedPropertiesContent({ data }: { data: PublishedHomepageData["featuredProperties"] }) {
+function FeaturedPropertiesContent({
+  data,
+}: {
+  data: PublishedHomepageData["featuredProperties"];
+}) {
   const properties = data.items;
   const trackRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -27,7 +36,8 @@ function FeaturedPropertiesContent({ data }: { data: PublishedHomepageData["feat
     const updateMotionPreference = () => setReducedMotion(mediaQuery.matches);
     updateMotionPreference();
     mediaQuery.addEventListener("change", updateMotionPreference);
-    return () => mediaQuery.removeEventListener("change", updateMotionPreference);
+    return () =>
+      mediaQuery.removeEventListener("change", updateMotionPreference);
   }, []);
 
   useEffect(() => {
@@ -39,16 +49,19 @@ function FeaturedPropertiesContent({ data }: { data: PublishedHomepageData["feat
     const updateFromScroll = () => {
       frame = 0;
       const scrollDistance = track.offsetHeight - stage.offsetHeight;
-      const progress = scrollDistance > 0
-        ? clamp(-track.getBoundingClientRect().top / scrollDistance, 0, 1)
-        : 0;
+      const progress =
+        scrollDistance > 0
+          ? clamp(-track.getBoundingClientRect().top / scrollDistance, 0, 1)
+          : 0;
       const nextIndex = Math.min(
         Math.floor(progress * properties.length),
         properties.length - 1,
       );
 
       stage.style.setProperty("--slideshow-progress", progress.toFixed(4));
-      setActiveIndex((current) => current === nextIndex ? current : nextIndex);
+      setActiveIndex((current) =>
+        current === nextIndex ? current : nextIndex,
+      );
     };
     const scheduleUpdate = () => {
       if (!frame) frame = window.requestAnimationFrame(updateFromScroll);
@@ -64,7 +77,7 @@ function FeaturedPropertiesContent({ data }: { data: PublishedHomepageData["feat
     };
   }, [properties.length]);
 
-  const progressWidth = `${Math.max((activeIndex + 1) / properties.length * 100, 8)}%`;
+  const progressWidth = `${Math.max(((activeIndex + 1) / properties.length) * 100, 8)}%`;
 
   return (
     <section
@@ -98,10 +111,7 @@ function FeaturedPropertiesContent({ data }: { data: PublishedHomepageData["feat
         className="relative mt-[clamp(70px,9vw,130px)]"
         style={{ minHeight: `${(properties.length + 1) * 100}svh` }}
       >
-        <div
-          ref={stageRef}
-          className="sticky top-0 h-svh"
-        >
+        <div ref={stageRef} className="sticky top-0 h-svh">
           <div className="relative size-full overflow-hidden bg-[#292c26]">
             {properties.map((property, index) => (
               <Image
@@ -134,7 +144,9 @@ function FeaturedPropertiesContent({ data }: { data: PublishedHomepageData["feat
                 className="max-w-[560px]"
                 aria-live="polite"
                 style={{
-                  animation: reducedMotion ? "none" : "curated-content-in 500ms cubic-bezier(.22,1,.36,1) both",
+                  animation: reducedMotion
+                    ? "none"
+                    : "curated-content-in 500ms cubic-bezier(.22,1,.36,1) both",
                 }}
               >
                 <p className="mb-3 text-[11px] font-medium uppercase tracking-[.22em] text-white/75 sm:text-xs">
@@ -158,7 +170,10 @@ function FeaturedPropertiesContent({ data }: { data: PublishedHomepageData["feat
               <div className="mb-1 w-[190px] shrink-0 text-right max-md:mt-8 max-md:w-full max-md:text-left">
                 <div className="mb-3 flex items-center justify-between text-[11px] font-medium uppercase tracking-[.18em] text-white/70">
                   <span>{data.scrollLabel}</span>
-                  <span className="text-white">{String(activeIndex + 1).padStart(2, "0")} / {String(properties.length).padStart(2, "0")}</span>
+                  <span className="text-white">
+                    {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                    {String(properties.length).padStart(2, "0")}
+                  </span>
                 </div>
                 <div className="h-px w-full bg-white/30">
                   <span
@@ -166,7 +181,9 @@ function FeaturedPropertiesContent({ data }: { data: PublishedHomepageData["feat
                     style={{ width: progressWidth }}
                   />
                 </div>
-                <span className="sr-only">Property {activeIndex + 1} of {properties.length}</span>
+                <span className="sr-only">
+                  Property {activeIndex + 1} of {properties.length}
+                </span>
               </div>
             </div>
           </div>

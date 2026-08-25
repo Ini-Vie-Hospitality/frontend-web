@@ -19,7 +19,11 @@ test("loadHomepageData returns the complete editable non-Hero homepage contract"
   assert.ok(data.whatsNew.items.every((item) => item.href));
   assert.ok(data.featuredIn.items.every((item) => item.alt));
   assert.ok(data.faq.items.every((item) => item.question && item.answer));
-  assert.ok(data.footer.contacts.every((item) => item.actions.every((action) => action.href)));
+  assert.ok(
+    data.footer.contacts.every((item) =>
+      item.actions.every((action) => action.href),
+    ),
+  );
   assert.ok(data.footer.socials.every((item) => item.href && item.icon));
 });
 
@@ -74,12 +78,23 @@ test("loadHomepageData accepts a data envelope", async () => {
 test("loadHomepageData falls back for missing env, non-OK, and network errors", async () => {
   const unavailable = [
     {},
-    { apiUrl: "https://cms.example.com", fetch: async () => new Response(null, { status: 503 }) },
-    { apiUrl: "https://cms.example.com", fetch: async () => { throw new Error("offline"); } },
+    {
+      apiUrl: "https://cms.example.com",
+      fetch: async () => new Response(null, { status: 503 }),
+    },
+    {
+      apiUrl: "https://cms.example.com",
+      fetch: async () => {
+        throw new Error("offline");
+      },
+    },
   ];
 
   for (const dependencies of unavailable) {
-    assert.deepEqual(await loadHomepageData(dependencies), fallbackHomepageData);
+    assert.deepEqual(
+      await loadHomepageData(dependencies),
+      fallbackHomepageData,
+    );
   }
 });
 
@@ -98,9 +113,26 @@ test("loadHomepageData logs fallback reasons only in production", async () => {
   const logger = (message) => messages.push(message);
 
   await loadHomepageData({ environment: "production", logger });
-  await loadHomepageData({ apiUrl: "https://cms.example.com", environment: "production", logger, fetch: async () => new Response(null, { status: 502 }) });
-  await loadHomepageData({ apiUrl: "https://cms.example.com", environment: "production", logger, fetch: async () => { throw new Error("offline"); } });
-  await loadHomepageData({ apiUrl: "https://cms.example.com", environment: "production", logger, fetch: async () => Response.json([]) });
+  await loadHomepageData({
+    apiUrl: "https://cms.example.com",
+    environment: "production",
+    logger,
+    fetch: async () => new Response(null, { status: 502 }),
+  });
+  await loadHomepageData({
+    apiUrl: "https://cms.example.com",
+    environment: "production",
+    logger,
+    fetch: async () => {
+      throw new Error("offline");
+    },
+  });
+  await loadHomepageData({
+    apiUrl: "https://cms.example.com",
+    environment: "production",
+    logger,
+    fetch: async () => Response.json([]),
+  });
   await loadHomepageData({ environment: "development", logger });
 
   assert.deepEqual(messages, [
@@ -113,20 +145,33 @@ test("loadHomepageData logs fallback reasons only in production", async () => {
 
 test("normalizeHomepageData accepts backend story blocks and numeric ID strings", () => {
   const input = structuredClone(fallbackHomepageData);
-  input.ourStory.blocks = Object.fromEntries(input.ourStory.blocks.map((block, index) => [index, block]));
+  input.ourStory.blocks = Object.fromEntries(
+    input.ourStory.blocks.map((block, index) => [index, block]),
+  );
   input.featuredProperties.items[0].id = "41";
   input.wellness.items[0].id = "52";
 
   const data = normalizeHomepageData(input);
 
   assert.equal(data.ourStory.blocks.length, 4);
-  assert.equal(data.ourStory.blocks[0].title, fallbackHomepageData.ourStory.blocks[0].title);
+  assert.equal(
+    data.ourStory.blocks[0].title,
+    fallbackHomepageData.ourStory.blocks[0].title,
+  );
   assert.equal(data.featuredProperties.items[0].id, 41);
   assert.equal(data.wellness.items[0].id, 52);
 });
 
 test("normalizeHomepageData safely hides unknown and partial nested input", () => {
-  for (const input of [null, {}, { navbar: {} }, { navbar: { mobile: null } }, { footer: null }, { culinary: "invalid" }, { popup: {} }]) {
+  for (const input of [
+    null,
+    {},
+    { navbar: {} },
+    { navbar: { mobile: null } },
+    { footer: null },
+    { culinary: "invalid" },
+    { popup: {} },
+  ]) {
     assert.doesNotThrow(() => normalizeHomepageData(input));
     const data = normalizeHomepageData(input);
     assert.equal(data.navbar, null);
@@ -150,10 +195,15 @@ test("homepage popup accepts only a complete published payload", async () => {
 });
 
 test("successful CMS response preserves unpublished nulls without fallback resurrection", async () => {
-  const payload = Object.fromEntries(Object.keys(fallbackHomepageData).map((key) => [key, null]));
+  const payload = Object.fromEntries(
+    Object.keys(fallbackHomepageData).map((key) => [key, null]),
+  );
   payload.faq = { title: "Malformed published FAQ" };
 
-  const data = await loadHomepageData({ apiUrl: "https://cms.example.com", fetch: async () => Response.json(payload) });
+  const data = await loadHomepageData({
+    apiUrl: "https://cms.example.com",
+    fetch: async () => Response.json(payload),
+  });
 
   assert.equal(data.navbar, null);
   assert.equal(data.footer, null);
@@ -163,8 +213,12 @@ test("successful CMS response preserves unpublished nulls without fallback resur
 
 test("brand images expose one editable source and alt only", async () => {
   const data = await loadHomepageData();
-  assert.ok(data.brandIntroduction.images.every((image) => image.src && image.alt));
-  assert.ok(data.brandIntroduction.images.every((image) => !("mobileSrc" in image)));
+  assert.ok(
+    data.brandIntroduction.images.every((image) => image.src && image.alt),
+  );
+  assert.ok(
+    data.brandIntroduction.images.every((image) => !("mobileSrc" in image)),
+  );
 });
 
 test("normalizeHomepageData falls back malformed fixed slots and empties malformed collections", () => {

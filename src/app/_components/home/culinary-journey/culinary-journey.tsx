@@ -26,12 +26,20 @@ const resetCardEffects = (cards: HTMLElement[]) => {
   });
 };
 
-export function CulinaryJourney({ data }: { data: PublishedHomepageData["culinary"] }) {
+export function CulinaryJourney({
+  data,
+}: {
+  data: PublishedHomepageData["culinary"];
+}) {
   if (!data.items.length) return null;
   return <CulinaryJourneyContent data={data} />;
 }
 
-function CulinaryJourneyContent({ data }: { data: PublishedHomepageData["culinary"] }) {
+function CulinaryJourneyContent({
+  data,
+}: {
+  data: PublishedHomepageData["culinary"];
+}) {
   const diningDestinations = data.items;
   const scrubRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -47,13 +55,18 @@ function CulinaryJourneyContent({ data }: { data: PublishedHomepageData["culinar
     const progressBar = progressRef.current;
     if (!scrub || !stage || !viewport || !track) return;
 
-    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const cards = Array.from(track.querySelectorAll<HTMLElement>("[data-culinary-card]"));
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    const cards = Array.from(
+      track.querySelectorAll<HTMLElement>("[data-culinary-card]"),
+    );
     let frame = 0;
     let maxTranslate = 0;
     let verticalTravel = 0;
 
-    const isStaticLayout = () => !isScrollScrubEnabled(reducedMotionQuery.matches);
+    const isStaticLayout = () =>
+      !isScrollScrubEnabled(reducedMotionQuery.matches);
 
     const updateCardEffects = (offset: number) => {
       const viewportCenter = viewport.clientWidth / 2;
@@ -61,10 +74,14 @@ function CulinaryJourneyContent({ data }: { data: PublishedHomepageData["culinar
 
       cards.forEach((card) => {
         const cardCenter = card.offsetLeft + card.offsetWidth / 2 + offset;
-        const signedDistance = (cardCenter - viewportCenter) / viewport.clientWidth;
-        const focus = 1 - Math.min(Math.abs(cardCenter - viewportCenter) / focusRange, 1);
+        const signedDistance =
+          (cardCenter - viewportCenter) / viewport.clientWidth;
+        const focus =
+          1 - Math.min(Math.abs(cardCenter - viewportCenter) / focusRange, 1);
         const image = card.querySelector<HTMLElement>("[data-culinary-image]");
-        const overlay = card.querySelector<HTMLElement>("[data-culinary-overlay]");
+        const overlay = card.querySelector<HTMLElement>(
+          "[data-culinary-overlay]",
+        );
         const copy = card.querySelector<HTMLElement>("[data-culinary-copy]");
 
         if (image) {
@@ -90,7 +107,8 @@ function CulinaryJourneyContent({ data }: { data: PublishedHomepageData["culinar
       );
       const offset = getHorizontalOffset(progress, maxTranslate);
       track.style.transform = `translate3d(${offset.toFixed(2)}px, 0, 0)`;
-      if (progressBar) progressBar.style.transform = `scaleX(${progress.toFixed(4)})`;
+      if (progressBar)
+        progressBar.style.transform = `scaleX(${progress.toFixed(4)})`;
       updateCardEffects(offset);
     };
 
@@ -156,7 +174,11 @@ function CulinaryJourneyContent({ data }: { data: PublishedHomepageData["culinar
             id="culinary-journey-title"
             className="mt-5 font-serif text-[clamp(3.2rem,15vw,4.8rem)] font-normal leading-[.92] tracking-[-.045em] md:text-[clamp(4.4rem,5vw,5.3rem)] md:leading-[.9]"
           >
-            {data.title.split("\n").map((line) => <span className="block" key={line}>{line}</span>)}
+            {data.title.split("\n").map((line) => (
+              <span className="block" key={line}>
+                {line}
+              </span>
+            ))}
           </h2>
         </Reveal>
         <Reveal delay={200}>

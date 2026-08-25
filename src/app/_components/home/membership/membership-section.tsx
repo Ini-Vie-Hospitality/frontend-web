@@ -3,7 +3,11 @@ import { Reveal } from "@/components/ui/reveal/reveal";
 import { MembershipBenefitItem } from "./membership-benefit-item";
 import type { PublishedHomepageData } from "@/content/homepage/types";
 
-export function MembershipSection({ data }: { data: PublishedHomepageData["membership"] }) {
+export function MembershipSection({
+  data,
+}: {
+  data: PublishedHomepageData["membership"];
+}) {
   return (
     <section
       id="membership"
@@ -53,7 +57,7 @@ export function MembershipSection({ data }: { data: PublishedHomepageData["membe
             <Reveal variant="slide-right" delay={220}>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                   href={data.primary.href}
+                  href={data.primary.href}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex min-h-11 items-center rounded-[4px] bg-[#211c22] px-5 text-[13px] font-medium tracking-[.02em] text-white transition-colors hover:bg-[#332b34] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -61,7 +65,7 @@ export function MembershipSection({ data }: { data: PublishedHomepageData["membe
                   {data.primary.label}
                 </Link>
                 <Link
-                   href={data.secondary.href}
+                  href={data.secondary.href}
                   className="inline-flex min-h-11 items-center rounded-[4px] border border-white px-5 text-[13px] font-medium tracking-[.02em] text-white transition-colors hover:bg-white/10 hover:text-oran focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   {data.secondary.label}

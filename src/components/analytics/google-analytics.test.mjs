@@ -2,9 +2,18 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 
-const layout = await readFile(new URL("../../app/layout.tsx", import.meta.url), "utf8");
-const tag = await readFile(new URL("./google-analytics.tsx", import.meta.url), "utf8");
-const events = await readFile(new URL("./analytics-events.tsx", import.meta.url), "utf8");
+const layout = await readFile(
+  new URL("../../app/layout.tsx", import.meta.url),
+  "utf8",
+);
+const tag = await readFile(
+  new URL("./google-analytics.tsx", import.meta.url),
+  "utf8",
+);
+const events = await readFile(
+  new URL("./analytics-events.tsx", import.meta.url),
+  "utf8",
+);
 
 test("loads the configured GA4 tag globally", () => {
   assert.match(tag, /G-L96SY2E2FF/);

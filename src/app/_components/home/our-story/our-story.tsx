@@ -2,7 +2,11 @@ import { Reveal } from "@/components/ui/reveal/reveal";
 import { StoryBlock } from "./story-block";
 import type { PublishedHomepageData } from "@/content/homepage/types";
 
-export function OurStory({ data }: { data: PublishedHomepageData["ourStory"] }) {
+export function OurStory({
+  data,
+}: {
+  data: PublishedHomepageData["ourStory"];
+}) {
   return (
     <section
       id="our-story"

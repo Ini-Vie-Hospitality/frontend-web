@@ -1,8 +1,14 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const sectionSource = await readFile(new URL("./whats-new.tsx", import.meta.url), "utf8");
-const cardsSource = await readFile(new URL("./story-cards.tsx", import.meta.url), "utf8");
+const sectionSource = await readFile(
+  new URL("./whats-new.tsx", import.meta.url),
+  "utf8",
+);
+const cardsSource = await readFile(
+  new URL("./story-cards.tsx", import.meta.url),
+  "utf8",
+);
 
 assert.match(sectionSource, /if \(!data\.items\.length\) return null/);
 assert.match(sectionSource, /\[featureStory, \.\.\.standardStories\]/);

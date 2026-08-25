@@ -1,14 +1,14 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Footer } from '@/components/layout/footer/footer';
-import { Navbar } from '@/components/layout/navbar/navbar';
-import { fallbackHomepageData } from '@/content/homepage/fallback';
-import { loadHomepageData } from '@/content/homepage/loader';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { Footer } from "@/components/layout/footer/footer";
+import { Navbar } from "@/components/layout/navbar/navbar";
+import { fallbackHomepageData } from "@/content/homepage/fallback";
+import { loadHomepageData } from "@/content/homepage/loader";
 
 export const metadata: Metadata = {
-  title: '404 | Ini Vie Hospitality',
-  description: 'The page you are looking for could not be found.',
+  title: "404 | Ini Vie Hospitality",
+  description: "The page you are looking for could not be found.",
 };
 
 export default async function NotFound() {

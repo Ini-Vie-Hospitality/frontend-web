@@ -3,7 +3,11 @@ import { Reveal } from "@/components/ui/reveal/reveal";
 import { CompactStory, FeatureStory } from "./story-cards";
 import type { PublishedHomepageData } from "@/content/homepage/types";
 
-export function WhatsNew({ data }: { data: PublishedHomepageData["whatsNew"] }) {
+export function WhatsNew({
+  data,
+}: {
+  data: PublishedHomepageData["whatsNew"];
+}) {
   if (!data.items.length) return null;
   const [featureStory, ...standardStories] = data.items;
 
@@ -25,7 +29,11 @@ export function WhatsNew({ data }: { data: PublishedHomepageData["whatsNew"] }) 
               id="journal-title"
               className="mt-5 max-w-[650px] text-balance font-serif text-[clamp(2.75rem,13vw,5rem)] font-normal leading-[.95] tracking-[-.045em]"
             >
-              {data.title.split("\n").map((line) => <span className="block" key={line}>{line}</span>)}
+              {data.title.split("\n").map((line) => (
+                <span className="block" key={line}>
+                  {line}
+                </span>
+              ))}
             </h2>
           </Reveal>
           <Reveal variant="slide-right" delay={160}>
@@ -64,7 +72,6 @@ export function WhatsNew({ data }: { data: PublishedHomepageData["whatsNew"] }) 
           ))}
         </div>
       </div>
-
     </section>
   );
 }

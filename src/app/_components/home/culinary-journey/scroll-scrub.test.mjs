@@ -23,7 +23,10 @@ const diningCardSource = await readFile(
   "utf8",
 );
 
-assert.doesNotMatch(diningCardSource, /border-r\s+border-l-0\s+border-\[#6f5c44\]\/60/);
+assert.doesNotMatch(
+  diningCardSource,
+  /border-r\s+border-l-0\s+border-\[#6f5c44\]\/60/,
+);
 assert.match(diningCardSource, /bg-\[#090806\]/);
 
 console.log("culinary scroll scrub: ok");

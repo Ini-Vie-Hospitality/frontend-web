@@ -17,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Ini Vie Hospitality | Stay Beyond The Ordinary",
-  description: "Thoughtfully designed stays and experiences across Bali's most inspiring destinations.",
+  description:
+    "Thoughtfully designed stays and experiences across Bali's most inspiring destinations.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
