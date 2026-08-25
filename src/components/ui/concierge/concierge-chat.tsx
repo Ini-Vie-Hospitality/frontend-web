@@ -3,7 +3,7 @@
 import { MessageCircle, Send, Sparkles, X } from "lucide-react";
 import Image from "next/image";
 import { type FormEvent, useEffect, useRef, useState } from "react";
-import { type ConciergeHistoryMessage, readConciergeHistory, trimConciergeHistory, writeConciergeHistory } from "./chat-history";
+import { type ConciergeHistoryMessage, trimConciergeHistory } from "./chat-history";
 import { ChatMessageContent } from "./chat-message-content";
 
 type ChatMessage = ConciergeHistoryMessage & { failed?: boolean };
@@ -18,13 +18,6 @@ export function ConciergeChat() {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      const saved = readConciergeHistory(window.localStorage);
-      if (saved.length) setMessages([welcome, ...saved]);
-    });
-    return () => window.clearTimeout(timer);
-  }, []);
   useEffect(() => { listRef.current?.scrollTo({ top: listRef.current.scrollHeight }); }, [messages, isSending]);
   useEffect(() => {
     if (!isOpen) return;
@@ -45,7 +38,6 @@ export function ConciergeChat() {
       const data = await response.json() as { message?: string };
       if (!response.ok || !data.message) throw new Error("Concierge request failed");
       const next = trimConciergeHistory([...history, userMessage, { role: "assistant", content: data.message }]);
-      writeConciergeHistory(window.localStorage, next);
       setMessages([welcome, ...next.slice(0, -1), { role: "assistant", content: data.message }]);
     } catch {
       setMessages((current) => [...current, { role: "assistant", content: "I’m sorry, the concierge is unavailable. Please try again shortly.", failed: true }]);

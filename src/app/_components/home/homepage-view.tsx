@@ -7,6 +7,7 @@ import { FaqSection } from './faq/faq-section';
 import { FeaturedIn } from './featured-in/featured-in';
 import { FeaturedProperties } from './featured-properties/featured-properties';
 import { Hero } from './hero/hero';
+import { HomepagePopup } from './homepage-popup';
 import { MembershipSection } from './membership/membership-section';
 import { OurStory } from './our-story/our-story';
 import { OurSpecialOffers } from './special-offers/special-offers';
@@ -30,6 +31,7 @@ export function HomepageView({
     )}
     <section id="booking" className="booking-anchor" aria-hidden="true" />
     <Hero />
+    <HomepagePopup data={data.popup ?? undefined} />
     {data.brandIntroduction && <BrandIntroduction data={data.brandIntroduction} />}
     {data.featuredProperties && <FeaturedProperties data={data.featuredProperties} />}
     {data.culinary && <CulinaryJourney data={data.culinary} />}

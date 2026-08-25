@@ -1,6 +1,7 @@
 import type { PublishedHomepageData } from "./types.ts";
 
 export const fallbackHomepageData: PublishedHomepageData = {
+  popup: { image: "", alt: "Website announcement", href: "" },
   navbar: {
     logo: { src: "/inivie-white.png", alt: "Ini Vie Hospitality", href: "/" },
     desktopLinks: [

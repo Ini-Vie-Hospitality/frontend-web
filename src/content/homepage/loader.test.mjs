@@ -126,13 +126,27 @@ test("normalizeHomepageData accepts backend story blocks and numeric ID strings"
 });
 
 test("normalizeHomepageData safely hides unknown and partial nested input", () => {
-  for (const input of [null, {}, { navbar: {} }, { navbar: { mobile: null } }, { footer: null }, { culinary: "invalid" }]) {
+  for (const input of [null, {}, { navbar: {} }, { navbar: { mobile: null } }, { footer: null }, { culinary: "invalid" }, { popup: {} }]) {
     assert.doesNotThrow(() => normalizeHomepageData(input));
     const data = normalizeHomepageData(input);
     assert.equal(data.navbar, null);
     assert.equal(data.culinary, null);
+    assert.equal(data.popup, null);
     assert.equal(data.footer, null);
   }
+});
+
+test("homepage popup accepts only a complete published payload", async () => {
+  const input = structuredClone(fallbackHomepageData);
+  input.popup = {
+    image: "https://cms.example.com/storage/homepage/popup.webp",
+    alt: "Special offer",
+    href: "https://inivie.com/offers",
+  };
+
+  const data = normalizeHomepageData(input);
+
+  assert.deepEqual(data.popup, input.popup);
 });
 
 test("successful CMS response preserves unpublished nulls without fallback resurrection", async () => {

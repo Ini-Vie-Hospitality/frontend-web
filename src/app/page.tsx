@@ -6,6 +6,7 @@ import { FaqSection } from "./_components/home/faq/faq-section";
 import { FeaturedIn } from "./_components/home/featured-in/featured-in";
 import { FeaturedProperties } from "./_components/home/featured-properties/featured-properties";
 import { Hero } from "./_components/home/hero/hero";
+import { HomepagePopup } from "./_components/home/homepage-popup";
 import { MembershipSection } from "./_components/home/membership/membership-section";
 import { OurStory } from "./_components/home/our-story/our-story";
 import { OurSpecialOffers } from "./_components/home/special-offers/special-offers";
@@ -19,6 +20,7 @@ export default async function Home() {
     {data.navbar && <Navbar heroId="hero" data={data.navbar} />}
     <section id="booking" className="booking-anchor" aria-hidden="true" />
     <Hero />
+    <HomepagePopup data={data.popup ?? undefined} />
     {data.brandIntroduction && <BrandIntroduction data={data.brandIntroduction} />}
     {data.featuredProperties && <FeaturedProperties data={data.featuredProperties} />}
     {data.culinary && <CulinaryJourney data={data.culinary} />}

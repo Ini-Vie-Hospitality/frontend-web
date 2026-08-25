@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { conciergeHistoryKey, readConciergeHistory, trimConciergeHistory } from "./chat-history.ts";
+import { trimConciergeHistory } from "./chat-history.ts";
 
 test("keeps only five concierge turns", () => {
   const messages = Array.from({ length: 12 }, (_, index) => ({ role: index % 2 ? "assistant" : "user", content: String(index) }));
@@ -8,7 +8,7 @@ test("keeps only five concierge turns", () => {
   assert.equal(trimConciergeHistory(messages)[0].content, "2");
 });
 
-test("ignores malformed local history", () => {
-  assert.deepEqual(readConciergeHistory({ getItem: () => "not-json" }), []);
-  assert.equal(conciergeHistoryKey, "inivie-concierge-history");
+test("keeps history in memory only", async () => {
+  const source = await import("node:fs/promises").then(({ readFile }) => readFile(new URL("./concierge-chat.tsx", import.meta.url), "utf8"));
+  assert.doesNotMatch(source, /localStorage|sessionStorage|readConciergeHistory|writeConciergeHistory/);
 });

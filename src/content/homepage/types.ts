@@ -12,6 +12,7 @@ export type Offer = { id: string; category: string; title: string; description: 
 export type JournalStory = { id: string; category: string; title: string[]; description: string; readingTime: string; image: string; alt: string; href: string };
 export type Contact = { title: string; phone?: LinkData; email?: LinkData; actions: LinkData[] };
 export type PublishedHomepageData = {
+  popup: { image: string; alt: string; href: string };
   navbar: { logo: ImageData & { href: string }; desktopLinks: NavigationLink[]; book: LinkData; mobile: { eyebrow: string; openLabel: string; closeLabel: string; links: NavigationLink[] } };
   brandIntroduction: { title: string; backgroundWords: [string, string]; story: [string, string]; quote: string; images: [ImageData, ImageData, ImageData] };
   featuredProperties: SectionHeading & { cta: string; scrollLabel: string; items: Property[] };
