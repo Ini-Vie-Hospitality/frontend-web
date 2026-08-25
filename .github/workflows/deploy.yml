@@ -81,6 +81,21 @@ jobs:
           git fetch origin master
           git reset --hard origin/master
           npm ci
+          node <<'NODE'
+          const { loadEnvConfig } = require('@next/env');
+          const expectedOrigin = 'https://cms-inivie.iandev.my.id';
+          const { combinedEnv } = loadEnvConfig(process.cwd(), false, {
+            info() {},
+            error() {},
+          });
+
+          for (const key of ['CMS_API_URL', 'CMS_MEDIA_HOST', 'CMS_APP_ORIGIN']) {
+            if (combinedEnv[key] !== expectedOrigin) {
+              console.error(`${key} must be ${expectedOrigin}; received ${combinedEnv[key] ?? 'missing'}`);
+              process.exit(1);
+            }
+          }
+          NODE
           npm run build
 
           export PATH="$HOME/.hermes/node/bin:$PATH"
