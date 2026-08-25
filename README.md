@@ -49,6 +49,15 @@ HOMEPAGE_PREVIEW_SECRET=
 FRONTEND_REVALIDATE_SECRET=
 ```
 
+Nilai secret wajib sinkron dengan backend CMS:
+
+| Frontend Web | Backend CMS |
+| --- | --- |
+| `frontend-web/.env:HOMEPAGE_PREVIEW_SECRET` | `backend-cms/.env:HOMEPAGE_PREVIEW_SECRET` |
+| `frontend-web/.env:FRONTEND_REVALIDATE_SECRET` | `backend-cms/.env:FRONTEND_REVALIDATE_SECRET` |
+
+Jika `HOMEPAGE_PREVIEW_SECRET` berbeda, preview homepage gagal dan dapat menghasilkan `404`. Jika `FRONTEND_REVALIDATE_SECRET` berbeda, endpoint revalidation mengembalikan `403 Forbidden` sehingga cache homepage tidak diperbarui.
+
 Variabel ini digunakan server-side. Jangan commit `.env`, credential production, atau mengekspose secret melalui `NEXT_PUBLIC_`.
 
 ## Menjalankan Aplikasi
@@ -127,6 +136,15 @@ POST /api/concierge
 Request diteruskan ke `${CMS_API_URL}/api/concierge/chat`. Credential provider AI tetap berada di backend CMS, bukan browser.
 
 ### Google Analytics
+
+Dashboard Google Analytics dan service-account GA4 dikonfigurasi hanya pada `backend-cms/.env`:
+
+```dotenv
+GOOGLE_ANALYTICS_PROPERTY_ID=551482850
+GOOGLE_ANALYTICS_CREDENTIALS=g4/ini-vie-c7ee54c100ce.json
+```
+
+Frontend tidak membaca kedua variabel tersebut dan tidak boleh menyimpan JSON service account. Credential tetap berada di server backend; analytics publik frontend menggunakan konfigurasi measurement script tersendiri.
 
 Google Analytics dimuat setelah interaksi browser melalui `next/script`. Measurement ID berada pada komponen analytics frontend. Dashboard Analytics dan credential Google dikelola backend CMS.
 
