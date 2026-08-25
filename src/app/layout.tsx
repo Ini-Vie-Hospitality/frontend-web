@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AnalyticsEvents } from "@/components/analytics/analytics-events";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { ConciergeChat } from "@/components/ui/concierge/concierge-chat";
 import "./globals.css";
 
@@ -27,6 +29,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         {children}
         <ConciergeChat />
+        <AnalyticsEvents />
+        <GoogleAnalytics />
       </body>
     </html>
   );
