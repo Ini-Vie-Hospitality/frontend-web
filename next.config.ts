@@ -52,7 +52,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "inivie.com",
-        pathname: "/inivie_assets/img/**",
+        pathname: "/**",
       },
       {
         protocol: "https",
