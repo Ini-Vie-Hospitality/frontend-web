@@ -86,6 +86,6 @@ jobs:
           export PATH="$HOME/.hermes/node/bin:$PATH"
           pm2 reload ini-vie --update-env
 
-          curl --fail --silent --show-error --max-time 15 http://127.0.0.1:3201/ >/dev/null
-          curl --fail --silent --show-error --max-time 30 https://inivie.iandev.my.id/ >/dev/null
+          curl --fail --silent --show-error --retry 30 --retry-delay 1 --retry-all-errors --retry-max-time 45 http://127.0.0.1:3201/ >/dev/null
+          curl --fail --silent --show-error --retry 5 --retry-delay 1 --retry-all-errors --retry-max-time 20 https://inivie.iandev.my.id/ >/dev/null
           REMOTE
