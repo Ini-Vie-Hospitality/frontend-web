@@ -194,6 +194,52 @@ test("homepage popup accepts only a complete published payload", async () => {
   assert.deepEqual(data.popup, input.popup);
 });
 
+test("normalizeHomepageData resolves relative CMS media URLs", () => {
+  const input = structuredClone(fallbackHomepageData);
+  input.brandIntroduction.images[0].src = "/storage/homepage/brand.webp";
+  input.brandIntroduction.images[1].src =
+    "https://cdn.example.com/brand-existing.webp";
+  input.popup.image = "/storage/homepage/popup.webp";
+  input.footer.backgroundImage = "/storage/homepage/footer.webp";
+
+  const data = normalizeHomepageData(input, "https://cms.example.com");
+
+  assert.equal(
+    data.brandIntroduction.images[0].src,
+    "https://cms.example.com/storage/homepage/brand.webp",
+  );
+  assert.equal(
+    data.brandIntroduction.images[1].src,
+    "https://cdn.example.com/brand-existing.webp",
+  );
+  assert.equal(
+    data.brandIntroduction.images[2].src,
+    fallbackHomepageData.brandIntroduction.images[2].src,
+  );
+  assert.equal(
+    data.popup?.image,
+    "https://cms.example.com/storage/homepage/popup.webp",
+  );
+  assert.equal(
+    data.footer?.backgroundImage,
+    "https://cms.example.com/storage/homepage/footer.webp",
+  );
+});
+test("loadHomepageData resolves relative CMS media URLs against the API origin", async () => {
+  const payload = structuredClone(fallbackHomepageData);
+  payload.brandIntroduction.images[0].src = "/storage/homepage/brand.webp";
+
+  const data = await loadHomepageData({
+    apiUrl: "https://cms.example.com/",
+    fetch: async () => Response.json(payload),
+  });
+
+  assert.equal(
+    data.brandIntroduction.images[0].src,
+    "https://cms.example.com/storage/homepage/brand.webp",
+  );
+});
+
 test("successful CMS response preserves unpublished nulls without fallback resurrection", async () => {
   const payload = Object.fromEntries(
     Object.keys(fallbackHomepageData).map((key) => [key, null]),

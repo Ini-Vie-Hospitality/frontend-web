@@ -14,7 +14,28 @@ function validShape(value: unknown, fallback: unknown): boolean {
   );
 }
 
-export function normalizeHomepageData(input: unknown): HomepageData {
+function normalizeMediaUrls(value: unknown, mediaBaseUrl?: string): unknown {
+  if (!mediaBaseUrl) return value;
+  if (Array.isArray(value))
+    return value.map((item) => normalizeMediaUrls(item, mediaBaseUrl));
+  if (!isRecord(value)) return value;
+
+  return Object.fromEntries(
+    Object.entries(value).map(([key, item]) => [
+      key,
+      typeof item === "string" &&
+      ["src", "image", "backgroundImage"].includes(key) &&
+      item.startsWith("/storage/")
+        ? new URL(item, mediaBaseUrl).toString()
+        : normalizeMediaUrls(item, mediaBaseUrl),
+    ]),
+  );
+}
+
+export function normalizeHomepageData(
+  input: unknown,
+  mediaBaseUrl?: string,
+): HomepageData {
   const source = isRecord(input) ? input : {};
   const data = Object.fromEntries(
     Object.keys(fallbackHomepageData).map((key) => [key, null]),
@@ -37,7 +58,10 @@ export function normalizeHomepageData(input: unknown): HomepageData {
       (value as PublishedHomepageData["specialOffers"]).items.length !== 3
     )
       continue;
-    const section = structuredClone(value) as PublishedHomepageData[typeof key];
+    const section = normalizeMediaUrls(
+      structuredClone(value),
+      mediaBaseUrl,
+    ) as PublishedHomepageData[typeof key];
     if (key === "featuredProperties" || key === "wellness") {
       const collection = section as
         | PublishedHomepageData["featuredProperties"]
@@ -105,7 +129,7 @@ export async function loadHomepageData({
     if (!isRecord(payload)) return fallback("invalid payload");
     const data = "data" in payload ? payload.data : payload;
     if (!isRecord(data)) return fallback("invalid payload");
-    return normalizeHomepageData(data);
+    return normalizeHomepageData(data, apiUrl);
   } catch {
     return fallback("request failed");
   }
